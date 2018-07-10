@@ -14,7 +14,8 @@ public enum CategoriaEnum {
 
 	ALIMENTOS_INDUSTRIALIZADOS("alimentos industrializados"), 
 	ALIMENTOS_NAO_INDUSTRIALIZADOS("alimentos nao industrializados"), 
-	LIMPEZA_HIGIENE_PESSOAL("higiene pessoal");
+	HIGIENE_PESSOAL("higiene pessoal"),
+	LIMPEZA("limpeza");
 	
 	private String descricao;
 	
@@ -37,6 +38,7 @@ public enum CategoriaEnum {
 	public String toString() {
 		return descricao;
 	}
+
 	
 	
 }

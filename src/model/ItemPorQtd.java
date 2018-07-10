@@ -34,8 +34,8 @@ public class ItemPorQtd extends ItemCompravel{
 	 * @param base
 	 * 			base para gerar o id do item
 	 */
-	public ItemPorQtd(String nome, String categoria, int quantidade, String unidade, String localDeCompra, double preco, int base) {
-		super(nome, categoria, localDeCompra, preco, base);
+	public ItemPorQtd(String nome, int id, String categoria, int quantidade, String unidade, String localDeCompra, double preco) {
+		super(nome, id, categoria, localDeCompra, preco);
 		this.quantidade = quantidade;
 		this.unidade = unidade;
 	}
@@ -57,6 +57,14 @@ public class ItemPorQtd extends ItemCompravel{
 	public String getUnidade() {
 		return unidade;
 	}
+	
+	private String localPreco() {
+		String localPreco = "";
+		for (String localDeCompra : mapaDePrecos.keySet()) {
+			localPreco += localDeCompra + ", " + String.format("R$ %.2f", (mapaDePrecos.get(localDeCompra))) + ";";
+		}
+		return localPreco;
+	}
 
 	/**
 	 * Responsavel por retornar a represnetação em String de um ItemPorQtd.
@@ -64,7 +72,6 @@ public class ItemPorQtd extends ItemCompravel{
 	 */
 	@Override
 	public String toString() {
-//		". Batata Tentacoes, alimento industrializado, Preco: <Supermercado Excepcional, R$ 3,79;>" exibeItem id=${id10}
-		return id + ". " + nome + ", " + categoria + ", " +  "Preco: <" ;
+		return id + ". " + nome + ", " + categoria + ", " +  "Preco: <" + localPreco() + ">" ;
 	}
 }

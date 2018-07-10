@@ -30,8 +30,8 @@ public class ItemPorUnidade extends ItemCompravel {
 	 * @param base
 	 * 			base para gerar o id do item
 	 */
-	public ItemPorUnidade(String nome, String categoria, int unidades, String localDeCompra, double preco, int base) {
-		super(nome, categoria, localDeCompra, preco, base);
+	public ItemPorUnidade(String nome, int id, String categoria, int unidades, String localDeCompra, double preco) {
+		super(nome, id, categoria, localDeCompra, preco);
 		this.unidade = unidades;
 	}
 	
@@ -43,12 +43,20 @@ public class ItemPorUnidade extends ItemCompravel {
 		return unidade;
 	}
 	
+	private String localPreco() {
+		String localPreco = "";
+		for (String localDeCompra : mapaDePrecos.keySet()) {
+			localPreco += localDeCompra + ", " + String.format("R$ %.2f", (mapaDePrecos.get(localDeCompra))) + ";";
+		}
+		return localPreco;
+	}
+	
 	/**
 	 * Responsavel por retornar a represnetação em String de um ItemPorUnidade.
 	 * @return String - representando um ItemPorUnidade
 	 */
 	@Override
 	public String toString() {
-		return id + ". " + nome + ", " + categoria + ", " +  "Preco: <" ;
+		return id + ". " + nome + ", " + categoria + ", " +  "Preco: <" + localPreco() + ">" ;
 	}
 }

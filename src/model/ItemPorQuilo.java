@@ -29,8 +29,8 @@ public class ItemPorQuilo extends ItemCompravel {
 	 * @param base
 	 * 			base para gerar o id do item
 	 */
-	public ItemPorQuilo(String nome, String categoria, double quilo, String localDeCompra, double preco, int base) {
-		super(nome, categoria, localDeCompra, preco, base);
+	public ItemPorQuilo(String nome, int id, String categoria, double quilo, String localDeCompra, double preco) {
+		super(nome, id, categoria, localDeCompra, preco);
 		this.quilo = quilo;
 	}
 	
@@ -42,12 +42,20 @@ public class ItemPorQuilo extends ItemCompravel {
 		return quilo;
 	}
 	
+	private String localPreco() {
+		String localPreco = "";
+		for (String localDeCompra : mapaDePrecos.keySet()) {
+			localPreco += localDeCompra + ", " + String.format("R$ %.2f", (mapaDePrecos.get(localDeCompra))) + ";";
+		}
+		return localPreco;
+	}
+	
 	/**
 	 * Responsavel por retornar a represnetação em String de um ItemPorQuilo.
 	 * @return String - representando um ItemPorQuilo
 	 */
 	@Override
 	public String toString() {
-		return id + ". " + nome + ", " + categoria + ", " +  "Preco por quilo: <" ;
+		return id + ". " + nome + ", " + categoria + ", " +  "Preco: <" + localPreco() + ">" ;
 	}
 }

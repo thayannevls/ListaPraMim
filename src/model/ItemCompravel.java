@@ -36,17 +36,13 @@ public abstract class ItemCompravel {
 	 * @param base
 	 * 			base usada para gerar id do item
 	 */
-	public ItemCompravel(String nome, String categoria, String localDeCompra, double preco, int base) {
+	public ItemCompravel(String nome, int id, String categoria, String localDeCompra, double preco) {
 		this.nome = nome;
 		this.mapaDePrecos = new HashMap<>();
-		this.id = base++;
+		this.id = id;
 		adicionaPreco(localDeCompra, preco);
-		for (CategoriaEnum c : CategoriaEnum.values()) {
-			if (categoria.equals(c)) {
-				this.categoria = c;
-			}
+		setCategoria(categoria);
 		}
-	}
 	
 	/**
 	 * Responsavel por adicionar predo e supermercado no mapa de 
@@ -59,7 +55,7 @@ public abstract class ItemCompravel {
 	public void adicionaPreco(String supermercado, double preco) {
 		this.mapaDePrecos.put(supermercado, preco);
 	}
-	
+		
 	/**
 	 * Responsavel por pegar o id do item
 	 * @return int - representando o identificador do item
@@ -78,13 +74,13 @@ public abstract class ItemCompravel {
 	}
 	
 	/**
-	 * Responsavel por alterar a categoria do item.
+	 * Responsavel por determinar a categoria do item.
 	 * @param categoria
 	 * 			categoria do item
 	 */
 	public void setCategoria(String categoria) {
 		for (CategoriaEnum c : CategoriaEnum.values()) {
-			if (categoria.equals(c)) {
+			if (c.toString().equals(categoria)){
 				this.categoria = c;
 			}
 		}

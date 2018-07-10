@@ -98,6 +98,7 @@ public abstract class ItemCompravel {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((categoria == null) ? 0 : categoria.hashCode());
+		result = prime * result + id;
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		return result;
 	}
@@ -107,7 +108,7 @@ public abstract class ItemCompravel {
 	 * Verificando o nome e a categoria dos itens.
 	 * 
 	 * @return boolean - determinando true se forem iguais e false caso contrario.
-	 */
+	*/
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -118,6 +119,8 @@ public abstract class ItemCompravel {
 			return false;
 		ItemCompravel other = (ItemCompravel) obj;
 		if (categoria != other.categoria)
+			return false;
+		if (id != other.id)
 			return false;
 		if (nome == null) {
 			if (other.nome != null)

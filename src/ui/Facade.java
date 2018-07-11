@@ -65,6 +65,16 @@ public class Facade {
 	}
 	
 	/**
+	 * Adiciona um preco ao mapa de compras do item
+	 * @param id id do item a ser adicionado
+	 * @param localDeCompra local de compra do produto
+	 * @param preco preco nesse local de compra
+	 */
+	public void adicionaPrecoItem(int id, String localDeCompra, double preco){
+		itemController.adicionaPrecoItem(id, localDecompra, preco);
+	}
+	
+	/**
 	 * Atualiza item com id especificado
 	 * @param id id do item
 	 * @param atributo atributo a ser modificado

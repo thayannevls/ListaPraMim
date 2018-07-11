@@ -5,7 +5,11 @@ import easyaccept.EasyAccept;
 
 /**
  * 
- * @author Thayanne Sousa - 117210414
+ * @author José Guilheme - Matricula: 117210370
+ * @author Mariana Nascimento - Matricula: 117210395
+ * @author Siuanny Barbosa - Matriucla: 
+ * @author Thayanne Sousa - Matricula:
+ * UFCG/2018.1 - Laboratório de Programação 2 - Projeto de Laboratorio (Lista pra mim)
  */
 public class Facade {
 	ItemController itemController;

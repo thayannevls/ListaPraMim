@@ -6,9 +6,9 @@ import easyaccept.EasyAccept;
 /**
  * 
  * @author José Guilheme - Matricula: 117210370
- * @author Mariana Nascimento - Matricula: 117210395
- * @author Siuanny Barbosa - Matriucla: 
- * @author Thayanne Sousa - Matricula:
+ * @author Mariana Nascimento - Matricula: 117210416
+ * @author Siuanny Barbosa - Matriucla: 117210395
+ * @author Thayanne Sousa - Matricula: 117210414
  * UFCG/2018.1 - Laboratório de Programação 2 - Projeto de Laboratorio (Lista pra mim)
  */
 public class Facade {

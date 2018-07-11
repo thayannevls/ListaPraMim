@@ -12,13 +12,12 @@ package util;
  */
 public enum CategoriaEnum {
 
-	ALIMENTOS_INDUSTRIALIZADOS("alimentos industrializados"), 
-	ALIMENTOS_NAO_INDUSTRIALIZADOS("alimentos nao industrializados"), 
-	HIGIENE_PESSOAL("higiene pessoal"),
-	LIMPEZA("limpeza");
+	ALIMENTOS_INDUSTRIALIZADOS("alimento industrializado"), 
+	ALIMENTOS_NAO_INDUSTRIALIZADOS("alimento nao industrializado"), 
+	LIMPEZA("limpeza"),
+	HIGIENE_PESSOAL("higiene pessoal");
 	
 	private String descricao;
-	
 	
 	/**
 	 * Inicializa a categoria com a sua descricao
@@ -38,7 +37,4 @@ public enum CategoriaEnum {
 	public String toString() {
 		return descricao;
 	}
-
-	
-	
 }

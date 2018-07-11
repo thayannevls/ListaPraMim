@@ -7,16 +7,15 @@ import model.ItemPorUnidade;
 
 public class ItemPorUnidadeTest {
 
-	private ItemPorUnidade dados;
+	private ItemPorUnidade itemUni1;
 	
 	@Before
-	public void criaItemPorQtd(){
-		dados = new ItemPorUnidade("Sabão", 1000001, "limpeza", 2, "Baratão", 5.8);
+	public void criaItemPorUnidade(){
+		itemUni1 = new ItemPorUnidade("Lata de Brigadeiro", 1, "alimento nao industrializado", 1, "Mercadinho Barato e do Bom", 6.99);
 	}
 	
 	@Test
 	public void test() {
-		System.out.println(dados.toString());
+		System.out.println(itemUni1.toString());
 	}
-
 }

@@ -10,9 +10,9 @@ import util.CategoriaEnum;
  * e ItemPorUnidade.
  * 
  * @author José Guilheme - Matricula: 117210370
- * @author Mariana Nascimento - Matricula: 117210395
- * @author Siuanny Barbosa - Matriucla: 
- * @author Thayanne Sousa - Matricula:
+ * @author Mariana Nascimento - Matricula: 117210416
+ * @author Siuanny Barbosa - Matriucla: 117210395
+ * @author Thayanne Sousa - Matricula: 117210414
  * UFCG/2018.1 - Laboratório de Programação 2 - Projeto de Laboratorio (Lista pra mim)
  */
 public abstract class ItemCompravel {
@@ -23,8 +23,7 @@ public abstract class ItemCompravel {
 	protected HashMap<String, Double> mapaDePrecos;
 	
 	/**
-	 * Construtor de ItemCompravel
-	 * 
+	 * Construtor de ItemCompravel.
 	 * @param nome
 	 * 			nome do item
 	 * @param categoria
@@ -55,14 +54,6 @@ public abstract class ItemCompravel {
 	public void adicionaPreco(String supermercado, double preco) {
 		this.mapaDePrecos.put(supermercado, preco);
 	}
-		
-	/**
-	 * Responsavel por pegar o id do item
-	 * @return int - representando o identificador do item
-	 */
-	public int getId() {
-		return id;
-	}
 	
 	/**
 	 * Responsavel por alterar o nome do item.
@@ -85,7 +76,15 @@ public abstract class ItemCompravel {
 			}
 		}
 	}
-
+		
+	/**
+	 * Responsavel por pegar o id do item
+	 * @return int - representando o identificador do item
+	 */
+	public int getId() {
+		return id;
+	}
+	
 	/** 
 	 * Responsável por verificar codigo hash do objeto
 	 */
@@ -102,7 +101,6 @@ public abstract class ItemCompravel {
 	/** 
 	 * Responsável por verificar se dois itens compraveis sáo iguais. 
 	 * Verificando o nome e a categoria dos itens.
-	 * 
 	 * @return boolean - determinando true se forem iguais e false caso contrario.
 	*/
 	@Override

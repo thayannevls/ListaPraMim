@@ -9,7 +9,7 @@ import controller.ItemController;
 
 public class ItemControllerTest {
 
-	private ItemController controller;
+	private ItemCompravelController controller;
 
 	@Before
 	public void inciaItemController() {
@@ -422,7 +422,7 @@ public class ItemControllerTest {
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void deletaItens() {
+	public void deletaItensExibe() {
 		int id1 = controller.adicionaItemPorUnidade("Esmalte Risquei", "higiene pessoal", 1, "Mercadinho DoBom", 3.80);
 
 		controller.deletaItem(id1);
@@ -430,7 +430,7 @@ public class ItemControllerTest {
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void deletaItens() {
+	public void deletaItensAtualiza() {
 		int id1 = controller.adicionaItemPorQtd("Azeite", "alimento industrializado", 300, "gramas",
 				"Mercado do seu Zeh", 9.80);
 

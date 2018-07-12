@@ -1,6 +1,6 @@
 package ui;
 
-import controller.ItemController;
+import controller.ItemCompravelController;
 import easyaccept.EasyAccept;
 
 /**
@@ -12,7 +12,7 @@ import easyaccept.EasyAccept;
  * UFCG/2018.1 - Laboratório de Programação 2 - Projeto de Laboratorio (Lista pra mim)
  */
 public class Facade {
-	ItemController itemController;
+	ItemCompravelController itemController;
 	
 	public static void main(String[] args){
 		args = new String[] {"ui.Facade","acceptance_test/use_case1","acceptance_test/use_case1_exception.txt"};
@@ -75,7 +75,7 @@ public class Facade {
 	 * @param preco preco nesse local de compra
 	 */
 	public void adicionaPrecoItem(int id, String localDeCompra, double preco){
-		itemController.adicionaPrecoItem(id, localDecompra, preco);
+		itemController.adicionaPrecoItem(id, localDeCompra, preco);
 	}
 	
 	/**
@@ -85,7 +85,7 @@ public class Facade {
 	 * @param novoValor novo valor do atributo
 	 */
 	public void atualizaItem(int id, String atributo, String novoValor) {
-		controller.atualizaItem(id, atributo, novoValor);
+		itemController.atualizaItem(id, atributo, novoValor);
 	}
 	
 	/**
@@ -93,7 +93,7 @@ public class Facade {
 	 * @param id
 	 */
 	public void deletaItem(int id) {
-		controller.deletaItem(id);
+		itemController.deletaItem(id);
 	}
 }
 

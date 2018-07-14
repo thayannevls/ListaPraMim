@@ -32,9 +32,9 @@ public abstract class ItemCompravel {
 	 * @param preco         preco do item
 	 */
 	public ItemCompravel(String nome, int id, String categoria, String localDeCompra, double preco) {
+		this.id = id;
 		this.nome = nome;
 		this.mapaDePrecos = new HashMap<>();
-		this.id = id;
 		this.adicionaPreco(localDeCompra, preco);
 		this.setCategoria(categoria);
 	}

@@ -48,20 +48,6 @@ public class ItemPorUnidade extends ItemCompravel {
 	}
 
 	/**
-	 * Responsável por unir em String os locais de copra do item e seu referente
-	 * preco. (usado no toString)
-	 * 
-	 * @return String - representando locais e precos
-	 */
-	private String localPreco() {
-		String localPreco = "";
-		for (String localDeCompra : this.mapaDePrecos.keySet()) {
-			localPreco += localDeCompra + ", " + String.format("R$ %.2f", (this.mapaDePrecos.get(localDeCompra))) + ";";
-		}
-		return localPreco;
-	}
-
-	/**
 	 * Responsavel por retornar a represnetação em String de um ItemPorUnidade.
 	 * 
 	 * @return String - representando um ItemPorUnidade

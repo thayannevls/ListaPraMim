@@ -79,6 +79,20 @@ public abstract class ItemCompravel {
 	public int getId() {
 		return this.id;
 	}
+	
+	/**
+	 * Responsável por unir em String os locais de copra do item e seu referente
+	 * preco. (usado no toString das classes filhas)
+	 * 
+	 * @return String - representando locais e precos
+	 */
+	protected String localPreco() {
+		String localPreco = "";
+		for (String localDeCompra : this.mapaDePrecos.keySet()) {
+			localPreco += localDeCompra + ", " + String.format("R$ %.2f", (this.mapaDePrecos.get(localDeCompra))) + ";";
+		}
+		return localPreco;
+	}
 
 	/**
 	 * Responsável por verificar codigo hash do objeto

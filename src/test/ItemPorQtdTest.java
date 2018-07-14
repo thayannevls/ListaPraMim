@@ -1,14 +1,17 @@
-package model;
+package test;
 
 import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import model.ItemPorQtd;
+
 public class ItemPorQtdTest {
 
 	private ItemPorQtd item;
 	private ItemPorQtd sabonete;
+	private ItemPorQtd algodao;
 
 	@Before
 	public void init() {

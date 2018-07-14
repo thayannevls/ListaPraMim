@@ -12,8 +12,8 @@ import util.CategoriaEnum;
  * @author José Guilheme - Matricula: 117210370
  * @author Mariana Nascimento - Matricula: 117210416
  * @author Siuanny Barbosa - Matriucla: 117210395
- * @author Thayanne Sousa - Matricula: 117210414 
- * UFCG/2018.1 - Laboratório de Programação 2 - Projeto de Laboratorio (Lista pra mim)
+ * @author Thayanne Sousa - Matricula: 117210414 UFCG/2018.1 - Laboratório de
+ *         Programação 2 - Projeto de Laboratorio (Lista pra mim)
  */
 public abstract class ItemCompravel {
 
@@ -25,11 +25,16 @@ public abstract class ItemCompravel {
 	/**
 	 * Construtor de ItemCompravel
 	 * 
-	 * @param nome          nome do item
-	 * @param id            identificador do item
-	 * @param categoria     categoria do item
-	 * @param localDeCompra local onde foi comprado o item
-	 * @param preco         preco do item
+	 * @param nome
+	 *            nome do item
+	 * @param id
+	 *            identificador do item
+	 * @param categoria
+	 *            categoria do item
+	 * @param localDeCompra
+	 *            local onde foi comprado o item
+	 * @param preco
+	 *            preco do item
 	 */
 	public ItemCompravel(String nome, int id, String categoria, String localDeCompra, double preco) {
 		this.nome = nome;
@@ -42,8 +47,10 @@ public abstract class ItemCompravel {
 	/**
 	 * Responsavel por adicionar preco e supermercado no mapa de precos.
 	 * 
-	 * @param supermercado nome do supermercado onde o item foi comprado
-	 * @param preco        preco do item
+	 * @param supermercado
+	 *            nome do supermercado onde o item foi comprado
+	 * @param preco
+	 *            preco do item
 	 */
 	public void adicionaPreco(String supermercado, double preco) {
 		this.mapaDePrecos.put(supermercado, preco);
@@ -52,7 +59,8 @@ public abstract class ItemCompravel {
 	/**
 	 * Responsavel por alterar o nome do item.
 	 * 
-	 * @param nome nome do item
+	 * @param nome
+	 *            nome do item
 	 */
 	public void setNome(String nome) {
 		this.nome = nome;
@@ -61,7 +69,8 @@ public abstract class ItemCompravel {
 	/**
 	 * Responsavel por determinar a categoria do item.
 	 * 
-	 * @param categoria categoria do item
+	 * @param categoria
+	 *            categoria do item
 	 */
 	public void setCategoria(String categoria) {
 		for (CategoriaEnum c : CategoriaEnum.values()) {
@@ -81,15 +90,29 @@ public abstract class ItemCompravel {
 	}
 
 	/**
+	 * Responsável por unir em String os locais de copra do item e seu referente
+	 * preco. (usado no toString)
+	 * 
+	 * @return String - representando locais e precos
+	 */
+	protected String localPreco() {
+		String localPreco = "";
+		for (String localDeCompra : this.mapaDePrecos.keySet()) {
+			localPreco += localDeCompra + ", " + String.format("R$ %.2f", (this.mapaDePrecos.get(localDeCompra))) + ";";
+		}
+		return localPreco;
+	}
+
+	/**
 	 * Responsável por verificar codigo hash do objeto
 	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((categoria == null) ? 0 : categoria.hashCode());
+		result = prime * result + categoria.hashCode();
 		result = prime * result + id;
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + nome.hashCode();
 		return result;
 	}
 
@@ -119,4 +142,5 @@ public abstract class ItemCompravel {
 			return false;
 		return true;
 	}
+	
 }

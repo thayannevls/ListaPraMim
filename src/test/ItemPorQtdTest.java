@@ -155,7 +155,7 @@ public class ItemPorQtdTest {
 
 	@Test
 	public void testToString() {
-		assertEquals("219. Algodão Clemer, higiene pessoal, 300 gramas, Preco: <Supermercado BaratoD+, R$ 2,33;  Baratão, R$ 2,30>", abonete.toString());
+		assertEquals("219. Algodão Clemer, higiene pessoal, 300 gramas, Preco: <Supermercado BaratoD+, R$ 2,33;  Baratão, R$ 2,30>", algodao.toString());
 	}
 
 }

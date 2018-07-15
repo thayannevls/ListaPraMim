@@ -16,7 +16,7 @@ public class Facade {
 	
 	public static void main(String[] args){
 		args = new String[] {"ui.Facade","acceptance_test/use_case1.txt","acceptance_test/use_case1_exception.txt",
-				                         "acceptance_test/use_case2.txt"};
+				                         "acceptance_test/use_case2.txt","acceptance_test/use_case2_exception.txt"};
 		EasyAccept.main(args);
 	}
 	

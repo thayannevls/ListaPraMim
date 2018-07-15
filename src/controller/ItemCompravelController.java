@@ -216,7 +216,8 @@ public class ItemCompravelController {
 	 * @param posicao posicao requerida
 	 * @return String - representaçao textual do item retornado
 	 */
-	public String getItemPorCategoria(String categoria, int posicao) {		
+	public String getItemPorCategoria(String categoria, int posicao) {
+		Validator.categoriaValida(categoria, ErrosItemController.LISTAGEM_CATEGORIA_INEXISTENTE.toString());
 		List<ItemCompravel> itensCategoria = new ArrayList<>();
 		for (ItemCompravel i : itens.values()) {
 			if (i.getCategoria().equals(categoria)) {

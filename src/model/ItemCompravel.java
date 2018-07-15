@@ -56,7 +56,14 @@ public abstract class ItemCompravel {
 	public void adicionaPreco(String supermercado, double preco) {
 		this.mapaDePrecos.put(supermercado, preco);
 	}
-
+	
+	/**
+	 * Retorna nome do item
+	 * @return String nome
+	 */
+	public String getNome(){
+		return nome;
+	}
 	/**
 	 * Responsavel por alterar o nome do item.
 	 * 

@@ -89,6 +89,14 @@ public abstract class ItemCompravel {
 	}
 
 	/**
+	 * Responsavel por pegar a categoria do item
+	 * @return String - representando a categoria do item
+	 */
+	public String getCategoria() {
+		return this.categoria.toString();
+	}
+	
+	/**
 	 * Responsavel por pegar o id do item
 	 * 
 	 * @return int - representando o identificador do item

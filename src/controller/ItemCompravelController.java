@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -194,10 +195,40 @@ public class ItemCompravelController {
 		itens.remove(id);
 	}
 	
+	public String getItem(int posicao) {
+		List<ItemCompravel> itensOrdenados = new ArrayList<>();
+		itensOrdenados.addAll(itens.values());
+		
+		Collections.sort(itensOrdenados,  new ItemNomeComparator());
+		if (posicao >= itensOrdenados.size())
+			return "";
+		return itensOrdenados.get(posicao).toString();
+	}
+	
+	/**
+	 * Retorna item ordenado por sua categoria
+	 * @param categoria categoria do item
+	 * @param posicao posicao requerida
+	 * @return String - representaçao textualdo item retornado
+	 */
+	public String getItemPorCategoria(String categoria, int posicao) {		
+		List<ItemCompravel> itensCategoria = new ArrayList<>();
+		for (ItemCompravel i : itens.values()) {
+			if (i.getCategoria().equals(categoria)) {
+				itensCategoria.add(i);
+			}
+		}
+		
+		Collections.sort(itensCategoria, new ItemNomeComparator());
+		if (posicao >= itensCategoria.size())
+			return "";
+		return itensCategoria.get(posicao).toString();
+	}
+		
 	/**
 	 * Retorna item que contem strPesquisada em seu nome na posicao indicada
 	 * @param strPesquisada string a ser pesquisada
-	 * @param posicao posicao posicao requerida
+	 * @param posicao posicao requerida
 	 * @return String representacao textual do item retornado
 	 */
 	public String getItemPorPesquisa(String strPesquisada, int posicao){

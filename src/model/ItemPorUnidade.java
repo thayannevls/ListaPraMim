@@ -1,7 +1,5 @@
 package model;
 
-import util.Utils;
-
 /**
  * Classe responsável por registrar e armazenar dados de um item do tipo: Por
  * unidade. Herda da classe ItemCompravel

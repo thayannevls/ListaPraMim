@@ -8,12 +8,12 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import comparator.ItemNomeComparator;
+import comparator.MenorPrecoComparator;
 import model.ItemCompravel;
 import model.ItemPorQtd;
 import model.ItemPorQuilo;
 import model.ItemPorUnidade;
 import util.ErrosItemController;
-import util.MenorPrecoComparator;
 import util.Validator;
 
 /**

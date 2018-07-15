@@ -1,4 +1,4 @@
---package ui;
+package ui;
 
 import controller.ItemCompravelController;
 import easyaccept.EasyAccept;

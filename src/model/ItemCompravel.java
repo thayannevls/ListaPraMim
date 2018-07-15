@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import util.CategoriaEnum;
+import util.Utils;
 
 /**
  * Classe responsável por registrar e manipular os dados de um Item compravel. É
@@ -98,7 +99,7 @@ public abstract class ItemCompravel {
 	protected String localPreco() {
 		String localPreco = "";
 		for (String localDeCompra : this.mapaDePrecos.keySet()) {
-			localPreco += localDeCompra + ", " + String.format("R$ %.2f", (this.mapaDePrecos.get(localDeCompra))) + ";";
+			localPreco += localDeCompra + ", " + Utils.realComVirgula((this.mapaDePrecos.get(localDeCompra))) + ";";
 		}
 		return localPreco;
 	}

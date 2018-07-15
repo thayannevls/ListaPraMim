@@ -58,7 +58,7 @@ public abstract class ItemCompravel {
 	}
 	
 	/**
-	 * Retorna nome do item
+	 * Retorna nome do item.
 	 * @return String nome
 	 */
 	public String getNome(){
@@ -75,6 +75,14 @@ public abstract class ItemCompravel {
 	}
 
 	/**
+	 * Responsavel por pegar a categoria do item.
+	 * @return String - representando a categoria do item
+	 */
+	public String getCategoria() {
+		return this.categoria.toString();
+	}
+	
+	/**
 	 * Responsavel por determinar a categoria do item.
 	 * 
 	 * @param categoria
@@ -87,17 +95,18 @@ public abstract class ItemCompravel {
 			}
 		}
 	}
-
+	
 	/**
-	 * Responsavel por pegar a categoria do item
-	 * @return String - representando a categoria do item
+	 * Responsavel por pegar o mapa de precos do item.
+	 * 
+	 * @return Map - representando o mapa de precos
 	 */
-	public String getCategoria() {
-		return this.categoria.toString();
+	public Map<String, Double> getMapaDePrecos() {
+		return this.mapaDePrecos;
 	}
 	
 	/**
-	 * Responsavel por pegar o id do item
+	 * Responsavel por pegar o id do item.
 	 * 
 	 * @return int - representando o identificador do item
 	 */
@@ -107,7 +116,7 @@ public abstract class ItemCompravel {
 
 	/**
 	 * Responsável por unir em String os locais de copra do item e seu referente
-	 * preco. (usado no toString)
+	 * preco. (usado no toString).
 	 * 
 	 * @return String - representando locais e precos
 	 */

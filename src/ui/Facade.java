@@ -121,14 +121,14 @@ public class Facade {
 		return itemController.getItemPorCategoria(categoria, posicao);
 	}
 	
-//	/**
-//	 * Exibe item ordenado em ordem crescente pelo menor preco cadastrado.
-//	 * @param posicao identificador do item
-//	 * @return String - representacao do item
-//	 */
-//	public String getItemPorMenorPreco(int posicao) {
-//		return itemController.getItemPorMenorPreco(posicao);
-//	}
+	/**
+	 * Exibe item ordenado em ordem crescente pelo menor preco cadastrado.
+	 * @param posicao identificador do item
+	 * @return String - representacao do item
+	 */
+	public String getItemPorMenorPreco(int posicao) {
+		return itemController.getItemPorMenorPreco(posicao);
+	}
 	
 	/**
 	 * Exibe item ordenado por pesquisa inserida pelo usuario.

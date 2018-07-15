@@ -16,6 +16,7 @@ public enum ErrosItemController {
 	// LISTAGEM
 	LISTAGEM_ID_INVALIDO("Erro na listagem de item: id invalido."),
 	LISTAGEM_ITEM_INEXISTENTE("Erro na listagem de item: item nao existe."),
+	LISTAGEM_CATEGORIA_INEXISTENTE("Erro na listagem de item: categoria nao existe"),
 	
 	// ATUALIZA
 	ATUALIZA_ITEM_INEXISTENTE("Erro na atualizacao de item: item nao existe."),

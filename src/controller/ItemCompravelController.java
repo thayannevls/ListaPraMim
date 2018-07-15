@@ -201,8 +201,6 @@ public class ItemCompravelController {
 	 * @return String representacao textual do item retornado
 	 */
 	public String getItemPorPesquisa(String strPesquisada, int posicao){
-		Validator.ehPositivo(posicao, "posicao invalida");
-		
 		List<ItemCompravel> itensPesquisados = new ArrayList<>();
 		itensPesquisados.addAll(itens.values());
 	

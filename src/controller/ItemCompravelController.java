@@ -211,6 +211,8 @@ public class ItemCompravelController {
 		Comparator c = new ItemNomeComparator();
 		itensPesquisados.sort(c);
 		
+		if(posicao >= itensPesquisados.size())
+			return "";
 		return itensPesquisados.get(posicao).toString();	
 	}
 	

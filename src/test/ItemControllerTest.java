@@ -439,5 +439,127 @@ public class ItemControllerTest {
 
 
 	}
+	
+	@Test
+	public void listaItemOrdemAlfabetica() {
+		int id1 = controller.adicionaItemPorQtd("Agua Sanitaria Drogon", "limpeza", 1, "l", "Supermercado Excepcional", 2.19);
+		int id2 = controller.adicionaItemPorQuilo("Peito de peru Saara", "alimento industrializado", 1.0, "Mercadinho Bem Barato", 34.49);
+		int id3 = controller.adicionaItemPorQuilo("Limao", "alimento nao industrializado", 1.0, "Supermercado Excepcional", 4.19);
+		int id4 = controller.adicionaItemPorQtd("Capsula Dois Coracoes", "alimento industrializado", 8, "capsulas", "Supermercado BuyMore", 10.89);
+		int id5 = controller.adicionaItemPorUnidade("Batata Tentacoes", "alimento industrializado", 1, "Supermercado Excepcional", 3.79);
+		
+		assertEquals(id1 + ". Agua Sanitaria Viserion, limpeza, 500 ml, Preco: <Supermercado Excepcional, R$ 2,19;>", controller.getItem(0));
+		assertEquals(id5 + ". Batata Tentacoes, alimento industrializado, Preco: <Supermercado UauMart, R$ 3,69;Mercadinho Bem Barato, R$ 3,99;>", controller.getItem(1));
+		assertEquals(id4 + ". Capsula Dois Coracoes, alimento industrializado, 8 capsulas, Preco: <Supermercado BuyMore, R$ 10,89;>", controller.getItem(2));
+		assertEquals(id3 + ". Limao, alimento nao industrializado, Preco por quilo: <Supermercado Excepcional, R$ 4,19;>", controller.getItem(3));
+		assertEquals(id2 + ". Peito de peru Saara, alimento industrializado, Preco por quilo: <Mercadinho Bem Barato, R$ 34,49;>", controller.getItem(4));
+		
+	}
+	
+	@Test
+	public void listaItemPorCategoria() {
+		int id1 = controller.adicionaItemPorQtd("Agua Sanitaria Drogon", "limpeza", 1, "l", "Supermercado Excepcional", 2.19);
+		int id2 = controller.adicionaItemPorQuilo("Peito de peru Saara", "alimento industrializado", 1.0, "Mercadinho Bem Barato", 34.49);
+		int id3 = controller.adicionaItemPorQtd("Queijo ralado Lebron", "alimento industrializado",50, "grama", "Supermercado UauMart", 1.59);
+		int id4 = controller.adicionaItemPorUnidade("Creme dental Oral-C", "higiene pessoal", 3, "Mercadinho Bem Barato", 3.79);
+		int id5 = controller.adicionaItemPorUnidade("Esponja de Aco Assolange", "limpeza", 1, "Supermercado BuyMore", 3.50);
+		int id6 = controller.adicionaItemPorQuilo("Limao", "alimento nao industrializado", 1.0, "Supermercado Excepcional", 4.19);
+		int id7 = controller.adicionaItemPorUnidade("Coentro", "alimento nao industrializado", 1, "Mercadinho Bem Barato", 1.39);
+		int id8 = controller.adicionaItemPorQtd("Capsula Dois Coracoes", "alimento industrializado", 8, "capsulas", "Supermercado BuyMore", 10.89);
+		int id9 = controller.adicionaItemPorQuilo("Costela suina Saara", "alimento industrializado", 1.0, "Supermercado UauMart", 23.49);
+		int id10 = controller.adicionaItemPorQuilo("Batata doce", "alimento nao industrializado", 1.0, "Supermercado Excepcional", 3.79);
+		
+		//alimento industrializado
+		assertEquals(id8 + ". Capsula Dois Coracoes, alimento industrializado, 8 capsulas, Preco: <Supermercado BuyMore, R$ 10,89;>", controller.getItemPorCategoria("alimento industrializado", 0));
+		assertEquals(id9 + ". Costela suina Sabia, alimento industrializado, Preco por quilo: <Supermercado UauMart, R$ 23,49;>", controller.getItemPorCategoria("alimento industrializado", 1));
+		assertEquals(id2 + ". Peito de peru Saara, alimento industrializado, Preco por quilo: <Mercadinho Bem Barato, R$ 34,49;>", controller.getItemPorCategoria("alimento indusrializado", 2));
+		assertEquals(id3 + ". Queijo ralado Lebro, alimento industrializado, 50 grama, Preco; <Supermercado UauMart, R$ 1,59;>", controller.getItemPorCategoria("alimento industrializado", 3));
+		
+		//alimento nao industrializado
+		assertEquals(id10 + ". Batata doce, alimento nao industrializado, Preco por quilo: <Supermercado Excepcional, R$ 3,79;>", controller.getItemPorCategoria("alimento nao industrializado",0));
+		assertEquals(id7 + ". Coentro, alimento nao industrializado, Preco: <Mercadinho Bem Barato, R$ 1,39;>", controller.getItemPorCategoria("alimento nao industrializado", 1));
+		assertEquals(id6 + ". Limao, alimento nao industrializado, Preco por quilo: <Supermercado Excepcional, R$ 4,19;>", controller.getItemPorCategoria("alimento nao industrializado", 2));
+		
+		//limpeza
+		assertEquals(id1 + ". Agua Sanitaria Viserion, limpeza, 500 ml, Preco: <Supermercado Excepcional, R$ 2,19;>", controller.getItemPorCategoria("limpeza", 0));
+		assertEquals(id5 + ". Esponja de Aco Assolange, limpeza, Preco: <Supermercado BuyMore, R$ 3,50;>", controller.getItemPorCategoria("limpeza", 1));
+		
+		//higiene pessoal
+		assertEquals(id4 + ". Creme dental Oral-C, higiene pessoal, Preco: <Mercadinho Bem Barato, R$ 3,79;>", controller.getItemPorCategoria("higiene pessoal", 0));
+		
+	}
+	
+	@Test
+	public void listaItemPorMenorPreco() {
+		int id1 = controller.adicionaItemPorQtd("Agua Sanitaria Drogon", "limpeza", 1, "l", "Supermercado Excepcional", 2.19);
+		int id2 = controller.adicionaItemPorQuilo("Peito de peru Saara", "alimento industrializado", 1.0, "Mercadinho Bem Barato", 34.49);
+		int id3 = controller.adicionaItemPorQtd("Queijo ralado Lebron", "alimento industrializado",50, "grama", "Supermercado UauMart", 1.59);
+		int id4 = controller.adicionaItemPorUnidade("Creme dental Oral-C", "higiene pessoal", 3, "Mercadinho Bem Barato", 3.79);
+		int id5 = controller.adicionaItemPorUnidade("Esponja de Aco Assolange", "limpeza", 1, "Supermercado BuyMore", 3.50);
+		
+		assertEquals(id3 + ". Queijo ralado Lebro, alimento industrializado, 50 grama, Preco; <Supermercado UauMart, R$ 1,59;>", controller.getItemPorMenorPreco(0));
+		assertEquals(id1 + ". Agua Sanitaria Viserion, limpeza, 500 ml, Preco: <Supermercado Excepcional, R$ 2,19;>", controller.getItemPorMenorPreco(1));
+		assertEquals(id5 + ". Esponja de Aco Assolange, limpeza, Preco: <Supermercado BuyMore, R$ 3,50;>", controller.getItemPorMenorPreco(2));
+		assertEquals(id4 + ". Creme dental Oral-C, higiene pessoal, Preco: <Mercadinho Bem Barato, R$ 3,79;>", controller.getItemPorMenorPreco(3));
+		assertEquals(id2 + ". Peito de peru Saara, alimento industrializado, Preco por quilo: <Mercadinho Bem Barato, R$ 34,49;>", controller.getItemPorMenorPreco(4));
+		
+	}
+	
+	@Test
+	public void listaItemPorPesquisa() {
+		int id1 = controller.adicionaItemPorUnidade("Alho poro", "alimento nao industrializado", 1, "Mercadinho Bem Barato", 1.39);
+		int id2 = controller.adicionaItemPorQtd("Batata chips", "alimento industrializado", 80,"grama", "Supermercado UauMart", 3.49);
+		int id3 = controller.adicionaItemPorQuilo("Batata doce", "alimento nao industrializado", 1.0, "Supermercado Excepcional", 3.79);
+		int id4 = controller.adicionaItemPorUnidade("Alho", "alimento nao industrializado", 2, "Mercado do seu Zeh", 1.50);
+		
+		
+		assertEquals(id2 + ". Batata chips, alimento industrializado, 80 grama, Preco: <Supermercado UauMart, R$ 3,49;>", controller.getItemPorPesquisa("Batata", 0));
+		assertEquals(id3 + ". Batata doce, alimento nao industrializado, Preco por quilo: <Supermercado Excepcional, R$ 3,79;>", controller.getItemPorPesquisa("Batata", 1));
+		
+		assertEquals(id4 + ". Alho, alimento nao industrializado, Preco: <Mercado do seu Zeh, R$ 1,50;>", controller.getItemPorPesquisa("Alho", 0));
+		assertEquals(id1 + ". Alho poro, alimento nao industrializado, Preco: <Mercadinho Bem Barato, R$ 1,39;>", controller.getItemPorPesquisa("Alho", 0));
+		
+	}
+	
+	@Test
+	public void listaItemOrdemAlfabeticaPosicaoInexistente() {
+		int id1 = controller.adicionaItemPorQtd("Agua Sanitaria Drogon", "limpeza", 1, "l", "Supermercado Excepcional", 2.19);
+		assertEquals(id1 + ". Agua Sanitaria Viserion, limpeza, 500 ml, Preco: <Supermercado Excepcional, R$ 2,19;>", controller.getItem(0));
+		
+		assertEquals("", controller.getItem(1));
+		//posicao 1 nao existe no array ordenado
 
+	}
+	
+	@Test
+	public void listaItemPorCategoriaNaoCondizComPosicao() {
+		int id1 = controller.adicionaItemPorQtd("Batata chips", "alimento industrializado", 80,"grama", "Supermercado UauMart", 3.49);
+		int id2 = controller.adicionaItemPorQuilo("Peito de peru Saara", "alimento industrializado", 1.0, "Mercadinho Bem Barato", 34.49);
+
+		assertEquals("", controller.getItemPorCategoria("alimento industrializado", 2));
+		assertEquals("", controller.getItemPorCategoria("alimento nao industrializado", 0));
+		
+		//as categorias em relacao a posicao -vice versa- nao sao correspondentes
+	}
+	
+	@Test
+	public void listaItemPorMenorPrecoItemInexistente() {
+		assertEquals("", controller.getItemPorMenorPreco(1));
+		
+	}
+	
+	@Test
+	public void listaItemPorPesquisaInvalida() {
+		int id1 = controller.adicionaItemPorQtd("Batata chips", "alimento industrializado", 80,"grama", "Supermercado UauMart", 3.49);
+		assertEquals("", controller.getItemPorPesquisa("banana", 0));
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void listaItemPorCategoriaNaoExiste() {
+		int id1 = controller.adicionaItemPorQtd("Batata chips", "alimento industrializado", 80,"grama", "Supermercado UauMart", 3.49);
+		
+		controller.getItemPorCategoria("alimento", 0);
+	}
+	
+	
 }

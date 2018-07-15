@@ -2,7 +2,6 @@ package controller;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +13,7 @@ import model.ItemPorQtd;
 import model.ItemPorQuilo;
 import model.ItemPorUnidade;
 import util.ErrosItemController;
+import util.MenorPrecoComparator;
 import util.Validator;
 
 /**
@@ -195,6 +195,11 @@ public class ItemCompravelController {
 		itens.remove(id);
 	}
 	
+	/**
+	 * Retorna item ordenado de forma alfabetica.
+	 * @param posicao posicao do item
+	 * @return String - representacao textual do item retornado
+	 */
 	public String getItem(int posicao) {
 		List<ItemCompravel> itensOrdenados = new ArrayList<>();
 		itensOrdenados.addAll(itens.values());
@@ -209,7 +214,7 @@ public class ItemCompravelController {
 	 * Retorna item ordenado por sua categoria
 	 * @param categoria categoria do item
 	 * @param posicao posicao requerida
-	 * @return String - representaçao textualdo item retornado
+	 * @return String - representaçao textual do item retornado
 	 */
 	public String getItemPorCategoria(String categoria, int posicao) {		
 		List<ItemCompravel> itensCategoria = new ArrayList<>();
@@ -220,9 +225,26 @@ public class ItemCompravelController {
 		}
 		
 		Collections.sort(itensCategoria, new ItemNomeComparator());
+		
 		if (posicao >= itensCategoria.size())
 			return "";
 		return itensCategoria.get(posicao).toString();
+	}
+	
+	/**
+	 * Retorna item ordenado pelo menor preco.
+	 * @param posicao posicao do item
+	 * @return String - representacao textual do item retornado
+	 */
+	public String getItemPorMenorPreco(int posicao) {
+		List<ItemCompravel> itensPreco = new ArrayList<>();
+		itensPreco.addAll(itens.values());
+		
+		Collections.sort(itensPreco, new MenorPrecoComparator());
+		
+		if (posicao >= itensPreco.size())
+			return "";
+		return itensPreco.get(posicao).toString();
 	}
 		
 	/**
@@ -239,12 +261,11 @@ public class ItemCompravelController {
 							item.getNome().toLowerCase().contains(strPesquisada.toLowerCase())).
 							collect(Collectors.toList());
 		
-		Comparator c = new ItemNomeComparator();
-		itensPesquisados.sort(c);
+		Collections.sort(itensPesquisados, new  ItemNomeComparator());
 		
 		if(posicao >= itensPesquisados.size())
 			return "";
-		return itensPesquisados.get(posicao).toString();	
+		return itensPesquisados.get(posicao).toString();
 	}
 	
 	/**
@@ -272,5 +293,5 @@ public class ItemCompravelController {
 			return true;
 		throw new IllegalArgumentException(mensagem);
 	}
-	
+
 }

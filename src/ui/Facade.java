@@ -1,4 +1,4 @@
-package ui;
+--package ui;
 
 import controller.ItemCompravelController;
 import easyaccept.EasyAccept;
@@ -103,40 +103,40 @@ public class Facade {
 	
 	/**
 	 * Exibe item ordenado por ordem alfabetica.
-	 * @param id identificador do item
+	 * @param posicao identificador do item
 	 * @return String - representacao do item
 	 */
-	public String getItem(int id) {
-		return itemController.getItem(id);
+	public String getItem(int posicao) {
+		return itemController.getItem(posicao);
 	}
 	
 	/**
 	 * Exibe item ordenado por uma dada categoria em ordem alfabetica.
 	 * @param categoria categoria do item
-	 * @param id identificador do item
+	 * @param posicao identificador do item
 	 * @return String - representacao do item
 	 */
-	public String getItemPorCategoria(String categoria, ind id) {
-		return itemController.getItemPorCategoria(categoria, id);
+	public String getItemPorCategoria(String categoria, ind posicao) {
+		return itemController.getItemPorCategoria(categoria, posicao);
 	}
 	
 	/**
 	 * Exibe item ordenado em ordem crescente pelo menor preco cadastrado.
-	 * @param id identificador do item
+	 * @param posicao identificador do item
 	 * @return String - representacao do item
 	 */
-	public String getItemPorMenorPreco(int id) {
-		return itemController.getItemPorMenorPreco(id);
+	public String getItemPorMenorPreco(int posicao) {
+		return itemController.getItemPorMenorPreco(posicao);
 	}
 	
 	/**
 	 * Exibe item ordenado por pesquisa inserida pelo usuario.
 	 * @param strPesquisada String a ser pesquisada
-	 * @param id identificador do item
+	 * @param posicao identificador do item
 	 * @return String - representacao do item
 	 */
-	public String getItemPorPesquisa(String strPesquisada, int id) {
-		return itemController.getItemPorPesquisa(strPesquisada, id);
+	public String getItemPorPesquisa(String strPesquisada, int posicao) {
+		return itemController.getItemPorPesquisa(strPesquisada, posicao);
 	}
 }
 

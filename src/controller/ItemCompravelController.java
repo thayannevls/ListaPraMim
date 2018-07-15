@@ -7,6 +7,8 @@ import model.ItemCompravel;
 import model.ItemPorQtd;
 import model.ItemPorQuilo;
 import model.ItemPorUnidade;
+import util.ErrosItemController;
+import util.Validator;
 
 /**
  * Classe responsável por controlar itens comŕavel no sistema
@@ -27,73 +29,190 @@ public class ItemCompravelController {
 	}
 	
 	/**
-	 * 
-	 * @param nome
-	 * @param categoria
-	 * @param kg
-	 * @param localDeCompra
-	 * @param preco
-	 * @return
-	 */
+	 * Adiciona item por quilo
+	 * @param nome nome do item
+	 * @param categoria categoria do item
+	 * @param kg quilo
+	 * @param localDeCompra local de compra do item
+	 * @param preco preco do item
+	 * @return int retorna id gerado para o item
+	 */		   
 	public int adicionaItemPorQuilo(String nome, String categoria, double kg, String localDeCompra, double preco) {
+		Validator.ehPositivo(kg, ErrosItemController.CADASTRO_QUILO_NEGATIVO.toString());
+		Validator.ehPositivo(preco, ErrosItemController.CADASTRO_PRECO_INVALIDO.toString());
+		Validator.campoValido(localDeCompra, ErrosItemController.CADASTRO_LOCAL_NULO.toString());
+		Validator.campoValido(categoria, ErrosItemController.CADASTRO_CATEGORIA_NULA.toString());
+		Validator.categoriaValida(categoria, ErrosItemController.CADASTRO_CATEGORIA_INEXISTENTE.toString());
+		Validator.campoValido(nome, ErrosItemController.CADASTRO_NOME_NULO.toString());
+		
 		int id = qtdItens + 1;
 		ItemCompravel item = new ItemPorQuilo(nome, id, categoria, kg, localDeCompra, preco);
 		itens.put(id, item);
+		qtdItens ++;
 		return id;
 	}
 
+	/**
+	 * Adiciona item por unidade
+	* @param nome nome do item
+	 * @param categoria categoria do item
+	 * @param unidade unidade
+	 * @param localDeCompra local de compra do item
+	 * @param preco preco do item
+	 * @return int retorna id gerado para o item
+	 */
 	public int adicionaItemPorUnidade(String nome, String categoria, int unidade, String localDeCompra, double preco) {
+		Validator.ehPositivo(preco, ErrosItemController.CADASTRO_PRECO_INVALIDO.toString());
+		Validator.ehPositivo(unidade, ErrosItemController.CADASTRO_UNIDADE_NEGATIVA.toString());
+		Validator.campoValido(localDeCompra, ErrosItemController.CADASTRO_LOCAL_NULO.toString());
+		Validator.campoValido(categoria, ErrosItemController.CADASTRO_CATEGORIA_NULA.toString());
+		Validator.categoriaValida(categoria, ErrosItemController.CADASTRO_CATEGORIA_INEXISTENTE.toString());
+		Validator.campoValido(nome, ErrosItemController.CADASTRO_NOME_NULO.toString());
+		
 		int id = qtdItens + 1;
 		ItemCompravel item = new ItemPorUnidade(nome, id, categoria, unidade, localDeCompra, preco);
 		itens.put(id, item);
+		qtdItens ++;
 		return id;
 	}
 
+	/**
+	 * Adiciciona item por quantidade de medida
+	 * @param nome nome do item
+	 * @param categoria categoria do item
+	 * @param qnt quantidade
+	 * @param unidadeDeMedida unidade de medida
+	 * @param localDeCompra local de compra do item
+	 * @param preco preco do item
+	 * @return int retorna id gerado para o item
+	 */
 	public int adicionaItemPorQtd(String nome, String categoria, int qnt, String unidadeDeMedida, String localDeCompra,
 			double preco) {
+		
+		Validator.ehPositivo(qnt, ErrosItemController.CADASTRO_QUANTIDADE_NEGATIVA.toString());
+		Validator.ehPositivo(preco, ErrosItemController.CADASTRO_PRECO_INVALIDO.toString());
+		Validator.campoValido(localDeCompra, ErrosItemController.CADASTRO_LOCAL_NULO.toString());
+		Validator.categoriaValida(categoria, ErrosItemController.CADASTRO_CATEGORIA_INEXISTENTE.toString());
+		Validator.campoValido(categoria, ErrosItemController.CADASTRO_CATEGORIA_NULA.toString());
+		Validator.campoValido(nome, ErrosItemController.CADASTRO_NOME_NULO.toString());
+		Validator.campoValido(unidadeDeMedida, ErrosItemController.CADASTRO_UNIDADE_NULA.toString());
+		
 		int id = qtdItens + 1;
 		ItemCompravel item = new ItemPorQtd(nome, id, categoria, qnt, unidadeDeMedida, localDeCompra, preco);
 		itens.put(id, item);
+		qtdItens ++;
 		return id;
 	}
-
+	
+	/**
+	 * Retorna representacao textual do item
+	 * @param id id do item a ser exibido
+	 * @return String representacao textual do item
+	 */
 	public String exibeItem(int id) {
-		idValido(id);
+		idValido(id, ErrosItemController.LISTAGEM_ID_INVALIDO.toString());
+		itemExiste(id, ErrosItemController.LISTAGEM_ITEM_INEXISTENTE.toString());
+
 		return itens.get(id).toString();
 	}
-
+	
+	/**
+	 * Adiciona um preco ao item
+	 * @param id id do item a ser adicionado rpeco
+	 * @param localDeCompra local de compra que teve esse preco
+	 * @param preco novo preco a ser adicionado
+	 */
 	public void adicionaPrecoItem(int id, String localDeCompra, double preco) {
-		idValido(id);
+		idValido(id, ErrosItemController.PRECO_ID_INVALIDO.toString());
+		itemExiste(id, ErrosItemController.PRECO_ITEM_INEXISTENTE.toString());
+
+		
+		Validator.ehPositivo(preco, ErrosItemController.PRECO_ITEM_PRECO_INVALIDO.toString());
+		Validator.campoValido(localDeCompra, ErrosItemController.PRECO_LOCAL_NULO.toString());
+		
 		itens.get(id).adicionaPreco(localDeCompra, preco);
 	}
 	
-	//to do
+	/**
+	 * atualiza algum atributo de item escolhido
+	 * @param id id do item a ser atualizado
+	 * @param atributo atributo a ser modificdo
+	 * @param novoValor novo valor que recebera o atributo
+	 * @exception quando se tem id, atributo ou novo valor invalido
+	 */
 	public void atualizaItem(int id, String atributo, String novoValor) {
-		idValido(id);
+		Validator.campoValido(atributo, ErrosItemController.ATUALIZA_ATRIBUTO_NULO.toString());
+		Validator.campoValido(novoValor, ErrosItemController.ATUALIZA_VALOR_NULO.toString());
+		idValido(id, ErrosItemController.ATUALIZA_ITEM_INEXISTENTE.toString());
+
+		itemExiste(id, ErrosItemController.ATUALIZA_ITEM_INEXISTENTE.toString());
 		
 		switch(atributo){
 			case "nome":
 				itens.get(id).setNome(novoValor);
 				break;
 			case "categoria":
+				Validator.categoriaValida(novoValor, ErrosItemController.ATUALIZA_CATEGORIA_INEXISTENTE.toString());
 				itens.get(id).setCategoria(novoValor);
 				break;
 			case "quantidade":
-				int valor = Integer.parseInt(novoValor);
-				((ItemPorQtd) itens.get(id)).setQuantidade(valor);
+				int quantidade = Integer.parseInt(novoValor);
+				Validator.ehPositivo(quantidade, ErrosItemController.ATUALIZA_QUANTIDADE_NEGATIVO.toString());
+				((ItemPorQtd) itens.get(id)).setQuantidade(quantidade);
+				break;
+			case "unidade de medida":
+				((ItemPorQtd) itens.get(id)).setUnidade(novoValor);
+				break;
+			case "unidades":
+				int unidade = Integer.parseInt(novoValor);
+				Validator.ehPositivo(unidade, ErrosItemController.ATUALIZA_QUANTIDADE_NEGATIVO.toString());
+				((ItemPorUnidade) itens.get(id)).setUnidade(unidade);
+				break;
+			case "kg":
+				double kg = Double.parseDouble(novoValor);
+				Validator.ehPositivo(kg, ErrosItemController.ATUALIZA_QUILO_NEGATIVO.toString());
 				
+				((ItemPorQuilo) itens.get(id)).setQuilo(kg);
+				break;
+			default:
+				throw new IllegalArgumentException(ErrosItemController.ATUALIZA_ATRIBUTO_INEXISTENTE.toString());
 		}
 	}
 	
+	/**
+	 * Deleta um item do sistema
+	 * @param id id do item a ser deletado
+	 */
 	public void deletaItem(int id) {
-		idValido(id);
+		idValido(id, ErrosItemController.DELETA_ID_INVALIDO.toString());
+		itemExiste(id, ErrosItemController.DELETA_ID_INVALIDO.toString());
 		itens.remove(id);
 	}
 	
-	private boolean idValido(int id){
+	/**
+	 * verifica se id eh valido
+	 * @param id id a ser verificado
+	 * @param mensagem mensagem de erro caso nao seja valido
+	 * @return boolean true se eh valido
+	 * @exception IllegalArgumentException quando id nao eh valido
+	 */
+	private boolean idValido(int id, String mensagem){
 		if(id < 1)
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException(mensagem);
 		return true;
+	}
+	
+	/**
+	 * Verifica se item existe no sistema de acordo com id
+	 * @param id id a ser verificado
+	 * @param mensagem mensagem de erro caso nao exista
+	 * @return boolean true se eh valido
+	 * @exception IllegalArgumentException quando item nao existe
+	 */
+	private boolean itemExiste(int id, String mensagem){
+		if(itens.containsKey(id))
+			return true;
+		throw new IllegalArgumentException(mensagem);
 	}
 	
 }

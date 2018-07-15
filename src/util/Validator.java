@@ -25,7 +25,7 @@ public class Validator {
 	 * @exception IllegalArgumentException se for negativo
 	 */
 	public static boolean ehPositivo(int num, String mensagem){
-		if(num < 0)
+		if(num <= 0)
 			throw new IllegalArgumentException(mensagem);
 		return true;
 	}
@@ -39,7 +39,7 @@ public class Validator {
 	 * @exception IllegalArgumentException se for negativo
 	 */
 	public static boolean ehPositivo(double num, String mensagem){
-		if(num < 0)
+		if(num <= 0)
 			throw new IllegalArgumentException(mensagem);
 		return true;
 	}
@@ -63,9 +63,9 @@ public class Validator {
 	 * @param mensagem mensagem a ser verificada
 	 * @exception IllegalArgumentException caso seja passado uma categoria inválida
 	 */
-	public static boolean categoriaValida(String previsao, String mensagem){
+	public static boolean categoriaValida(String categoria, String mensagem){
 		for (CategoriaEnum c : CategoriaEnum.values()) {
-			if (c.toString().equals(mensagem)) {
+			if (c.toString().equals(categoria.toLowerCase())) {
 				return true;
 			}
 		}

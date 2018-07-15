@@ -9,8 +9,8 @@ import util.Utils;
  * @author José Guilheme - Matricula: 117210370
  * @author Mariana Nascimento - Matricula: 117210416
  * @author Siuanny Barbosa - Matriucla: 117210395
- * @author Thayanne Sousa - Matricula: 117210414 
- * UFCG/2018.1 - Laboratório de Programação 2 - Projeto de Laboratorio (Lista pra mim)
+ * @author Thayanne Sousa - Matricula: 117210414 UFCG/2018.1 - Laboratório de
+ *         Programação 2 - Projeto de Laboratorio (Lista pra mim)
  */
 public class ItemPorQuilo extends ItemCompravel {
 
@@ -19,12 +19,18 @@ public class ItemPorQuilo extends ItemCompravel {
 	/**
 	 * Construtor de ItemPorQuilo, herdando codigo da classe pai.
 	 * 
-	 * @param nome          nome do item
-	 * @param id            identificador do item
-	 * @param categoria     categoria do item
-	 * @param quilograma    quantidade em quilo do item
-	 * @param localDeCompra local da compra do produto
-	 * @param preco         preco do item
+	 * @param nome
+	 *            nome do item
+	 * @param id
+	 *            identificador do item
+	 * @param categoria
+	 *            categoria do item
+	 * @param quilograma
+	 *            quantidade em quilo do item
+	 * @param localDeCompra
+	 *            local da compra do produto
+	 * @param preco
+	 *            preco do item
 	 */
 	public ItemPorQuilo(String nome, int id, String categoria, double quilograma, String localDeCompra, double preco) {
 		super(nome, id, categoria, localDeCompra, preco);
@@ -34,7 +40,7 @@ public class ItemPorQuilo extends ItemCompravel {
 	/**
 	 * Responsavel por pegar a quantidade em quilo do item.
 	 * 
-	 * @return int - representando a quantidade comprada do item
+	 * @return double - representando a quantidade de kg de um item
 	 */
 	public double getQuilo() {
 		return this.quilograma;
@@ -43,24 +49,11 @@ public class ItemPorQuilo extends ItemCompravel {
 	/**
 	 * Responsavel por alterar o valor da quantidade em quilo do item.
 	 * 
-	 * @param quilograma novo valor para a quantidade em quilo do item
+	 * @param quilograma
+	 *            novo valor para a quantidade em quilo do item
 	 */
 	public void setQuilo(double quilograma) {
 		this.quilograma = quilograma;
-	}
-
-	/**
-	 * Responsável por unir em String os locais de copra do item e seu referente
-	 * preco. (usado no toString)
-	 * 
-	 * @return String - representando locais e precos
-	 */
-	private String localPreco() {
-		String localPreco = "";
-		for (String localDeCompra : this.mapaDePrecos.keySet()) {
-			localPreco += localDeCompra + ", " + Utils.realComVirgula((this.mapaDePrecos.get(localDeCompra))) + ";";
-		}
-		return localPreco;
 	}
 
 	/**
@@ -70,6 +63,7 @@ public class ItemPorQuilo extends ItemCompravel {
 	 */
 	@Override
 	public String toString() {
-		return this.id + ". " + this.nome + ", " + this.categoria + ", " + "Preco por quilo: <" + this.localPreco() + ">";
+		return this.id + ". " + this.nome + ", " + this.categoria + ", " + "Preco por quilo: <" + super.localPreco() + ">";
 	}
+
 }

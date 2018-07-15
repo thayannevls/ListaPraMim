@@ -9,8 +9,8 @@ import util.Utils;
  * @author José Guilheme - Matricula: 117210370
  * @author Mariana Nascimento - Matricula: 117210416
  * @author Siuanny Barbosa - Matriucla: 117210395
- * @author Thayanne Sousa - Matricula: 117210414 
- * UFCG/2018.1 - Laboratório de Programação 2 - Projeto de Laboratorio (Lista pra mim)
+ * @author Thayanne Sousa - Matricula: 117210414 UFCG/2018.1 - Laboratório de
+ *         Programação 2 - Projeto de Laboratorio (Lista pra mim)
  */
 public class ItemPorQtd extends ItemCompravel {
 
@@ -20,15 +20,23 @@ public class ItemPorQtd extends ItemCompravel {
 	/**
 	 * Construtor de ItemPorQuantidade, herdando codigo da classe pai.
 	 * 
-	 * @param nome            nome do item
-	 * @param id              identificador do item
-	 * @param categoria       categoria do item
-	 * @param quantidade      quantidade comprada do item
-	 * @param unidadeDeMedida unidade de medida do item
-	 * @param localDeCompra   local onde foi comprado o item
-	 * @param preco           preco do item
+	 * @param nome
+	 *            nome do item
+	 * @param id
+	 *            identificador do item
+	 * @param categoria
+	 *            categoria do item
+	 * @param quantidade
+	 *            quantidade comprada do item
+	 * @param unidadeDeMedida
+	 *            unidade de medida do item
+	 * @param localDeCompra
+	 *            local onde foi comprado o item
+	 * @param preco
+	 *            preco do item
 	 */
-	public ItemPorQtd(String nome, int id, String categoria, int quantidade, String unidadeDeMedida,String localDeCompra, double preco) {
+	public ItemPorQtd(String nome, int id, String categoria, int quantidade, String unidadeDeMedida,
+			String localDeCompra, double preco) {
 		super(nome, id, categoria, localDeCompra, preco);
 		this.quantidade = quantidade;
 		this.unidadeDeMedida = unidadeDeMedida;
@@ -55,7 +63,8 @@ public class ItemPorQtd extends ItemCompravel {
 	/**
 	 * Responsavel por alterar a quantidade do item.
 	 * 
-	 * @param quantidade nova quantidade para ser atualizado
+	 * @param quantidade
+	 *            nova quantidade para ser atualizado
 	 */
 	public void setQuantidade(int quantidade) {
 		this.quantidade = quantidade;
@@ -64,24 +73,11 @@ public class ItemPorQtd extends ItemCompravel {
 	/**
 	 * Responsavel por alterar a unidade de medida do item.
 	 * 
-	 * @param unidadeDeMedida novo valor para alterar a unidade de medida
+	 * @param unidadeDeMedida
+	 *            novo valor para alterar a unidade de medida
 	 */
 	public void setUnidade(String unidadeDeMedida) {
 		this.unidadeDeMedida = unidadeDeMedida;
-	}
-
-	/**
-	 * Responsável por unir em String os locais de copra do item e seu referente
-	 * preco. (usado no toString)
-	 * 
-	 * @return String - representando locais e precos
-	 */
-	private String localPreco() {
-		String localPreco = "";
-		for (String localDeCompra : this.mapaDePrecos.keySet()) {
-			localPreco += localDeCompra + ", " + Utils.realComVirgula((this.mapaDePrecos.get(localDeCompra))) + ";";
-		}
-		return localPreco;
 	}
 
 	/**
@@ -91,6 +87,7 @@ public class ItemPorQtd extends ItemCompravel {
 	 */
 	@Override
 	public String toString() {
-		return this.id + ". " + this.nome + ", " + this.categoria + ", " + this.quantidade + " " + this.unidadeDeMedida + ", " + "Preco: <" + this.localPreco() + ">";
+		return this.id + ". " + this.nome + ", " + this.categoria + ", " + this.quantidade + " " + this.unidadeDeMedida
+				+ ", " + "Preco: <" + super.localPreco() + ">";
 	}
 }

@@ -32,7 +32,6 @@ public class MenorPrecoComparator implements Comparator<ItemCompravel> {
 			}
 
 		}
-
 		return (aux1.compareTo(aux2));
 
 	}

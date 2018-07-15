@@ -1,8 +1,13 @@
 package controller;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
+import comparator.ItemNomeComparator;
 import model.ItemCompravel;
 import model.ItemPorQtd;
 import model.ItemPorQuilo;
@@ -187,6 +192,28 @@ public class ItemCompravelController {
 		idValido(id, ErrosItemController.DELETA_ID_INVALIDO.toString());
 		itemExiste(id, ErrosItemController.DELETA_ID_INVALIDO.toString());
 		itens.remove(id);
+	}
+	
+	/**
+	 * Retorna item que contem strPesquisada em seu nome na posicao indicada
+	 * @param strPesquisada string a ser pesquisada
+	 * @param posicao posicao posicao requerida
+	 * @return String representacao textual do item retornado
+	 */
+	public String getItemPorPesquisa(String strPesquisada, int posicao){
+		List<ItemCompravel> itensPesquisados = new ArrayList<>();
+		itensPesquisados.addAll(itens.values());
+	
+		itensPesquisados = itensPesquisados.stream().filter((ItemCompravel item) -> 
+							item.getNome().toLowerCase().contains(strPesquisada.toLowerCase())).
+							collect(Collectors.toList());
+		
+		Comparator c = new ItemNomeComparator();
+		itensPesquisados.sort(c);
+		
+		if(posicao >= itensPesquisados.size())
+			return "";
+		return itensPesquisados.get(posicao).toString();	
 	}
 	
 	/**

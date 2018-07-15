@@ -116,7 +116,7 @@ public class Facade {
 	 * @param posicao identificador do item
 	 * @return String - representacao do item
 	 */
-	public String getItemPorCategoria(String categoria, ind posicao) {
+	public String getItemPorCategoria(String categoria, int posicao) {
 		return itemController.getItemPorCategoria(categoria, posicao);
 	}
 	
@@ -139,4 +139,3 @@ public class Facade {
 		return itemController.getItemPorPesquisa(strPesquisada, posicao);
 	}
 }
-

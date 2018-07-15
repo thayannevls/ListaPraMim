@@ -1,5 +1,7 @@
 package model;
 
+import util.Utils;
+
 /**
  * Classe responsável por registrar e armazenar dados de um item do tipo: Por
  * quilo. Herda da classe ItemCompravel
@@ -56,7 +58,7 @@ public class ItemPorQuilo extends ItemCompravel {
 	private String localPreco() {
 		String localPreco = "";
 		for (String localDeCompra : this.mapaDePrecos.keySet()) {
-			localPreco += localDeCompra + ", " + String.format("R$ %.2f", (this.mapaDePrecos.get(localDeCompra))) + ";";
+			localPreco += localDeCompra + ", " + Utils.realComVirgula((this.mapaDePrecos.get(localDeCompra))) + ";";
 		}
 		return localPreco;
 	}
@@ -68,6 +70,6 @@ public class ItemPorQuilo extends ItemCompravel {
 	 */
 	@Override
 	public String toString() {
-		return this.id + ". " + this.nome + ", " + this.categoria + ", " + "Preco: <" + this.localPreco() + ">";
+		return this.id + ". " + this.nome + ", " + this.categoria + ", " + "Preco por quilo: <" + this.localPreco() + ">";
 	}
 }

@@ -7,6 +7,7 @@ import model.ItemCompravel;
 import model.ItemPorQtd;
 import model.ItemPorQuilo;
 import model.ItemPorUnidade;
+import util.ErrosItemController;
 
 /**
  * Classe responsável por controlar itens comŕavel no sistema
@@ -39,6 +40,7 @@ public class ItemCompravelController {
 		int id = qtdItens + 1;
 		ItemCompravel item = new ItemPorQuilo(nome, id, categoria, kg, localDeCompra, preco);
 		itens.put(id, item);
+		qtdItens ++;
 		return id;
 	}
 
@@ -46,6 +48,7 @@ public class ItemCompravelController {
 		int id = qtdItens + 1;
 		ItemCompravel item = new ItemPorUnidade(nome, id, categoria, unidade, localDeCompra, preco);
 		itens.put(id, item);
+		qtdItens ++;
 		return id;
 	}
 
@@ -54,22 +57,22 @@ public class ItemCompravelController {
 		int id = qtdItens + 1;
 		ItemCompravel item = new ItemPorQtd(nome, id, categoria, qnt, unidadeDeMedida, localDeCompra, preco);
 		itens.put(id, item);
+		qtdItens ++;
 		return id;
 	}
 
 	public String exibeItem(int id) {
-		idValido(id);
+		idValido(id, ErrosItemController.LISTAGEM_ITEM_INEXISTENTE.toString());
 		return itens.get(id).toString();
 	}
 
 	public void adicionaPrecoItem(int id, String localDeCompra, double preco) {
-		idValido(id);
+		idValido(id, ErrosItemController.PRECO_ID_INVALIDO.toString());
 		itens.get(id).adicionaPreco(localDeCompra, preco);
 	}
 	
-	//to do
 	public void atualizaItem(int id, String atributo, String novoValor) {
-		idValido(id);
+		idValido(id, ErrosItemController.ATUALIZA_ITEM_INEXISTENTE.toString());
 		
 		switch(atributo){
 			case "nome":
@@ -79,20 +82,27 @@ public class ItemCompravelController {
 				itens.get(id).setCategoria(novoValor);
 				break;
 			case "quantidade":
-				int valor = Integer.parseInt(novoValor);
-				((ItemPorQtd) itens.get(id)).setQuantidade(valor);
-				
+				((ItemPorQtd) itens.get(id)).setQuantidade(Integer.parseInt(novoValor));
+				break;
+			case "unidade de medida":
+				((ItemPorQtd) itens.get(id)).setUnidade(novoValor);
+				break;
+			case "kg":
+				((ItemPorQuilo) itens.get(id)).setQuilo(Double.parseDouble(novoValor));
+				break;
+			default:
+				throw new IllegalArgumentException(ErrosItemController.ATUALIZA_ATRIBUTO_INEXISTENTE.toString());
 		}
 	}
 	
 	public void deletaItem(int id) {
-		idValido(id);
+		idValido(id, ErrosItemController.DELETA_ID_INVALIDO.toString());
 		itens.remove(id);
 	}
 	
-	private boolean idValido(int id){
+	private boolean idValido(int id, String mensagem){
 		if(id < 1)
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException(mensagem);
 		return true;
 	}
 	

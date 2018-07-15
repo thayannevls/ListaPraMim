@@ -1,5 +1,7 @@
 package model;
 
+import util.Utils;
+
 /**
  * Classe responsável por registrar e armazenar dados de um item do tipo: Por
  * unidade. Herda da classe ItemCompravel
@@ -56,7 +58,7 @@ public class ItemPorUnidade extends ItemCompravel {
 	private String localPreco() {
 		String localPreco = "";
 		for (String localDeCompra : this.mapaDePrecos.keySet()) {
-			localPreco += localDeCompra + ", " + String.format("R$ %.2f", (this.mapaDePrecos.get(localDeCompra))) + ";";
+			localPreco += localDeCompra + ", " + Utils.realComVirgula((this.mapaDePrecos.get(localDeCompra))) + ";";
 		}
 		return localPreco;
 	}

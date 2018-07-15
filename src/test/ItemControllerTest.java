@@ -21,10 +21,10 @@ public class ItemControllerTest {
 		controller.adicionaItemPorQtd("", "higiene pessoal", 4, "gramas", "Mercado Central", 2.50);
 	}
 
-//	@Test(expected = IllegalArgumentException.class)
-//	public void cadastraItemNomeNull() {
-//		controller.adicionaItemPorQtd(null, "alimento industrializado", 2.0, "l", "Mercadinho BomD+", 5.0);
-//	}
+	@Test(expected = IllegalArgumentException.class)
+	public void cadastraItemNomeNull() {
+		controller.adicionaItemPorQtd(null, "alimento industrializado", 2, "l", "Mercadinho BomD+", 5.0);
+	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void cadastraItemCategoriaVazia() {
@@ -52,11 +52,11 @@ public class ItemControllerTest {
 		controller.adicionaItemPorQuilo("Frango Cocorico", "alimento industrializado", 0, "Mercadinho Legal", 9.00);
 	}
 
-//	@Test(expected = IllegalArgumentException.class)
-//	public void cadastraItemQtdNegativa() {
-//		controller.adicionaItemPorQtd("Nescau 4.0", "alimento industrializado", -2.0, "gramas", "Mercadinho BomD+",
-//				6.0);
-//	}
+	@Test(expected = IllegalArgumentException.class)
+	public void cadastraItemQtdNegativa() {
+		controller.adicionaItemPorQtd("Nescau 4.0", "alimento industrializado", -2, "gramas", "Mercadinho BomD+",
+				6.0);
+	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void cadastraItemQtdZero() {
@@ -75,10 +75,10 @@ public class ItemControllerTest {
 		controller.adicionaItemPorQtd("Nescau 4.0", "alimento industrializado", 200, "", "Mercadinho BomD+", 6.0);
 	}
 
-//	@Test(expected = IllegalArgumentException.class)
-//	public void cadastraItemValorNegativo() {
-//		controller.adicionaItemPorUnidade("Shampoo Seda", "higiene pessoal", -2, "Mercado Central", 6.50);
-//	}
+	@Test(expected = IllegalArgumentException.class)
+	public void cadastraItemPorUnidadeValorNegativo() {
+		controller.adicionaItemPorUnidade("Shampoo Seda", "higiene pessoal", -2, "Mercado Central", 6.50);
+	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void cadastraItemValorZero() {
@@ -100,11 +100,11 @@ public class ItemControllerTest {
 		controller.adicionaItemPorQtd("Leite", "alimento industrializado", 2, "mililitro", "Mercadinho DoBom", -3);
 	}
 
-//	@Test(expected = IllegalArgumentException.class)
-//	public void cadastraItemValorZero() {
-//		controller.adicionaItemPorQtd("Massa de bolo", "alimento industrializado", 2, "gramas", "Mercado do seu Zeh",
-//				0.00);
-//	}
+	@Test(expected = IllegalArgumentException.class)
+	public void cadastraItemPorQtdValorZero() {
+		controller.adicionaItemPorQtd("Massa de bolo", "alimento industrializado", 2, "gramas", "Mercado do seu Zeh",
+				0.00);
+	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void exibeItemIdNegativo() {
@@ -298,7 +298,7 @@ public class ItemControllerTest {
 		int id1 = controller.adicionaItemPorQuilo("Carne Freeboy", "alimento industrializado", 2.0, "Mercadinho BomD+",
 				27.00);
 
-		assertEquals(id1 + ". Carne Freeboy, alimento industrializado, Preco por quilo: <Mercadinho BomD+, R$ 27,00>",
+		assertEquals(id1 + ". Carne Freeboy, alimento industrializado, Preco por quilo: <Mercadinho BomD+, R$ 27,00;>",
 				controller.exibeItem(id1));
 
 	}
@@ -307,19 +307,19 @@ public class ItemControllerTest {
 	public void adicionaItemPorQtdTest() {
 		int id1 = controller.adicionaItemPorQtd("Detergente", "limpeza", 180, "mililitro", "Mercadinho BomD+", 16.50);
 
-		assertEquals(id1 + ". Detergente, limpeza, 180 mililitros, Preco: <Mercadinho BomD+, R$ 16,50>",
+		assertEquals(id1 + ". Detergente, limpeza, 180 mililitro, Preco: <Mercadinho BomD+, R$ 16,50;>",
 				controller.exibeItem(id1));
 
 	}
 
-//	@Test
-//	public void adicionaItemPorUnidadeTest() {
-//		int id1 = controller.adicionaItemPorUnidade("Creme hidratante", "higiene pessoal", "Supermercado Nice", 3.99);
-//
-//		assertEquals(id1 + ". Creme hidratante, higiene pessoal, Preco: <Supermercado Nice, R$ 3,99>",
-//				controller.exibeItem(id1));
-//
-//	}
+	@Test
+	public void adicionaItemPorUnidadeTest() {
+		int id1 = controller.adicionaItemPorUnidade("Creme hidratante", "higiene pessoal", 1, "Supermercado Nice", 3.99);
+
+		assertEquals(id1 + ". Creme hidratante, higiene pessoal, Preco: <Supermercado Nice, R$ 3,99;>",
+				controller.exibeItem(id1));
+
+	}
 
 	@Test
 	public void exibeItensVariadosPeloId() {
@@ -336,24 +336,24 @@ public class ItemControllerTest {
 				"Mercado do seu Zeh", 12.00);
 		int id7 = controller.adicionaItemPorQuilo("Mortadela Sadia", "alimento industrializado", 0.5,
 				"Supermercado Top", 4.99);
-//		int id8 = controller.adicionaitemPorUnidade("Guardanapo", "limpeza", 4, "Super Mercado", 1.00);
+		int id8 = controller.adicionaItemPorUnidade("Guardanapo", "limpeza", 4, "Super Mercado", 1.00);
 
-		assertEquals(id1 + ". Carne Freeboy, alimento industrializado, Preco por quilo: <Mercadinho BomD+, R$ 27,00>",
+		assertEquals(id1 + ". Carne Freeboy, alimento industrializado, Preco por quilo: <Mercadinho BomD+, R$ 27,00;>",
 				controller.exibeItem(id1));
-		assertEquals(id2 + ". Creme hidratante, higiene pessoal, Preco: <Supermercado Nice, R$ 3,99>",
+		assertEquals(id2 + ". Creme hidratante, higiene pessoal, Preco: <Supermercado Nice, R$ 3,99;>",
 				controller.exibeItem(id2));
-		assertEquals(id3 + ". Leite Ninho, alimento industrializado, 300 gramas, Precp: <Mercadinho BomD+, R$ 16,50>",
+		assertEquals(id3 + ". Leite Ninho, alimento industrializado, 300 gramas, Preco: <Mercadinho BomD+, R$ 16,50;>",
 				controller.exibeItem(id3));
-		assertEquals(id4 + ". Creme de barbear, higiene pessoal, Preco: <Mercado Central, R$ 8,90>",
+		assertEquals(id4 + ". Creme de barbear, higiene pessoal, Preco: <Mercado Central, R$ 8,90;>",
 				controller.exibeItem(id4));
-		assertEquals(id5 + ". Algodao do campo, higiene pessoal, Preco: <Mercado do seu Zeh, R$ 1,40>",
+		assertEquals(id5 + ". Algodao do campo, higiene pessoal, 2 gramas, Preco: <Mercado do seu Zeh, R$ 1,40;>",
 				controller.exibeItem(id5));
 		assertEquals(
-				id6 + ". Peito de flango, alimento industrializado, Preco por quilo: <Mercado do seu Zeh, R$ 12,00",
+				id6 + ". Peito de flango, alimento industrializado, Preco por quilo: <Mercado do seu Zeh, R$ 12,00;>",
 				controller.exibeItem(id6));
-		assertEquals(id7 + ". Mortadela Sadia, alimento industrializado, Preco por quilo: <Supermercado Top, R$ 4,99>",
+		assertEquals(id7 + ". Mortadela Sadia, alimento industrializado, Preco por quilo: <Supermercado Top, R$ 4,99;>",
 				controller.exibeItem(id7));
-//		assertEquals(id8 + ". Guardanapo, limpeza, Preco: <Super Mercado, R$ 1,00>", controller.exibeItem(id8));
+		assertEquals(id8 + ". Guardanapo, limpeza, Preco: <Super Mercado, R$ 1,00;>", controller.exibeItem(id8));
 
 	}
 
@@ -361,13 +361,10 @@ public class ItemControllerTest {
 	public void atualizaItemPorQtdTest() {
 		int id1 = controller.adicionaItemPorQtd("Talco para chuleh", "higiene pessoal", 250, "gramas",
 				"Mercado Central", 6.80);
-		assertEquals(id1 + ". Talco para chuleh, higiene pessoal, 150 gramas, Preco: <Mercado Central, R$ 6,80>",
-				controller.exibeItem(id1));
-
 		controller.atualizaItem(id1, "nome", "Talco para BB");
 		controller.atualizaItem(id1, "quantidade", "200");
 
-		assertEquals(id1 + ". Talco para BB, higiene pessoal, 200 gramas, Preco: <Mercado Central, R$ 6,80>",
+		assertEquals(id1 + ". Talco para BB, higiene pessoal, 200 gramas, Preco: <Mercado Central, R$ 6,80;>",
 				controller.exibeItem(id1));
 	}
 
@@ -376,25 +373,25 @@ public class ItemControllerTest {
 		int id1 = controller.adicionaItemPorQuilo("Peito de flango", "alimento industrializado", 1.5,
 				"Mercado do seu Zeh", 12.00);
 		assertEquals(
-				id1 + ". Peito de flango, alimento industrializado, Preco por quilo: <Mercado do seu Zeh, R$ 12,00",
+				id1 + ". Peito de flango, alimento industrializado, Preco por quilo: <Mercado do seu Zeh, R$ 12,00;>",
 				controller.exibeItem(id1));
 
 		controller.atualizaItem(id1, "nome", "File Mignon");
 		controller.atualizaItem(id1, "kg", "2.0");
 
-		assertEquals(id1 + ". File Mignon, alimento industrializado, Preco por quilo: <Mercado do seu Zeh, R$ 12,00>",
+		assertEquals(id1 + ". File Mignon, alimento industrializado, Preco por quilo: <Mercado do seu Zeh, R$ 12,00;>",
 				controller.exibeItem(id1));
 	}
 
 	@Test
 	public void atualizaItemPorUnidadeTest() {
 		int id1 = controller.adicionaItemPorUnidade("Creme de barbear", "higiene pessoal", 3, "Mercado Central", 8.90);
-		assertEquals(id1 + ". Creme de barbear, higiene pessoal, Preco: <Mercado Central, R$ 8,90>",
+		assertEquals(id1 + ". Creme de barbear, higiene pessoal, Preco: <Mercado Central, R$ 8,90;>",
 				controller.exibeItem(id1));
 
 		controller.atualizaItem(id1, "nome", "Oleo de peroba");
 		controller.atualizaItem(id1, "categoria", "limpeza");
-		assertEquals(id1 + ". Oleo de peroba, limpeza, Preco: <Mercado Central, R$ 8,90>", controller.exibeItem(id1));
+		assertEquals(id1 + ". Oleo de peroba, limpeza, Preco: <Mercado Central, R$ 8,90;>", controller.exibeItem(id1));
 	}
 
 	@Test
@@ -410,15 +407,14 @@ public class ItemControllerTest {
 		controller.adicionaPrecoItem(id3, "Mercadinho BomD+", 9.50);
 
 		assertEquals(
-				id1 + ". Esmalte Risquei, higiene pessoa, Preco: <Mercadinho DoBom, R$ 3,80; Super Mercado, R$ 3,70>",
+				id1 + ". Esmalte Risquei, higiene pessoal, Preco: <Mercadinho DoBom, R$ 3,80;Super Mercado, R$ 3,70;>",
 				controller.exibeItem(id1));
 		assertEquals(id2
-				+ ". Azeite, alimento industrializado, 300 gramas, Preco: <Mercado do seu Zeh, R$ 9,80; Supermercado Top, R$ 10,99>",
+				+ ". Azeite, alimento industrializado, 300 gramas, Preco: <Supermercado Top, R$ 10,99;Mercado do seu Zeh, R$ 9,80;>",
 				controller.exibeItem(id2));
 		assertEquals(id3
-				+ ". Queijo Mussarela, alimento industrializado, Preco por quilo: <Mercado Central, R$ 9,00; Mercadinho BomD+, R$ 9,50>",
+				+ ". Queijo Mussarela, alimento industrializado, Preco por quilo: <Mercadinho BomD+, R$ 9,50;Mercado Central, R$ 9,00;>",
 				controller.exibeItem(id3));
-
 	}
 
 	@Test(expected = IllegalArgumentException.class)

@@ -107,9 +107,9 @@ public class Facade {
 	 * @param posicao identificador do item
 	 * @return String - representacao do item
 	 */
-//	public String getItem(int posicao) {
-//		return itemController.getItem(posicao);
-//	}
+	public String getItem(int posicao) {
+		return itemController.getItem(posicao);
+	}
 	
 	/**
 	 * Exibe item ordenado por uma dada categoria em ordem alfabetica.

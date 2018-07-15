@@ -8,7 +8,7 @@ import model.ItemCompravel;
  * Compara pelo alfabeto strings
  * @author Thayanne
  */
-public class AlfabetoComparator implements Comparator<ItemCompravel> {
+public class ItemNomeComparator implements Comparator<ItemCompravel> {
 
 	@Override
 	public int compare(ItemCompravel i1, ItemCompravel i2) {

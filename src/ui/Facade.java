@@ -19,7 +19,7 @@ public class Facade {
 	}
 	
 	public static void main(String[] args){
-		args = new String[] {"ui.Facade","acceptance_test/use_case1.txt","acceptance_test/use_case1_exception.txt", "acceptance_test/use_case2.txt"};
+		args = new String[] {"ui.Facade","acceptance_test/use_case1.txt","acceptance_test/use_case1_exception.txt"};
 		EasyAccept.main(args);
 	}
 	
@@ -101,34 +101,34 @@ public class Facade {
 		itemController.deletaItem(id);
 	}
 	
-//	/**
-//	 * Exibe item ordenado por ordem alfabetica.
-//	 * @param posicao identificador do item
-//	 * @return String - representacao do item
-//	 */
-//	public String getItem(int posicao) {
-//		return itemController.getItem(posicao);
-//	}
-//	
-//	/**
-//	 * Exibe item ordenado por uma dada categoria em ordem alfabetica.
-//	 * @param categoria categoria do item
-//	 * @param posicao identificador do item
-//	 * @return String - representacao do item
-//	 */
-//	public String getItemPorCategoria(String categoria, int posicao) {
-//		return itemController.getItemPorCategoria(categoria, posicao);
-//	}
-//	
-//	/**
-//	 * Exibe item ordenado em ordem crescente pelo menor preco cadastrado.
-//	 * @param posicao identificador do item
-//	 * @return String - representacao do item
-//	 */
-//	public String getItemPorMenorPreco(int posicao) {
-//		return itemController.getItemPorMenorPreco(posicao);
-//	}
-//	
+	/**
+	 * Exibe item ordenado por ordem alfabetica.
+	 * @param posicao identificador do item
+	 * @return String - representacao do item
+	 */
+	public String getItem(int posicao) {
+		return itemController.getItem(posicao);
+	}
+	
+	/**
+	 * Exibe item ordenado por uma dada categoria em ordem alfabetica.
+	 * @param categoria categoria do item
+	 * @param posicao identificador do item
+	 * @return String - representacao do item
+	 */
+	public String getItemPorCategoria(String categoria, int posicao) {
+		return itemController.getItemPorCategoria(categoria, posicao);
+	}
+	
+	/**
+	 * Exibe item ordenado em ordem crescente pelo menor preco cadastrado.
+	 * @param posicao identificador do item
+	 * @return String - representacao do item
+	 */
+	public String getItemPorMenorPreco(int posicao) {
+		return itemController.getItemPorMenorPreco(posicao);
+	}
+	
 	/**
 	 * Exibe item ordenado por pesquisa inserida pelo usuario.
 	 * @param strPesquisada String a ser pesquisada
@@ -139,4 +139,3 @@ public class Facade {
 		return itemController.getItemPorPesquisa(strPesquisada, posicao);
 	}
 }
-

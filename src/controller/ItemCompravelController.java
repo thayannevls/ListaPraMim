@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import comparator.AlfabetoComparator;
+import comparator.ItemNomeComparator;
 import model.ItemCompravel;
 import model.ItemPorQtd;
 import model.ItemPorQuilo;
@@ -208,7 +208,7 @@ public class ItemCompravelController {
 							item.getNome().toLowerCase().contains(strPesquisada.toLowerCase())).
 							collect(Collectors.toList());
 		
-		Comparator c = new AlfabetoComparator();
+		Comparator c = new ItemNomeComparator();
 		itensPesquisados.sort(c);
 		
 		return itensPesquisados.get(posicao).toString();	

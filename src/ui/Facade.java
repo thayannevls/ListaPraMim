@@ -14,13 +14,14 @@ import easyaccept.EasyAccept;
 public class Facade {
 	ItemCompravelController itemController;
 	
-	public Facade() {
-		this.itemController = new ItemCompravelController();
+	public static void main(String[] args){
+		args = new String[] {"ui.Facade","acceptance_test/use_case1.txt","acceptance_test/use_case1_exception.txt",
+				                         "acceptance_test/use_case2.txt"};
+		EasyAccept.main(args);
 	}
 	
-	public static void main(String[] args){
-		args = new String[] {"ui.Facade","acceptance_test/use_case1.txt","acceptance_test/use_case1_exception.txt"};
-		EasyAccept.main(args);
+	public Facade() {
+		this.itemController = new ItemCompravelController();
 	}
 	
 	/**
@@ -106,9 +107,9 @@ public class Facade {
 	 * @param posicao identificador do item
 	 * @return String - representacao do item
 	 */
-	public String getItem(int posicao) {
-		return itemController.getItem(posicao);
-	}
+//	public String getItem(int posicao) {
+//		return itemController.getItem(posicao);
+//	}
 	
 	/**
 	 * Exibe item ordenado por uma dada categoria em ordem alfabetica.
@@ -120,14 +121,14 @@ public class Facade {
 		return itemController.getItemPorCategoria(categoria, posicao);
 	}
 	
-	/**
-	 * Exibe item ordenado em ordem crescente pelo menor preco cadastrado.
-	 * @param posicao identificador do item
-	 * @return String - representacao do item
-	 */
-	public String getItemPorMenorPreco(int posicao) {
-		return itemController.getItemPorMenorPreco(posicao);
-	}
+//	/**
+//	 * Exibe item ordenado em ordem crescente pelo menor preco cadastrado.
+//	 * @param posicao identificador do item
+//	 * @return String - representacao do item
+//	 */
+//	public String getItemPorMenorPreco(int posicao) {
+//		return itemController.getItemPorMenorPreco(posicao);
+//	}
 	
 	/**
 	 * Exibe item ordenado por pesquisa inserida pelo usuario.

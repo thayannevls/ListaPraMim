@@ -29,13 +29,13 @@ public class ItemCompravelController {
 	}
 	
 	/**
-	 * 
-	 * @param nome
-	 * @param categoria
-	 * @param kg
-	 * @param localDeCompra
-	 * @param preco
-	 * @return
+	 * Adiciona item por quilo
+	 * @param nome nome do item
+	 * @param categoria categoria do item
+	 * @param kg quilo
+	 * @param localDeCompra local de compra do item
+	 * @param preco preco do item
+	 * @return int retorna id gerado para o item
 	 */		   
 	public int adicionaItemPorQuilo(String nome, String categoria, double kg, String localDeCompra, double preco) {
 		Validator.ehPositivo(kg, ErrosItemController.CADASTRO_QUILO_NEGATIVO.toString());
@@ -52,6 +52,15 @@ public class ItemCompravelController {
 		return id;
 	}
 
+	/**
+	 * Adiciona item por unidade
+	* @param nome nome do item
+	 * @param categoria categoria do item
+	 * @param unidade unidade
+	 * @param localDeCompra local de compra do item
+	 * @param preco preco do item
+	 * @return int retorna id gerado para o item
+	 */
 	public int adicionaItemPorUnidade(String nome, String categoria, int unidade, String localDeCompra, double preco) {
 		Validator.ehPositivo(preco, ErrosItemController.CADASTRO_PRECO_INVALIDO.toString());
 		Validator.ehPositivo(unidade, ErrosItemController.CADASTRO_UNIDADE_NEGATIVA.toString());
@@ -67,6 +76,16 @@ public class ItemCompravelController {
 		return id;
 	}
 
+	/**
+	 * Adiciciona item por quantidade de medida
+	 * @param nome nome do item
+	 * @param categoria categoria do item
+	 * @param qnt quantidade
+	 * @param unidadeDeMedida unidade de medida
+	 * @param localDeCompra local de compra do item
+	 * @param preco preco do item
+	 * @return int retorna id gerado para o item
+	 */
 	public int adicionaItemPorQtd(String nome, String categoria, int qnt, String unidadeDeMedida, String localDeCompra,
 			double preco) {
 		
@@ -84,14 +103,25 @@ public class ItemCompravelController {
 		qtdItens ++;
 		return id;
 	}
-
+	
+	/**
+	 * Retorna representacao textual do item
+	 * @param id id do item a ser exibido
+	 * @return String representacao textual do item
+	 */
 	public String exibeItem(int id) {
 		idValido(id, ErrosItemController.LISTAGEM_ID_INVALIDO.toString());
 		itemExiste(id, ErrosItemController.LISTAGEM_ITEM_INEXISTENTE.toString());
 
 		return itens.get(id).toString();
 	}
-
+	
+	/**
+	 * Adiciona um preco ao item
+	 * @param id id do item a ser adicionado rpeco
+	 * @param localDeCompra local de compra que teve esse preco
+	 * @param preco novo preco a ser adicionado
+	 */
 	public void adicionaPrecoItem(int id, String localDeCompra, double preco) {
 		idValido(id, ErrosItemController.PRECO_ID_INVALIDO.toString());
 		itemExiste(id, ErrosItemController.PRECO_ITEM_INEXISTENTE.toString());
@@ -103,6 +133,13 @@ public class ItemCompravelController {
 		itens.get(id).adicionaPreco(localDeCompra, preco);
 	}
 	
+	/**
+	 * atualiza algum atributo de item escolhido
+	 * @param id id do item a ser atualizado
+	 * @param atributo atributo a ser modificdo
+	 * @param novoValor novo valor que recebera o atributo
+	 * @exception quando se tem id, atributo ou novo valor invalido
+	 */
 	public void atualizaItem(int id, String atributo, String novoValor) {
 		Validator.campoValido(atributo, ErrosItemController.ATUALIZA_ATRIBUTO_NULO.toString());
 		Validator.campoValido(novoValor, ErrosItemController.ATUALIZA_VALOR_NULO.toString());
@@ -142,18 +179,36 @@ public class ItemCompravelController {
 		}
 	}
 	
+	/**
+	 * Deleta um item do sistema
+	 * @param id id do item a ser deletado
+	 */
 	public void deletaItem(int id) {
 		idValido(id, ErrosItemController.DELETA_ID_INVALIDO.toString());
 		itemExiste(id, ErrosItemController.DELETA_ID_INVALIDO.toString());
 		itens.remove(id);
 	}
 	
+	/**
+	 * verifica se id eh valido
+	 * @param id id a ser verificado
+	 * @param mensagem mensagem de erro caso nao seja valido
+	 * @return boolean true se eh valido
+	 * @exception IllegalArgumentException quando id nao eh valido
+	 */
 	private boolean idValido(int id, String mensagem){
 		if(id < 1)
 			throw new IllegalArgumentException(mensagem);
 		return true;
 	}
 	
+	/**
+	 * Verifica se item existe no sistema de acordo com id
+	 * @param id id a ser verificado
+	 * @param mensagem mensagem de erro caso nao exista
+	 * @return boolean true se eh valido
+	 * @exception IllegalArgumentException quando item nao existe
+	 */
 	private boolean itemExiste(int id, String mensagem){
 		if(itens.containsKey(id))
 			return true;

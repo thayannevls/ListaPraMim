@@ -17,6 +17,7 @@ public enum ErrosItemController {
 	LISTAGEM_ID_INVALIDO("Erro na listagem de item: id invalido."),
 	LISTAGEM_ITEM_INEXISTENTE("Erro na listagem de item: item nao existe."),
 	
+	// ATUALIZA
 	ATUALIZA_ITEM_INEXISTENTE("Erro na atualizacao de item: item nao existe."),
 	ATUALIZA_ATRIBUTO_INEXISTENTE("Erro na atualizacao de item: atributo nao existe."),
 	ATUALIZA_ATRIBUTO_NULO("Erro na atualizacao de item: atributo nao pode ser vazio ou nulo."),
@@ -28,7 +29,7 @@ public enum ErrosItemController {
 	// ADICIONA NOVOS PRECOS
 	PRECO_ID_INVALIDO("Erro no cadastro de preco: id de item invalido."),
 	PRECO_LOCAL_NULO("Erro no cadastro de preco: local de compra nao pode ser vazio ou nulo."),
-	PRECO_ITEM_INVALIDO("Erro no cadastro de preco: preco de item invalido."),
+	PRECO_ITEM_PRECO_INVALIDO("Erro no cadastro de preco: preco de item invalido."),
 	PRECO_ITEM_INEXISTENTE("Erro no cadastro de preco: item nao existe."),
 	
 	// DELETA

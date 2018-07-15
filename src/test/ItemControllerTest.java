@@ -32,12 +32,6 @@ public class ItemControllerTest {
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void cadastraItemCategoriaNull() {
-		controller.adicionaItemPorUnidade("Bolacha", null, 2, "Supermercado Show", 3.50);
-
-	}
-
-	@Test(expected = IllegalArgumentException.class)
 	public void cadastraItemCategoriaInexistente() {
 		controller.adicionaItemPorQuilo("Carne Freeboy", "mamifero", 1.5, "Mercado Central", 12.30);
 	}

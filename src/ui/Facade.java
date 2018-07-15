@@ -14,8 +14,12 @@ import easyaccept.EasyAccept;
 public class Facade {
 	ItemCompravelController itemController;
 	
+	public Facade() {
+		this.itemController = new ItemCompravelController();
+	}
+	
 	public static void main(String[] args){
-		args = new String[] {"ui.Facade","acceptance_test/use_case1","acceptance_test/use_case1_exception.txt"};
+		args = new String[] {"ui.Facade","acceptance_test/use_case1.txt","acceptance_test/use_case1_exception.txt"};
 		EasyAccept.main(args);
 	}
 	
@@ -43,7 +47,8 @@ public class Facade {
 	 * @return int id do novo item
 	 */
 	public int adicionaItemPorQuilo(String nome, String categoria, double kg, String localDeCompra, double preco) {
-		return itemController.adicionaItemPorQuilo(nome, categoria, kg, localDeCompra, preco);
+		int id = itemController.adicionaItemPorQuilo(nome, categoria, kg, localDeCompra, preco);
+		return id;
 	}
 	
 	/**

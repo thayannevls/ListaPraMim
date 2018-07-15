@@ -1,6 +1,5 @@
-package util;
+package comparator;
 
-import java.util.Collection;
 import java.util.Comparator;
 
 import model.ItemCompravel;
@@ -21,19 +20,18 @@ public class MenorPrecoComparator implements Comparator<ItemCompravel> {
 		Double aux1 = Double.MAX_VALUE;
 		Double aux2 = Double.MAX_VALUE;
 		
-		for (Double precos : obj1.getMapaDePrecos.values()) {
+		for (Double precos : obj1.getMapaDePrecos().values()) {
 			if (precos < aux1) {
 				aux1 = precos;
 			}
 		}
-		for (Double precos : obj2.getMapaDePrecos.values()) {
+		for (Double precos : obj2.getMapaDePrecos().values()) {
 			if (precos < aux2) {
 				aux2 = precos;
 			}
 
 		}
 		return (aux1.compareTo(aux2));
-
 	}
 
 }

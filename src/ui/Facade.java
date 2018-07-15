@@ -14,13 +14,14 @@ import easyaccept.EasyAccept;
 public class Facade {
 	ItemCompravelController itemController;
 	
-	public Facade() {
-		this.itemController = new ItemCompravelController();
+	public static void main(String[] args){
+		args = new String[] {"ui.Facade","acceptance_test/use_case1.txt","acceptance_test/use_case1_exception.txt",
+				                         "acceptance_test/use_case2.txt","acceptance_test/use_case2_exception.txt"};
+		EasyAccept.main(args);
 	}
 	
-	public static void main(String[] args){
-		args = new String[] {"ui.Facade","acceptance_test/use_case1.txt","acceptance_test/use_case1_exception.txt"};
-		EasyAccept.main(args);
+	public Facade() {
+		this.itemController = new ItemCompravelController();
 	}
 	
 	/**

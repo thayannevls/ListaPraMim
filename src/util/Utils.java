@@ -15,5 +15,6 @@ public class Utils {
 		Locale ptBr = new Locale("pt", "BR");
 		String valorReais = NumberFormat.getCurrencyInstance(ptBr).format(valorReal);
 		return valorReais;
+
 	}
 }

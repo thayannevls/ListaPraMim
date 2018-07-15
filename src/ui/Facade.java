@@ -100,5 +100,43 @@ public class Facade {
 	public void deletaItem(int id) {
 		itemController.deletaItem(id);
 	}
+	
+	/**
+	 * Exibe item ordenado por ordem alfabetica.
+	 * @param posicao identificador do item
+	 * @return String - representacao do item
+	 */
+	public String getItem(int posicao) {
+		return itemController.getItem(posicao);
+	}
+	
+	/**
+	 * Exibe item ordenado por uma dada categoria em ordem alfabetica.
+	 * @param categoria categoria do item
+	 * @param posicao identificador do item
+	 * @return String - representacao do item
+	 */
+	public String getItemPorCategoria(String categoria, ind posicao) {
+		return itemController.getItemPorCategoria(categoria, posicao);
+	}
+	
+	/**
+	 * Exibe item ordenado em ordem crescente pelo menor preco cadastrado.
+	 * @param posicao identificador do item
+	 * @return String - representacao do item
+	 */
+	public String getItemPorMenorPreco(int posicao) {
+		return itemController.getItemPorMenorPreco(posicao);
+	}
+	
+	/**
+	 * Exibe item ordenado por pesquisa inserida pelo usuario.
+	 * @param strPesquisada String a ser pesquisada
+	 * @param posicao identificador do item
+	 * @return String - representacao do item
+	 */
+	public String getItemPorPesquisa(String strPesquisada, int posicao) {
+		return itemController.getItemPorPesquisa(strPesquisada, posicao);
+	}
 }
 

@@ -135,7 +135,6 @@ public abstract class ItemCompravel {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + categoria.hashCode();
 		result = prime * result + id;
 		result = prime * result + nome.hashCode();
 		return result;
@@ -167,5 +166,13 @@ public abstract class ItemCompravel {
 			return false;
 		return true;
 	}
-	
+
+	/**
+	 * Retorna uma representacao textual basica de um item por quilo contendo sua
+	 * descricao e sua categoria e peso base.
+	 */
+	public String getDescricaoBasica() {
+		return this.nome + ", " + this.categoria;
+	}
+
 }

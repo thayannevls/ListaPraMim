@@ -3,8 +3,12 @@ package model;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import comparator.ComparadorPorCategoriaEPorNivel;
 
 /**
  * Entidade usada para representar uma lista de compras. Em uma lista de compras
@@ -21,8 +25,6 @@ import java.util.Map;
  */
 public class ListaDeCompras {
 
-	private static final String ln = System.lineSeparator();
-	
 	private String descritor;
 	private Map<Integer, Compra> listaDeCompras;
 	private Date dataCriacao;
@@ -90,12 +92,11 @@ public class ListaDeCompras {
 	 * 
 	 * @return string contendo uma representacao textual de todas as compras cadastradas na lista.
 	 */
-	public String imprimeListagem() {
-		String res = "";
-		for (Compra c : listaDeCompras.values()) {
-			res += c.toString() + ln;
-		}
-		return res;
+	public String getItemLista(int id) {
+		List<Compra> compras = new ArrayList<>(listaDeCompras.values());
+		compras.sort(new ComparadorPorCategoriaEPorNivel());
+		//
+		return compras.get(id).toString();
 	}
 	
 	/**
@@ -152,7 +153,7 @@ public class ListaDeCompras {
 	 *            com o id especificado
 	 */
 	private void analisaExistencia(int id, String msg) {
-		if(!this.listaDeCompras.containsKey(id)) {
+		if(this.listaDeCompras.containsKey(id)) {
 			throw new IllegalArgumentException(msg);
 		}
 	}

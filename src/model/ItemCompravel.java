@@ -92,8 +92,10 @@ public abstract class ItemCompravel {
 		for (CategoriaEnum c : CategoriaEnum.values()) {
 			if (c.toString().equals(categoria)) {
 				this.categoria = c;
+				return;
 			}
 		}
+		throw new IllegalArgumentException("A categoria" + categoria + "passada nao é valida");
 	}
 	
 	/**

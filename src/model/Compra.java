@@ -55,7 +55,25 @@ public class Compra {
 	 * comprados e uma descricao basica do item.
 	 */
 	public String toString() {
-		return this.qtd + item.getDescricaoBasica();
+		return this.qtd + " " + item.getDescricaoBasica();
+	}
+
+	/**
+	 * Disponibiliza para outras entidades do sistema a categoria do item a ser comprado.
+	 * 
+	 * @return string contendo a categoria do item a ser comprado.
+	 */
+	public String getCategoria() {
+		return this.item.getCategoria();
+	}
+	
+	/**
+	 * Disponibiliza para outras entidades do sistema a descricao do item a ser comprado.
+	 * 
+	 * @return string contendo a descricao do item a ser comprado.
+	 */
+	public String getNome() {
+		return this.item.getNome();
 	}
 
 }

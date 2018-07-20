@@ -79,6 +79,15 @@ public class ItemPorQtd extends ItemCompravel {
 	}
 
 	/**
+	 * Retorna uma representacao textual basica de um item por quilo contendo sua
+	 * descricao e sua categoria e peso base.
+	 */
+	@Override
+	public String getDescricaoBasica() {
+		return this.nome + ", " + this.categoria + ", " + this.quantidade + " " + this.unidadeDeMedida;
+	}
+	
+	/**
 	 * Responsavel por retornar a represnetação em String de um ItemPorQtd.
 	 * 
 	 * @return String - representando um ItemPorQtd
@@ -88,4 +97,5 @@ public class ItemPorQtd extends ItemCompravel {
 		return this.id + ". " + this.nome + ", " + this.categoria + ", " + this.quantidade + " " + this.unidadeDeMedida
 				+ ", " + "Preco: <" + super.localPreco() + ">";
 	}
+
 }

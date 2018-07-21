@@ -49,15 +49,7 @@ public class Compra {
 	public void setQtd(int nQtd) {
 		this.qtd = nQtd;
 	}
-
-	/**
-	 * Representacao textual da classe compra contendo a quantidade de itens a serem
-	 * comprados e uma descricao basica do item.
-	 */
-	public String toString() {
-		return this.qtd + " " + item.getDescricaoBasica();
-	}
-
+	
 	/**
 	 * Disponibiliza para outras entidades do sistema a categoria do item a ser comprado.
 	 * 
@@ -74,6 +66,14 @@ public class Compra {
 	 */
 	public String getNome() {
 		return this.item.getNome();
+	}
+
+	/**
+	 * Representacao textual da classe compra contendo a quantidade de itens a serem
+	 * comprados e uma descricao basica do item.
+	 */
+	public String toString() {
+		return this.qtd + " " + item.getDescricaoBasica();
 	}
 
 }

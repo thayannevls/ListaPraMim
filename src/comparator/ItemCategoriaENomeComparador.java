@@ -6,11 +6,11 @@ import java.util.List;
 
 import model.Compra;
 
-public class ComparadorPorCategoriaEPorNivel implements Comparator<Compra>{
+public class ItemCategoriaENomeComparador implements Comparator<Compra>{
 
 	private List<String> categorias;
 	
-	public ComparadorPorCategoriaEPorNivel() {
+	public ItemCategoriaENomeComparador() {
 		categorias = Arrays.asList("higiene pessoal", "limpeza", "alimento industrializado", "alimento nao industrializado");
 	}
 	

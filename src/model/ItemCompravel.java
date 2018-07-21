@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import util.CategoriaEnum;
+import util.ErrosItemCompravel;
 import util.Utils;
 
 /**
@@ -95,7 +96,7 @@ public abstract class ItemCompravel {
 				return;
 			}
 		}
-		throw new IllegalArgumentException("A categoria" + categoria + "passada nao é valida");
+		throw new IllegalArgumentException(ErrosItemCompravel.CATEGORIA_INVALIDA.toString());
 	}
 	
 	/**

@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import comparator.ComparadorPorCategoriaEPorNivel;
+import comparator.ItemCategoriaENomeComparador;
 
 /**
  * Entidade usada para representar uma lista de compras. Em uma lista de compras
@@ -94,7 +94,7 @@ public class ListaDeCompras {
 	 */
 	public String getItemLista(int id) {
 		List<Compra> compras = new ArrayList<>(listaDeCompras.values());
-		compras.sort(new ComparadorPorCategoriaEPorNivel());
+		compras.sort(new ItemCategoriaENomeComparador());
 		//
 		return compras.get(id).toString();
 	}

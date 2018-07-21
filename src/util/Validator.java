@@ -1,5 +1,9 @@
 package util;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 public class Validator {
 
 	/**
@@ -60,7 +64,8 @@ public class Validator {
 	/**
 	 * Verifica se a categoria é válida pros tipos conhecidos
 	 * 
-	 * @param mensagem mensagem a ser verificada
+	 * @param categoria categoria a ser verficida
+	 * @param mensagem mensagem que vai ser retorna se houver erro
 	 * @exception IllegalArgumentException caso seja passado uma categoria inválida
 	 */
 	public static boolean categoriaValida(String categoria, String mensagem){
@@ -70,5 +75,24 @@ public class Validator {
 			}
 		}
 		throw new IllegalArgumentException(mensagem);
+	}
+	
+	/**
+	 * Verifica se campo eh uma data valida
+	 * 
+	 * @param data campo a ser verificado
+	 * @param mensagem mensagem de erro a ser retornado se nao for valido
+	 * @exception IllegalArgumentException caso seja passado uma categoria inválida
+	 */
+	public static boolean dataValida(String data, String mensagem){
+		String dateFormat = "dd-MM-yyyy";
+		try {
+			DateFormat df = new SimpleDateFormat(dateFormat);
+            df.setLenient(false);
+            df.parse(data);
+            return true;
+        } catch (ParseException e) {
+        		throw new IllegalArgumentException(mensagem);
+        }
 	}
 }

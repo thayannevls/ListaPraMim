@@ -37,4 +37,5 @@ public enum CategoriaEnum {
 	public String toString() {
 		return this.descricao;
 	}
+	
 }

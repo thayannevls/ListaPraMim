@@ -125,8 +125,9 @@ public class ListaDeCompras {
 	 * @param nQtd
 	 *            nova quantidade a ser comprada
 	 */
-	public void setCompra(int id, int nQtd) {
-		if(nQtd == 0) {
+	public void setQntCompra(int id, int nQtd) {
+		int qtdAtual = this.listaDeCompras.get(id).getQtd();
+		if(qtdAtual + nQtd == 0) {
 			this.deletaCompra(id);
 		} else {
 			this.listaDeCompras.get(id).setQtd(nQtd);

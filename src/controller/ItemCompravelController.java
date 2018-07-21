@@ -60,7 +60,7 @@ public class ItemCompravelController {
 
 	/**
 	 * Adiciona item por unidade
-	* @param nome nome do item
+	 * @param nome nome do item
 	 * @param categoria categoria do item
 	 * @param unidade unidade
 	 * @param localDeCompra local de compra do item
@@ -92,8 +92,7 @@ public class ItemCompravelController {
 	 * @param preco preco do item
 	 * @return int retorna id gerado para o item
 	 */
-	public int adicionaItemPorQtd(String nome, String categoria, int qnt, String unidadeDeMedida, String localDeCompra,
-			double preco) {
+	public int adicionaItemPorQtd(String nome, String categoria, int qnt, String unidadeDeMedida, String localDeCompra, double preco) {
 		
 		Validator.ehPositivo(qnt, ErrosItemController.CADASTRO_QUANTIDADE_NEGATIVA.toString());
 		Validator.ehPositivo(preco, ErrosItemController.CADASTRO_PRECO_INVALIDO.toString());
@@ -294,5 +293,14 @@ public class ItemCompravelController {
 			return true;
 		throw new IllegalArgumentException(mensagem);
 	}
-
+	
+	/**
+	 * Retorna um item especificado pelo id.
+	 * @param id id do item buscado
+	 * @return ItemCompravel - representando o item
+	 */
+	public ItemCompravel getItemCadastrado(int id) {
+		itemExiste(id, ErrosItemController.GET_ID_IVÁLIDO.toString());
+		return itens.get(id);
+	}
 }

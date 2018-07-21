@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import util.CategoriaEnum;
+import util.ErrosItemCompravel;
 import util.Utils;
 
 /**
@@ -92,8 +93,10 @@ public abstract class ItemCompravel {
 		for (CategoriaEnum c : CategoriaEnum.values()) {
 			if (c.toString().equals(categoria)) {
 				this.categoria = c;
+				return;
 			}
 		}
+		throw new IllegalArgumentException(ErrosItemCompravel.CATEGORIA_INVALIDA.toString());
 	}
 	
 	/**

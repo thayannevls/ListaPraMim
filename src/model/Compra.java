@@ -49,13 +49,31 @@ public class Compra {
 	public void setQtd(int nQtd) {
 		this.qtd = nQtd;
 	}
+	
+	/**
+	 * Disponibiliza para outras entidades do sistema a categoria do item a ser comprado.
+	 * 
+	 * @return string contendo a categoria do item a ser comprado.
+	 */
+	public String getCategoria() {
+		return this.item.getCategoria();
+	}
+	
+	/**
+	 * Disponibiliza para outras entidades do sistema a descricao do item a ser comprado.
+	 * 
+	 * @return string contendo a descricao do item a ser comprado.
+	 */
+	public String getNome() {
+		return this.item.getNome();
+	}
 
 	/**
 	 * Representacao textual da classe compra contendo a quantidade de itens a serem
 	 * comprados e uma descricao basica do item.
 	 */
 	public String toString() {
-		return this.qtd + item.getDescricaoBasica();
+		return this.qtd + " " + item.getDescricaoBasica();
 	}
 
 }

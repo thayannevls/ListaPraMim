@@ -47,7 +47,7 @@ public class Compra {
 	 *            nova quantidade que se deseja comprar
 	 */
 	public void setQtd(int nQtd) {
-		this.qtd = nQtd;
+		this.qtd += nQtd;
 	}
 	
 	/**

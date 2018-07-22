@@ -56,9 +56,6 @@ public class ListaDeCompras {
 	 *            item que sera comprado
 	 */
 	public void adicionaItemLista(int id, int qtd, ItemCompravel item) {
-		this.analisaExistencia(id, "");
-		this.analisaEstado("");
-		//
 		this.listaDeCompras.put(item.getId(), new Compra(qtd, item));
 	}
 	
@@ -69,9 +66,6 @@ public class ListaDeCompras {
 	 *            identificador do item a ser removido.
 	 */
 	public void deletaCompra(int id) {
-		this.analisaExistencia(id, "");
-		this.analisaEstado("");
-		//
 		this.listaDeCompras.remove(id);
 	}
 
@@ -82,9 +76,8 @@ public class ListaDeCompras {
 	 *            mensagem de erro a ser exibida caso se queira realizar uma
 	 *            atividade nao desejada em uma lista finalizada
 	 */
-	private void analisaEstado(String msg) {
-		if(this.finalizada)
-			throw new IllegalArgumentException(msg);
+	public boolean getEstado() {
+		return this.finalizada;
 	}
 	
 	/**
@@ -92,11 +85,11 @@ public class ListaDeCompras {
 	 * 
 	 * @return string contendo uma representacao textual de todas as compras cadastradas na lista.
 	 */
-	public String getItemLista(int id) {
+	public String getItemLista(int pos) {
 		List<Compra> compras = new ArrayList<>(listaDeCompras.values());
 		compras.sort(new ItemCategoriaENomeComparador());
 		//
-		return compras.get(id).toString();
+		return compras.get(pos).toString();
 	}
 	
 	/**
@@ -108,7 +101,6 @@ public class ListaDeCompras {
 	 *            quantia total gasta em todas as compras
 	 */
 	public void finalizaCompras(String localCompra, double valorTotal) {
-		this.analisaEstado("");
 		this.localCompra = localCompra;
 		this.valorTotal = valorTotal;
 		this.finalizada = true;
@@ -133,10 +125,9 @@ public class ListaDeCompras {
 	 * @param nQtd
 	 *            nova quantidade a ser comprada
 	 */
-	public void setCompra(int id, int nQtd) {
-		this.analisaExistencia(id, "");
-		//
-		if(nQtd == 0) {
+	public void setQntCompra(int id, int nQtd) {
+		int qtdAtual = this.listaDeCompras.get(id).getQtd();
+		if(qtdAtual + nQtd == 0) {
 			this.deletaCompra(id);
 		} else {
 			this.listaDeCompras.get(id).setQtd(nQtd);
@@ -152,10 +143,8 @@ public class ListaDeCompras {
 	 *            mensagem de erro a ser exibida caso nao exista compra cadastrada
 	 *            com o id especificado
 	 */
-	private void analisaExistencia(int id, String msg) {
-		if(this.listaDeCompras.containsKey(id)) {
-			throw new IllegalArgumentException(msg);
-		}
+	public boolean analisaExistencia(int id, String msg) {
+		return (this.listaDeCompras.containsKey(id));
 	}
 	
 	/**

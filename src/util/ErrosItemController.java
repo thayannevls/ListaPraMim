@@ -34,7 +34,10 @@ public enum ErrosItemController {
 	PRECO_ITEM_INEXISTENTE("Erro no cadastro de preco: item nao existe."),
 	
 	// DELETA
-	DELETA_ID_INVALIDO("Erro ao deletar item: id de item invalido.");
+	DELETA_ID_INVALIDO("Erro ao deletar item: id de item invalido."),
+	
+	// PEGAR ITEM
+	GET_ID_IVALIDO("Erro ao buscar o item: id de item inexistente");
 	
 	private String descricao;
 

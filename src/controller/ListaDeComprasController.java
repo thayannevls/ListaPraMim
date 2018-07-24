@@ -127,7 +127,6 @@ public class ListaDeComprasController {
 	 */
 	public void deletaCompraDeLista(String descritor, int id) {
 		Validator.campoValido(descritor, ErrosListasComprasController.E_DESCRITOR_INVALIDO.toString());
-		listasDeCompras.get(descritor).analisaExistencia(id, ErrosListasComprasController.E_COMPRA_INEXISTENTE.toString());
 		listasDeCompras.get(descritor).analisaExistencia(id, ErrosListasComprasController.E_ITEM_INEXISTENTE.toString());
 		listasDeCompras.get(descritor).deletaCompra(id);
 	}

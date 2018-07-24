@@ -1,6 +1,7 @@
 package controller;
 
 import model.ItemCompravel;
+import util.ErrosListasComprasController;
 
 public class ListaPraMimController {
 	private ItemCompravelController itemController;
@@ -250,6 +251,7 @@ public class ListaPraMimController {
 	 *            identificador do item a ser deletado
 	 */
 	public void deletaCompraDeLista(String descritorLista, int itemId) {
+		itemController.itemExiste(itemId, ErrosListasComprasController.E_ITEM_INEXISTENTE.toString());
 		this.listasDeComprasController.deletaCompraDeLista(descritorLista, itemId);
 	}
 

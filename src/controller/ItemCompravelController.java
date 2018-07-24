@@ -14,6 +14,7 @@ import model.ItemPorQtd;
 import model.ItemPorQuilo;
 import model.ItemPorUnidade;
 import util.ErrosItemController;
+import util.ErrosListasComprasController;
 import util.Validator;
 
 /**
@@ -346,7 +347,7 @@ public class ItemCompravelController {
 	 * @return ItemCompravel - representando o item
 	 */
 	public ItemCompravel getItemCadastrado(int id) {
-		itemExiste(id, ErrosItemController.GET_ID_INVALIDO.toString());
+		itemExiste(id, ErrosListasComprasController.ADD_ITEM_INEXISTENTE.toString());
 		return itens.get(id);
 	}
 

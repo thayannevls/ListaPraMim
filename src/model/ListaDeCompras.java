@@ -140,7 +140,7 @@ public class ListaDeCompras {
 	 *            nova quantidade a ser comprada
 	 */
 	public void setQntCompra(int id, int nQtd) {
-		compraCadastrada(id, ErrosListasComprasController.P_COMPRA_INEXISTENTE.toString());
+		analisaExistencia(id, ErrosListasComprasController.P_COMPRA_INEXISTENTE.toString());
 		int qtdAtual = this.listaDeCompras.get(id).getQtd();
 		if (qtdAtual + nQtd == 0) {
 			this.deletaCompra(id);
@@ -158,10 +158,6 @@ public class ListaDeCompras {
 	 *            mensagem de erro a ser exibida caso nao exista compra cadastrada
 	 *            com o id especificado
 	 */
-	public boolean analisaExistencia(int id, String msg) {
-		return (this.listaDeCompras.containsKey(id));
-	}
-
 	private boolean compraCadastrada(int id, String msg) {
 		if (this.listaDeCompras.containsKey(id))
 			return true;

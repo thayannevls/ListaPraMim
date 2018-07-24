@@ -25,7 +25,7 @@ public class Facade {
 		args = new String[] { "ui.Facade", "acceptance_test/use_case1.txt", "acceptance_test/use_case1_exception.txt",
 				"acceptance_test/use_case2.txt", "acceptance_test/use_case2_exception.txt",
 				"acceptance_test/use_case3.txt", "acceptance_test/use_case3_exception.txt",
-				"acceptance_test/use_case4.txt", "acceptance_test/use_case4_exception.txt"};
+				"acceptance_test/use_case4.txt", "acceptance_test/use_case4_exception.txt" };
 		EasyAccept.main(args);
 	}
 
@@ -340,4 +340,15 @@ public class Facade {
 		return this.listaPraMim.getItemListaPorItem(id, posicaoLista);
 	}
 
+	/**
+	 * Pesquisa no sistema por todas as listas cadastradas em uma determinada data.
+	 * 
+	 * @param data
+	 *            data a ser pesquisada no sistema
+	 * @return String - contendo uma listagem de todas as listas cadastradas em uma
+	 *         determinada data passada como parametro.
+	 */
+	public String pesquisaListasDeComprasPorItem(String data) {
+		return this.listaPraMim.pesquisaListasDeComprasPorItem(data);
+	}
 }

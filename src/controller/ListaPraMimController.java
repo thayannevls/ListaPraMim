@@ -4,7 +4,7 @@ import model.ItemCompravel;
 import util.ErrosListasComprasController;
 
 public class ListaPraMimController {
-	
+
 	private ItemCompravelController itemController;
 	private ListaDeComprasController listasDeComprasController;
 
@@ -312,6 +312,18 @@ public class ListaPraMimController {
 	 */
 	public String getItemListaPorItem(int id, int posicaoLista) {
 		return this.listasDeComprasController.getItemListaPorItem(id, posicaoLista);
+	}
+
+	/**
+	 * Pesquisa por todas as listas de compras cadastradas em uma determinada data.
+	 * 
+	 * @param data
+	 *            string contendo a data para ser pesquisada no sistema.
+	 * @return string contendo uma representacao textual pra todas as listas
+	 *         cadastradas em uma determinada data passada como parametro.
+	 */
+	public String pesquisaListasDeComprasPorItem(String data) {
+		return this.listasDeComprasController.pesquisaListasDeComprasPorItem(data);
 	}
 
 }

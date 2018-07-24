@@ -18,12 +18,14 @@ import easyaccept.EasyAccept;
  *         (Lista pra mim)
  */
 public class Facade {
+
 	ListaPraMimController listaPraMim;
 
 	public static void main(String[] args) {
 		args = new String[] { "ui.Facade", "acceptance_test/use_case1.txt", "acceptance_test/use_case1_exception.txt",
-				"acceptance_test/use_case2.txt", "acceptance_test/use_case2_exception.txt", 
-				"acceptance_test/use_case3.txt", "acceptance_test/use_case3_exception.txt"};
+				"acceptance_test/use_case2.txt", "acceptance_test/use_case2_exception.txt",
+				"acceptance_test/use_case3.txt", "acceptance_test/use_case3_exception.txt",
+				"acceptance_test/use_case4.txt" };
 		EasyAccept.main(args);
 	}
 
@@ -48,8 +50,9 @@ public class Facade {
 	 *            preco em reais
 	 * @return int id do novo item
 	 */
-	public int adicionaItemPorQtd(String nome, String categoria, int qnt, String unidadeDeMedida, String localDeCompra, double preco) {
-		return listaPraMim.adicionaItemPorQtd(nome, categoria, qnt, unidadeDeMedida, localDeCompra, preco);
+	public int adicionaItemPorQtd(String nome, String categoria, int qnt, String unidadeDeMedida, String localDeCompra,
+			double preco) {
+		return this.listaPraMim.adicionaItemPorQtd(nome, categoria, qnt, unidadeDeMedida, localDeCompra, preco);
 	}
 
 	/**
@@ -68,7 +71,7 @@ public class Facade {
 	 * @return int id do novo item
 	 */
 	public int adicionaItemPorQuilo(String nome, String categoria, double kg, String localDeCompra, double preco) {
-		int id = listaPraMim.adicionaItemPorQuilo(nome, categoria, kg, localDeCompra, preco);
+		int id = this.listaPraMim.adicionaItemPorQuilo(nome, categoria, kg, localDeCompra, preco);
 		return id;
 	}
 
@@ -88,7 +91,7 @@ public class Facade {
 	 * @return int id do novo item
 	 */
 	public int adicionaItemPorUnidade(String nome, String categoria, int unidade, String localDeCompra, double preco) {
-		return listaPraMim.adicionaItemPorUnidade(nome, categoria, unidade, localDeCompra, preco);
+		return this.listaPraMim.adicionaItemPorUnidade(nome, categoria, unidade, localDeCompra, preco);
 	}
 
 	/**
@@ -99,7 +102,7 @@ public class Facade {
 	 * @return String item
 	 */
 	public String exibeItem(int id) {
-		return listaPraMim.exibeItem(id);
+		return this.listaPraMim.exibeItem(id);
 	}
 
 	/**
@@ -113,7 +116,7 @@ public class Facade {
 	 *            preco nesse local de compra
 	 */
 	public void adicionaPrecoItem(int id, String localDeCompra, double preco) {
-		listaPraMim.adicionaPrecoItem(id, localDeCompra, preco);
+		this.listaPraMim.adicionaPrecoItem(id, localDeCompra, preco);
 	}
 
 	/**
@@ -127,7 +130,7 @@ public class Facade {
 	 *            novo valor do atributo
 	 */
 	public void atualizaItem(int id, String atributo, String novoValor) {
-		listaPraMim.atualizaItem(id, atributo, novoValor);
+		this.listaPraMim.atualizaItem(id, atributo, novoValor);
 	}
 
 	/**
@@ -136,7 +139,7 @@ public class Facade {
 	 * @param id
 	 */
 	public void deletaItem(int id) {
-		listaPraMim.deletaItem(id);
+		this.listaPraMim.deletaItem(id);
 	}
 
 	/**
@@ -147,7 +150,7 @@ public class Facade {
 	 * @return String - representacao do item
 	 */
 	public String getItem(int posicao) {
-		return listaPraMim.getItem(posicao);
+		return this.listaPraMim.getItem(posicao);
 	}
 
 	/**
@@ -160,7 +163,7 @@ public class Facade {
 	 * @return String - representacao do item
 	 */
 	public String getItemPorCategoria(String categoria, int posicao) {
-		return listaPraMim.getItemPorCategoria(categoria, posicao);
+		return this.listaPraMim.getItemPorCategoria(categoria, posicao);
 	}
 
 	/**
@@ -171,7 +174,7 @@ public class Facade {
 	 * @return String - representacao do item
 	 */
 	public String getItemPorMenorPreco(int posicao) {
-		return listaPraMim.getItemPorMenorPreco(posicao);
+		return this.listaPraMim.getItemPorMenorPreco(posicao);
 	}
 
 	/**
@@ -184,7 +187,7 @@ public class Facade {
 	 * @return String - representacao do item
 	 */
 	public String getItemPorPesquisa(String strPesquisada, int posicao) {
-		return listaPraMim.getItemPorPesquisa(strPesquisada, posicao);
+		return this.listaPraMim.getItemPorPesquisa(strPesquisada, posicao);
 	}
 
 	/**
@@ -195,7 +198,7 @@ public class Facade {
 	 *            compras
 	 */
 	public String adicionaListaDeCompras(String descricao) {
-		return listaPraMim.adicionaListaDeCompras(descricao);
+		return this.listaPraMim.adicionaListaDeCompras(descricao);
 	}
 
 	/**
@@ -210,7 +213,7 @@ public class Facade {
 	 *            identificador do item
 	 */
 	public void adicionaCompraALista(String descritorLista, int quantidade, int itemId) {
-		listaPraMim.adicionaCompraALista(descritorLista, quantidade, itemId);
+		this.listaPraMim.adicionaCompraALista(descritorLista, quantidade, itemId);
 	}
 
 	/**
@@ -222,7 +225,7 @@ public class Facade {
 	 * @return String - representando a lista encontrada
 	 */
 	public String pesquisaListaDeCompras(String descritor) {
-		return listaPraMim.pesquisaListaDeCompras(descritor);
+		return this.listaPraMim.pesquisaListaDeCompras(descritor);
 	}
 
 	/**
@@ -236,7 +239,7 @@ public class Facade {
 	 * @return String - representando a lista encontrada pela pesquisa
 	 */
 	public String pesquisaCompraEmLista(String descritorLista, int itemId) {
-		return listaPraMim.pesquisaCompraEmLista(descritorLista, itemId);
+		return this.listaPraMim.pesquisaCompraEmLista(descritorLista, itemId);
 	}
 
 	/**
@@ -253,7 +256,7 @@ public class Facade {
 	 *            quantidade a ser atualizada
 	 */
 	public void atualizaCompraDeLista(String descritorLista, int itemId, String operacao, int quantidade) {
-		listaPraMim.atualizaCompraDeLista(descritorLista, itemId, operacao, quantidade);
+		this.listaPraMim.atualizaCompraDeLista(descritorLista, itemId, operacao, quantidade);
 	}
 
 	/**
@@ -266,7 +269,7 @@ public class Facade {
 	 *            identificador do item a ser deletado
 	 */
 	public void deletaCompraDeLista(String descritorLista, int itemId) {
-		listaPraMim.deletaCompraDeLista(descritorLista, itemId);
+		this.listaPraMim.deletaCompraDeLista(descritorLista, itemId);
 	}
 
 	/**
@@ -282,7 +285,7 @@ public class Facade {
 	 *            valor final da compra
 	 */
 	public void finalizarListaDeCompras(String descritorLista, String localDaCompra, double valorFinalDaCompra) {
-		listaPraMim.finalizarListaDeCompras(descritorLista, localDaCompra, valorFinalDaCompra);
+		this.listaPraMim.finalizarListaDeCompras(descritorLista, localDaCompra, valorFinalDaCompra);
 	}
 
 	/**
@@ -296,16 +299,45 @@ public class Facade {
 	 * @return String - representando o item especificado
 	 */
 	public String getItemLista(String descritorLista, int posicaoItem) {
-		return listaPraMim.getItemLista(descritorLista, posicaoItem);
+		return this.listaPraMim.getItemLista(descritorLista, posicaoItem);
 	}
-	
+
 	/**
 	 * Retorna data atual
 	 * 
 	 * @return String - representando a data
 	 */
-	public String dataAtual() {	
+	public String dataAtual() {
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		return dateFormat.format(new Date(System.currentTimeMillis()));
 	}
+
+	/**
+	 * Retorna a lista cadastrada em uma determinada data em uma dada posicao.
+	 * 
+	 * @param data
+	 *            data do cadastro
+	 * @param posicaoLista
+	 *            posicao da lista de compras em ordem lexicografica
+	 * @return string - representando a descritor de uma lista
+	 */
+	public String getItemListaPorData(String data, int posicaoLista) {
+		return this.listaPraMim.getItemListaPorData(data, posicaoLista);
+	}
+
+	/**
+	 * Retorna os descritores das listas que contem uma compra relacionada ao item
+	 * pesquisado.
+	 * 
+	 * @param id
+	 *            id do item o qual se deseja pesquisar
+	 * @param posicaoLista
+	 *            posicao da lista de compras apos ser ordenada pela data de criacao
+	 *            das listas que possuem o item pesquisado.
+	 * @return string - representando o descritor da lista
+	 */
+	public String getItemListaPorItem(int id, int posicaoLista) {
+		return this.listaPraMim.getItemListaPorItem(id, posicaoLista);
+	}
+	
 }

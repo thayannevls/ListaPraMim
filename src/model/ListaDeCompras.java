@@ -158,10 +158,9 @@ public class ListaDeCompras {
 	 *            mensagem de erro a ser exibida caso nao exista compra cadastrada
 	 *            com o id especificado
 	 */
-	private boolean compraCadastrada(int id, String msg) {
-		if (this.listaDeCompras.containsKey(id))
-			return true;
-		throw new IllegalArgumentException(msg);
+	public void analisaExistencia(int id, String msg) {
+		if (!this.listaDeCompras.containsKey(id))
+			throw new IllegalArgumentException(msg);
 	}
 
 	/**

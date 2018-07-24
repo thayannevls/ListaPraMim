@@ -322,8 +322,12 @@ public class ListaPraMimController {
 	 * @return string contendo uma representacao textual pra todas as listas
 	 *         cadastradas em uma determinada data passada como parametro.
 	 */
-	public String pesquisaListasDeComprasPorItem(String data) {
-		return this.listasDeComprasController.pesquisaListasDeComprasPorItem(data);
+	public String pesquisaListasDeComprasPorData(String data) {
+		return this.listasDeComprasController.pesquisaListasDeComprasPorData(data);
+	}
+
+	public String pesquisaListasDeComprasPorItem(int id) {
+		return this.listasDeComprasController.pesquisaListasDeComprasPorItem(id);
 	}
 
 }

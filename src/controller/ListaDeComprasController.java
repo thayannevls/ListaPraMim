@@ -95,7 +95,7 @@ public class ListaDeComprasController {
 		Validator.campoValido(descritor, ErrosListasComprasController.PL_DESCRITOR_INVALIDO.toString());
 		//
 		if (!this.listasDeCompras.containsKey(descritor))
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException(ErrosListasComprasController.P_LISTA_INEXISTENTE.toString());
 
 		return descritor;
 	}
@@ -229,7 +229,9 @@ public class ListaDeComprasController {
 	 * @return string - contendo a listagem de todas as listas cadastradas em uma
 	 *         determinada data.
 	 */
-	public String pesquisaListasDeComprasPorItem(String data) {
+	public String pesquisaListasDeComprasPorData(String data) {
+		Validator.campoValido(data, ErrosListasComprasController.P_DATA_VAZIA_OU_NULA.toString());
+		Validator.dataValida(data, ErrosListasComprasController.P_DATA_FORMATO_IVALIDO.toString());
 		List<String> aux = new ArrayList<>();
 		for (ListaDeCompras lista : this.listasDeCompras.values()) {
 			if (lista.getDataCriacao().equals(data)) {
@@ -243,6 +245,31 @@ public class ListaDeComprasController {
 		for (String descricao : aux) {
 			listagem += descricao + System.lineSeparator();
 		}
+		
+		return listagem;
+	}
+
+	/**
+	 * Retorna uma listagem de todas as listas de compras que contém um determinado id em suas compras.
+	 * 
+	 * @param id item a ser pesquisado.
+	 * @return string - contendo todas as listas que possuem um determinado id em suas compras.
+	 */
+	public String pesquisaListasDeComprasPorItem(int id) {
+		List<String> aux = new ArrayList<>();
+		for (ListaDeCompras lista : this.listasDeCompras.values()) {
+			if (lista.analisaExistencia(id))
+				aux.add(lista.toString());
+		}
+		
+		Collections.sort(aux, Collator.getInstance());
+
+		String listagem = "";
+		for (String descricao : aux) 
+			listagem += descricao + System.lineSeparator();
+		
+		if (("").equals(listagem))
+			throw new IllegalArgumentException(ErrosListasComprasController.P_COMPRA_INEXISTENTE.toString());
 		
 		return listagem;
 	}

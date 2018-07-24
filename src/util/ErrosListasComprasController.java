@@ -9,7 +9,7 @@ public enum ErrosListasComprasController {
 	P_COMPRA_INEXISTENTE("Erro na pesquisa de compra: compra nao encontrada na lista."),
 	P_ID_INVALIDO("Erro na pesquisa de compra: item id invalido."),
 	P_DESCRITOR_INVALIDO("Erro na pesquisa de compra: descritor nao pode ser vazio ou nulo."),
-	PL_DESCRITOR_INVALIDO("Erro na pesquisa da lista de compras: descritor nao pode ser vazio ou nulo."),
+	PL_DESCRITOR_INVALIDO("Erro na pesquisa de compra: descritor nao pode ser vazio ou nulo."),
 	
 	
 	//ATUALIZACAO

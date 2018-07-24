@@ -220,4 +220,31 @@ public class ListaDeComprasController {
 		return (aux.size() == 0) ? "" : aux.get(posicaoLista);
 	}
 
+	/**
+	 * Retorna uma listagem para todas as listas cadastradas em uma determinada data
+	 * passada como parametro.
+	 * 
+	 * @param data
+	 *            string informando a data a ser pesquisada
+	 * @return string - contendo a listagem de todas as listas cadastradas em uma
+	 *         determinada data.
+	 */
+	public String pesquisaListasDeComprasPorItem(String data) {
+		List<String> aux = new ArrayList<>();
+		for (ListaDeCompras lista : this.listasDeCompras.values()) {
+			if (lista.getDataCriacao().equals(data)) {
+				aux.add(lista.getDescritor());
+			}
+		}
+
+		Collections.sort(aux, Collator.getInstance());
+
+		String listagem = "";
+		for (String descricao : aux) {
+			listagem += descricao + System.lineSeparator();
+		}
+		
+		return listagem;
+	}
+
 }

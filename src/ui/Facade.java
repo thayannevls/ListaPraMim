@@ -25,7 +25,7 @@ public class Facade {
 		args = new String[] { "ui.Facade", "acceptance_test/use_case1.txt", "acceptance_test/use_case1_exception.txt",
 				"acceptance_test/use_case2.txt", "acceptance_test/use_case2_exception.txt",
 				"acceptance_test/use_case3.txt", "acceptance_test/use_case3_exception.txt",
-				"acceptance_test/use_case4.txt" };
+				"acceptance_test/use_case4.txt", "acceptance_test/use_case4_exception.txt"};
 		EasyAccept.main(args);
 	}
 
@@ -339,5 +339,5 @@ public class Facade {
 	public String getItemListaPorItem(int id, int posicaoLista) {
 		return this.listaPraMim.getItemListaPorItem(id, posicaoLista);
 	}
-	
+
 }

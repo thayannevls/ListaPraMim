@@ -1,6 +1,10 @@
 package controller;
 
+import java.text.Collator;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import model.ItemCompravel;
@@ -18,11 +22,11 @@ import util.Validator;
  *         Programacao 2 - Projeto de Laboratorio (Lista pra mim)
  */
 public class ListaDeComprasController {
+
 	private Map<String, ListaDeCompras> listasDeCompras;
 
 	public ListaDeComprasController() {
 		this.listasDeCompras = new HashMap<>();
-
 	}
 
 	/**
@@ -34,9 +38,11 @@ public class ListaDeComprasController {
 	public String adicionaListaDeCompras(String descritor) {
 		Validator.campoValido(descritor, ErrosListasComprasController.C_DESCRITOR_INVALIDO.toString());
 		ListaDeCompras lista = new ListaDeCompras(descritor);
-		if (!listasDeCompras.containsKey(descritor)) {
-			listasDeCompras.put(descritor, lista);
+
+		if (!this.listasDeCompras.containsKey(descritor)) {
+			this.listasDeCompras.put(descritor, lista);
 		}
+
 		return descritor;
 	}
 
@@ -71,10 +77,11 @@ public class ListaDeComprasController {
 	 */
 	public String pesquisaCompraEmLista(String descritor, int id) {
 		Validator.campoValido(descritor, ErrosListasComprasController.P_DESCRITOR_INVALIDO.toString());
-		idValido(id, ErrosListasComprasController.P_ID_INVALIDO.toString());
-		listasDeCompras.get(descritor).analisaExistencia(id, ErrosListasComprasController.P_COMPRA_INEXISTENTE.toString());
-		return listasDeCompras.get(descritor).getItemPeloId(id);
-
+		Validator.idValido(id, ErrosListasComprasController.P_ID_INVALIDO.toString());
+		this.listasDeCompras.get(descritor).analisaExistencia(id,
+				ErrosListasComprasController.P_COMPRA_INEXISTENTE.toString());
+		//
+		return this.listasDeCompras.get(descritor).getItemPeloId(id);
 	}
 
 	/**
@@ -86,10 +93,11 @@ public class ListaDeComprasController {
 	 */
 	public String pesquisaListaDeCompras(String descritor) {
 		Validator.campoValido(descritor, ErrosListasComprasController.PL_DESCRITOR_INVALIDO.toString());
+		//
 		if (!this.listasDeCompras.containsKey(descritor))
 			throw new IllegalArgumentException();
-		return descritor;
 
+		return descritor;
 	}
 
 	/**
@@ -107,13 +115,14 @@ public class ListaDeComprasController {
 	 */
 	public void atualizaCompraDeLista(String descritor, int id, String operacao, int novaQtd) {
 		Validator.campoValido(descritor, ErrosListasComprasController.A_DESCRITOR_INVALIDO.toString());
-		operacaoValida(operacao, ErrosListasComprasController.A_OPERACAO_INVALIDA.toString());
-		listasDeCompras.get(descritor).analisaExistencia(id,
+		Validator.operacaoValida(operacao, ErrosListasComprasController.A_OPERACAO_INVALIDA.toString());
+		this.listasDeCompras.get(descritor).analisaExistencia(id,
 				ErrosListasComprasController.A_COMPRA_INEXISTENTE.toString());
+		//
 		if (operacao.equals("adiciona")) {
-			listasDeCompras.get(descritor).setQntCompra(id, novaQtd);
-		} else if (operacao.equals("diminui")) {
-			listasDeCompras.get(descritor).setQntCompra(id, -novaQtd);
+			this.listasDeCompras.get(descritor).setQntCompra(id, novaQtd);
+		} else {
+			this.listasDeCompras.get(descritor).setQntCompra(id, -novaQtd);
 		}
 	}
 
@@ -127,8 +136,10 @@ public class ListaDeComprasController {
 	 */
 	public void deletaCompraDeLista(String descritor, int id) {
 		Validator.campoValido(descritor, ErrosListasComprasController.E_DESCRITOR_INVALIDO.toString());
-		listasDeCompras.get(descritor).analisaExistencia(id, ErrosListasComprasController.E_COMPRA_INEXISTENTE.toString());
-		listasDeCompras.get(descritor).deletaCompra(id);
+		this.listasDeCompras.get(descritor).analisaExistencia(id,
+				ErrosListasComprasController.E_COMPRA_INEXISTENTE.toString());
+		//
+		this.listasDeCompras.get(descritor).deletaCompra(id);
 	}
 
 	/**
@@ -142,7 +153,7 @@ public class ListaDeComprasController {
 	 * @return representacao textual do item
 	 */
 	public String getItemLista(String descritor, int posicao) {
-		return listasDeCompras.get(descritor).getItemLista(posicao);
+		return this.listasDeCompras.get(descritor).getItemLista(posicao);
 	}
 
 	/**
@@ -159,35 +170,54 @@ public class ListaDeComprasController {
 		Validator.campoValido(descritor, ErrosListasComprasController.F_DESCRITOR_INVALIDO.toString());
 		Validator.campoValido(localDaCompra, ErrosListasComprasController.F_LOCAL_INVALIDO.toString());
 		Validator.ehPositivo(valorTotal, ErrosListasComprasController.F_VALOR_FINAL_INVALIDO.toString());
-		listasDeCompras.get(descritor).finalizaCompras(localDaCompra, valorTotal);
+		//
+		this.listasDeCompras.get(descritor).finalizaCompras(localDaCompra, valorTotal);
 	}
 
 	/**
-	 * Verifica se o id de um item eh valido.
+	 * Imprime uma lista cadastrada em uma determinada data cuja sua posicao apos a
+	 * ordenacao e passada como parametro.
+	 * 
+	 * @param data
+	 *            data na qual se deseja obter as listas cadastradas
+	 * @param posicaoLista
+	 *            posicao de uma determinada lista apos a ordenacao por ordem
+	 *            crescente de criacao
+	 * @return string - contendo o descritor de uma determinada lista.
+	 */
+	public String getItemListaPorData(String data, int posicaoLista) {
+		List<String> aux = new ArrayList<>();
+		for (ListaDeCompras lista : this.listasDeCompras.values()) {
+			if (lista.getDataCriacao().equals(data)) {
+				aux.add(lista.getDescritor());
+			}
+		}
+
+		Collections.sort(aux, Collator.getInstance());
+
+		return (aux.size() == 0) ? "" : aux.get(posicaoLista);
+	}
+
+	/**
+	 * Imprime uma lista onde um determinado item com id e sua posicao apos a
+	 * ordenacao está inserido.
 	 * 
 	 * @param id
-	 *            identificacao do item
-	 * @param msg
-	 * @return valor booleano
+	 *            identificador do item
+	 * @param posicaoLista
+	 *            posicao do item na lista apos a ordenacao
+	 * @return String - contendo a data da criacao da lista e seu descritor
 	 */
-	private boolean idValido(int id, String msg) {
-		if (id < 1)
-			throw new IllegalArgumentException(msg);
-		return true;
+	public String getItemListaPorItem(int id, int posicaoLista) {
+		List<String> aux = new ArrayList<>();
+		for (ListaDeCompras lista : this.listasDeCompras.values()) {
+			if (lista.analisaExistencia(id))
+				aux.add(lista.toString());
+		}
+
+		Collections.sort(aux, Collator.getInstance());
+
+		return (aux.size() == 0) ? "" : aux.get(posicaoLista);
 	}
 
-	/**
-	 * Verifica se a operacao de atualizacao da lista de compras eh valida.
-	 * 
-	 * @param operacao
-	 *            operacao que sera realizada
-	 * @param msg
-	 *            mensagem que sera lancada
-	 * @return valor booleano
-	 */
-	private boolean operacaoValida(String operacao, String msg) {
-		if (operacao.equals("adiciona") || operacao.equals("diminui"))
-			return true;
-		throw new IllegalArgumentException(msg);
-	}
 }

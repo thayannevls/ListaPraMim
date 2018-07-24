@@ -8,6 +8,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import controller.ItemCompravelController;
+import controller.ListaDeComprasController;
 import util.CategoriaEnum;
 
 public class ListaDeComprasControllerTest {
@@ -45,7 +46,7 @@ public class ListaDeComprasControllerTest {
 		int itemId = itemController.adicionaItemPorUnidade("abacate", CategoriaEnum.ALIMENTOS_NAO_INDUSTRIALIZADOS.toString(), 
 				2, "haha", 2.4);
 		
-		controller.adicionaCompraALista("feira", itemId, 2);
+		controller.adicionaCompraALista("feira", 2, itemController.getItemCadastrado(itemId));
 		
 		assertEquals("Verifica se adicionou compra a lista de compras", "2 "+ itemController.exibeItem(itemId), 
 				controller.getItemLista("feira", 0));
@@ -56,7 +57,7 @@ public class ListaDeComprasControllerTest {
 		int itemId = itemController.adicionaItemPorUnidade("abacate", CategoriaEnum.ALIMENTOS_NAO_INDUSTRIALIZADOS.toString(), 
 				2, "haha", 2.4);
 		
-		controller.adicionaCompraALista(" ", itemId, 2);
+		controller.adicionaCompraALista(" ", 2, itemController.getItemCadastrado(itemId));
 
 	}
 	
@@ -65,7 +66,7 @@ public class ListaDeComprasControllerTest {
 		int itemId = itemController.adicionaItemPorUnidade("abacate", CategoriaEnum.ALIMENTOS_NAO_INDUSTRIALIZADOS.toString(), 
 				2, "haha", 2.4);
 		
-		controller.adicionaCompraALista("opaopa", itemId, 2);
+		controller.adicionaCompraALista("opaopa", 2, itemController.getItemCadastrado(itemId));
 
 	}
 	
@@ -74,8 +75,8 @@ public class ListaDeComprasControllerTest {
 		int itemId = itemController.adicionaItemPorUnidade("abacate", CategoriaEnum.ALIMENTOS_NAO_INDUSTRIALIZADOS.toString(), 
 				2, "haha", 2.4);
 		
-		controller.adicionaCompraALista(" ", itemId, 0);
-		controller.adicionaCompraALista(" ", itemId, -2);
+		controller.adicionaCompraALista(" ", 0, itemController.getItemCadastrado(itemId));
+		controller.adicionaCompraALista(" ", -2, itemController.getItemCadastrado(itemId));
 	}
 	
 	//---------------- TESTA PESQUISAR ITEM NA LISTA--------------------//
@@ -83,7 +84,7 @@ public class ListaDeComprasControllerTest {
 	public void testPesquisaCompraEmLista(){
 		int itemId = itemController.adicionaItemPorUnidade("abacate", CategoriaEnum.ALIMENTOS_NAO_INDUSTRIALIZADOS.toString(), 
 				2, "haha", 2.4);
-		controller.adicionaCompraALista("feira", itemId, 2);
+		controller.adicionaCompraALista("feira", 2, itemController.getItemCadastrado(itemId));
 		
 		assertEquals("Verifica pesquisa esta funcionando", "2 "+ itemController.exibeItem(itemId), 
 				controller.pesquisaCompraEmLista("feira", itemId));
@@ -108,7 +109,7 @@ public class ListaDeComprasControllerTest {
 	public void testAtualizaCompraDeListaAdicionar(){
 		int itemId = itemController.adicionaItemPorUnidade("abacate", CategoriaEnum.ALIMENTOS_NAO_INDUSTRIALIZADOS.toString(), 
 				2, "haha", 2.4);
-		controller.adicionaCompraALista("feira", itemId, 2);
+		controller.adicionaCompraALista("feira", 2, itemController.getItemCadastrado(itemId));
 		
 		controller.atualizaCompraDeLista("feira", itemId, "adiciona", 2);
 		
@@ -120,7 +121,7 @@ public class ListaDeComprasControllerTest {
 	public void testAtualizaCompraDeListaDiminui(){
 		int itemId = itemController.adicionaItemPorUnidade("abacate", CategoriaEnum.ALIMENTOS_NAO_INDUSTRIALIZADOS.toString(), 
 				2, "haha", 2.4);
-		controller.adicionaCompraALista("feira", itemId, 2);
+		controller.adicionaCompraALista("feira", 2, itemController.getItemCadastrado(itemId));
 		
 		controller.atualizaCompraDeLista("feira", itemId, "diminui", 1);
 		
@@ -130,7 +131,7 @@ public class ListaDeComprasControllerTest {
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void testAtualizaCompraDeListaItemInvalido(){
-		controller.atualizaCompraDeLista("feira", -2);
+		controller.atualizaCompraDeLista("feira", -2, "diminui", 1);
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
@@ -142,7 +143,7 @@ public class ListaDeComprasControllerTest {
 	public void testAtualizaCompraDeListaValorNegativo(){
 		int itemId = itemController.adicionaItemPorUnidade("abacate", CategoriaEnum.ALIMENTOS_NAO_INDUSTRIALIZADOS.toString(), 
 				2, "haha", 2.4);
-		controller.adicionaCompraALista("feira", itemId, 2);
+		controller.adicionaCompraALista("feira", 2, itemController.getItemCadastrado(itemId));
 		
 		controller.atualizaCompraDeLista("feira", itemId, "diminui", -1);
 	}
@@ -151,7 +152,7 @@ public class ListaDeComprasControllerTest {
 	public void testAtualizaCompraDeListaOperacaoInvalido(){
 		int itemId = itemController.adicionaItemPorUnidade("abacate", CategoriaEnum.ALIMENTOS_NAO_INDUSTRIALIZADOS.toString(), 
 				2, "haha", 2.4);
-		controller.adicionaCompraALista("feira", itemId, 2);
+		controller.adicionaCompraALista("feira", 2, itemController.getItemCadastrado(itemId));
 		
 		controller.atualizaCompraDeLista("feira", itemId, "peguei", 1);
 	}
@@ -161,7 +162,7 @@ public class ListaDeComprasControllerTest {
 	public void testDeletaCompraDeLista(){
 		int itemId = itemController.adicionaItemPorUnidade("abacate", CategoriaEnum.ALIMENTOS_NAO_INDUSTRIALIZADOS.toString(), 
 				2, "haha", 2.4);
-		controller.adicionaCompraALista("feira", itemId, 2);
+		controller.adicionaCompraALista("feira", 2, itemController.getItemCadastrado(itemId));
 		
 		controller.deletaCompraDeLista("feira", itemId);
 	}
@@ -197,9 +198,9 @@ public class ListaDeComprasControllerTest {
 		int itemId3 = itemController.adicionaItemPorUnidade("banana", CategoriaEnum.ALIMENTOS_NAO_INDUSTRIALIZADOS.toString(), 
 				2, "haha", 4.0);
 		
-		controller.adicionaCompraALista("feira", itemId1, 1);
-		controller.adicionaCompraALista("feira", itemId2, 1);
-		controller.adicionaCompraALista("feira", itemId3, 1);
+		controller.adicionaCompraALista("feira", 1, itemController.getItemCadastrado(itemId1));
+		controller.adicionaCompraALista("feira", 1, itemController.getItemCadastrado(itemId2));
+		controller.adicionaCompraALista("feira", 1, itemController.getItemCadastrado(itemId3));
 
 		
 		assertEquals("Verifica se getItemLista() esta funcionando", "1 "+ itemController.exibeItem(itemId1), 
@@ -237,9 +238,9 @@ public class ListaDeComprasControllerTest {
 		int itemId3 = itemController.adicionaItemPorUnidade("banana", CategoriaEnum.ALIMENTOS_NAO_INDUSTRIALIZADOS.toString(), 
 				2, "haha", 4.0);
 		
-		controller.adicionaCompraALista("papai", itemId1, 1);
-		controller.adicionaCompraALista("papai", itemId2, 1);
-		controller.adicionaCompraALista("papai", itemId3, 1);
+		controller.adicionaCompraALista("papai", 1, itemController.getItemCadastrado(itemId1));
+		controller.adicionaCompraALista("papai", 1, itemController.getItemCadastrado(itemId2));
+		controller.adicionaCompraALista("papai", 1, itemController.getItemCadastrado(itemId3));
 		
 		controller.finalizarListaDeCompras("papai", "supermercado", 14.0);
 	}

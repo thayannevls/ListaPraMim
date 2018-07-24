@@ -300,7 +300,7 @@ public class ItemCompravelController {
 	 * @return ItemCompravel - representando o item
 	 */
 	public ItemCompravel getItemCadastrado(int id) {
-		itemExiste(id, ErrosItemController.GET_ID_IVÁLIDO.toString());
+		itemExiste(id, ErrosItemController.GET_ID_INVALIDO.toString());
 		return itens.get(id);
 	}
 }

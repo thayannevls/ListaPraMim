@@ -37,7 +37,7 @@ public enum ErrosItemController {
 	DELETA_ID_INVALIDO("Erro ao deletar item: id de item invalido."),
 	
 	// PEGAR ITEM
-	GET_ID_IVALIDO("Erro ao buscar o item: id de item inexistente");
+	GET_ID_INVALIDO("Erro ao buscar o item: id de item inexistente");
 	
 	private String descricao;
 

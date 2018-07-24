@@ -166,7 +166,7 @@ public class ListaPraMimController {
 	 * @return String - representando a lista encontrada
 	 */
 	public String pesquisaListaDeCompras(String descritor) {
-		return this.listasDeComprasController.getListaDeCompras(descritor);
+		return this.listasDeComprasController.pesquisaListaDeCompras(descritor);
 	}
 
 	/**

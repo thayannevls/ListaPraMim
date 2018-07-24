@@ -1,4 +1,5 @@
 package controller;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,7 +38,6 @@ public class ListaDeComprasController {
 			listasDeCompras.put(descritor, lista);
 		}
 		return descritor;
-
 	}
 
 	/**
@@ -57,7 +57,6 @@ public class ListaDeComprasController {
 		if (listasDeCompras.containsKey(descritor)) {
 			this.listasDeCompras.get(descritor).adicionaItemLista(item.getId(), qtd, item);
 		}
-
 	}
 
 	/**
@@ -109,14 +108,12 @@ public class ListaDeComprasController {
 	public void atualizaCompraDeLista(String descritor, int id, String operacao, int novaQtd) {
 		Validator.campoValido(descritor, ErrosListasComprasController.A_DESCRITOR_INVALIDO.toString());
 		operacaoValida(operacao, ErrosListasComprasController.A_OPERACAO_INVALIDA.toString());
-		listasDeCompras.get(descritor).analisaExistencia(id, ErrosListasComprasController.A_COMPRA_INEXISTENTE.toString());
-		
+		listasDeCompras.get(descritor).analisaExistencia(id,
+				ErrosListasComprasController.A_COMPRA_INEXISTENTE.toString());
 		if (operacao.equals("adiciona")) {
 			listasDeCompras.get(descritor).setQntCompra(id, novaQtd);
-
 		} else if (operacao.equals("diminui")) {
 			listasDeCompras.get(descritor).setQntCompra(id, -novaQtd);
-
 		}
 	}
 
@@ -130,12 +127,9 @@ public class ListaDeComprasController {
 	 */
 	public void deletaCompraDeLista(String descritor, int id) {
 		Validator.campoValido(descritor, ErrosListasComprasController.E_DESCRITOR_INVALIDO.toString());
-		
 		listasDeCompras.get(descritor).analisaExistencia(id, ErrosListasComprasController.E_COMPRA_INEXISTENTE.toString());
 		listasDeCompras.get(descritor).analisaExistencia(id, ErrosListasComprasController.E_ITEM_INEXISTENTE.toString());
-		
 		listasDeCompras.get(descritor).deletaCompra(id);
-
 	}
 
 	/**
@@ -150,7 +144,6 @@ public class ListaDeComprasController {
 	 */
 	public String getItemLista(String descritor, int posicao) {
 		return listasDeCompras.get(descritor).getItemLista(posicao);
-
 	}
 
 	/**
@@ -168,7 +161,6 @@ public class ListaDeComprasController {
 		Validator.campoValido(localDaCompra, ErrosListasComprasController.F_LOCAL_INVALIDO.toString());
 		Validator.ehPositivo(valorTotal, ErrosListasComprasController.F_VALOR_FINAL_INVALIDO.toString());
 		listasDeCompras.get(descritor).finalizaCompras(localDaCompra, valorTotal);
-
 	}
 
 	/**

@@ -69,7 +69,6 @@ public class ListaDeCompras {
 	 *            identificador do item a ser removido.
 	 */
 	public void deletaCompra(int id) {
-
 		this.listaDeCompras.remove(id);
 	}
 
@@ -94,12 +93,16 @@ public class ListaDeCompras {
 		List<Compra> compras = new ArrayList<>(listaDeCompras.values());
 		Collections.sort(compras, new ItemCategoriaENomeComparador());
 
-		if (pos >= compras.size())
-			return "";
-
-		return compras.get(pos).toString();
+		return (pos >= compras.size()) ? "" : compras.get(pos).toString();
 	}
 
+	/**
+	 * Retorna uma representação do Item pelo seu id.
+	 * 
+	 * @param id
+	 *            identificador do item
+	 * @return String - com sua representação
+	 */
 	public String getItemPeloId(int id) {
 		return listaDeCompras.get(id).toString();
 	}
@@ -155,7 +158,7 @@ public class ListaDeCompras {
 	 *            mensagem de erro a ser exibida caso nao exista compra cadastrada
 	 *            com o id especificado
 	 */
-	public boolean analisaExistencia(int id, String msg) {
+	private boolean compraCadastrada(int id, String msg) {
 		if (this.listaDeCompras.containsKey(id))
 			return true;
 		throw new IllegalArgumentException(msg);

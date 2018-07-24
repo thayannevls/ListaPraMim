@@ -75,7 +75,7 @@ public class ListaDeComprasController {
 	public String pesquisaCompraEmLista(String descritor, int id) {
 		Validator.campoValido(descritor, ErrosListasComprasController.P_DESCRITOR_INVALIDO.toString());
 		idValido(id, ErrosListasComprasController.P_ID_INVALIDO.toString());
-		return listasDeCompras.get(descritor).getItemLista(id);
+		return listasDeCompras.get(descritor).getItemPeloId(id);
 
 	}
 

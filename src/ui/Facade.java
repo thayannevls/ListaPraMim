@@ -348,7 +348,11 @@ public class Facade {
 	 * @return String - contendo uma listagem de todas as listas cadastradas em uma
 	 *         determinada data passada como parametro.
 	 */
-	public String pesquisaListasDeComprasPorItem(String data) {
-		return this.listaPraMim.pesquisaListasDeComprasPorItem(data);
+	public String pesquisaListasDeComprasPorData(String data) {
+		return this.listaPraMim.pesquisaListasDeComprasPorData(data);
+	}
+
+	public String pesquisaListasDeComprasPorItem(int id) {
+		return this.listaPraMim.pesquisaListasDeComprasPorItem(id);
 	}
 }

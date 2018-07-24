@@ -70,13 +70,12 @@ public class Validator {
 	 * @param mensagem mensagem de erro a ser retornado se nao for valido
 	 * @exception IllegalArgumentException caso seja passado uma categoria inválida
 	 */
-	public static boolean dataValida(String data, String mensagem){
-		String dateFormat = "dd-MM-yyyy";
+	public static void dataValida(String data, String mensagem){
+		String dateFormat = "dd/MM/yyyy";
 		try {
 			DateFormat df = new SimpleDateFormat(dateFormat);
             df.setLenient(false);
             df.parse(data);
-            return true;
         } catch (ParseException e) {
         		throw new IllegalArgumentException(mensagem);
         }

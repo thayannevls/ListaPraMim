@@ -6,34 +6,20 @@ import java.text.SimpleDateFormat;
 
 public class Validator {
 
-	/**
-	 * Verifica se número é maior que zero
-	 * 
-	 * @param num número a ser comparado
-	 * @param mensagem mensagem que deve ser incluída na exceção
-	 * @return boolean - retorna se for maior que zero
-	 * @exception IllegalArgumentException se for menor que zero
-	 */
-	public static boolean maiorQueZero(int num, String mensagem){
-		if(num <= 0)
-			throw new IllegalArgumentException(mensagem);
-		return true;
-	}
-	
-	/**
-	 * Verifica se número é positivo
-	 * 
-	 * @param num número a ser comparado
-	 * @param mensagem mensagem que deve ser incluída na exceção
-	 * @return boolean retorna se for positivo
-	 * @exception IllegalArgumentException se for negativo
-	 */
-	public static boolean ehPositivo(int num, String mensagem){
-		if(num <= 0)
-			throw new IllegalArgumentException(mensagem);
-		return true;
-	}
-	
+//	/**
+//	 * Verifica se número é maior que zero
+//	 * 
+//	 * @param num número a ser comparado
+//	 * @param mensagem mensagem que deve ser incluída na exceção
+//	 * @return boolean - retorna se for maior que zero
+//	 * @exception IllegalArgumentException se for menor que zero
+//	 */
+//	public static boolean maiorQueZero(int num, String mensagem){
+//		if(num <= 0)
+//			throw new IllegalArgumentException(mensagem);
+//		return true;
+//	}
+
 	/**
 	 * Verifica se número é positivo
 	 * 
@@ -95,4 +81,32 @@ public class Validator {
         		throw new IllegalArgumentException(mensagem);
         }
 	}
+
+	/**
+	 * Verifica se a operacao de atualizacao da lista de compras eh valida.
+	 * 
+	 * @param operacao
+	 *            operacao que sera realizada
+	 * @param msg
+	 *            mensagem que sera lancada
+	 * @return valor booleano
+	 */
+	public static void operacaoValida(String operacao, String msg) {
+		if (!(operacao.equals("adiciona") || operacao.equals("diminui")))
+			throw new IllegalArgumentException(msg);
+	}
+	
+	/**
+	 * Verifica se o id de um item eh valido.
+	 * 
+	 * @param id
+	 *            identificacao do item
+	 * @param msg
+	 * @return valor booleano
+	 */
+	public static void idValido(int id, String msg) {
+		if (id < 1)
+			throw new IllegalArgumentException(msg);
+	}
+	
 }

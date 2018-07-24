@@ -4,6 +4,7 @@ import model.ItemCompravel;
 import util.ErrosListasComprasController;
 
 public class ListaPraMimController {
+	
 	private ItemCompravelController itemController;
 	private ListaDeComprasController listasDeComprasController;
 

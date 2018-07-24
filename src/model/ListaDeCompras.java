@@ -25,11 +25,15 @@ import util.ErrosListasComprasController;
  *         UFCG/2018.1 - Laboratório de Programação 2 - Projeto de Laboratorio
  *         (Lista pra mim)
  */
+/**
+ * @author siuannybsr
+ *
+ */
 public class ListaDeCompras {
 
 	private String descritor;
 	private Map<Integer, Compra> listaDeCompras;
-	private Date dataCriacao;
+	private String dataCriacao;
 	private boolean finalizada;
 	private String localCompra;
 	private double valorTotal;
@@ -44,8 +48,20 @@ public class ListaDeCompras {
 	public ListaDeCompras(String descritor) {
 		this.descritor = descritor;
 		this.listaDeCompras = new HashMap<>();
-		this.dataCriacao = new Date(System.currentTimeMillis());
+		this.dataCriacao = this.getDate();
 		this.finalizada = false;
+	}
+
+	/**
+	 * Captura do sistema a data atual da criacao da lista.
+	 * 
+	 * @return string - no formato dd/MM/yyyy contendo a data capturada do sistema
+	 *         na qual a lista foi criada.
+	 */
+	private String getDate() {
+		Date data = new Date(System.currentTimeMillis());
+		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+		return df.format(data);
 	}
 
 	/**
@@ -60,6 +76,16 @@ public class ListaDeCompras {
 	 */
 	public void adicionaItemLista(int id, int qtd, ItemCompravel item) {
 		this.listaDeCompras.put(item.getId(), new Compra(qtd, item));
+	}
+
+	/**
+	 * Retorna para o sistema a data na qual a lista de compras foi criada.
+	 * 
+	 * @return string - no formato dd/MM/yyyy contendo a data na qual a lista foi
+	 *         cadastrada.
+	 */
+	public String getDataCriacao() {
+		return dataCriacao.toString();
 	}
 
 	/**
@@ -164,12 +190,22 @@ public class ListaDeCompras {
 	}
 
 	/**
+	 * Analisa se um determinado id encontra-se cadastrado na lista de compras.
+	 * 
+	 * @param id
+	 *            identificador a ser buscado
+	 * @return boolean - true se o id estiver cadastrado, caso contrario, false.
+	 */
+	public boolean analisaExistencia(int id) {
+		return this.listaDeCompras.containsKey(id);
+	}
+
+	/**
 	 * Retorna a representacao textual da lista de compras.
 	 */
 	@Override
 	public String toString() {
-		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-		return df.format(this.dataCriacao) + " " + this.descritor;
+		return this.dataCriacao + " - " + this.descritor;
 	}
 
 }

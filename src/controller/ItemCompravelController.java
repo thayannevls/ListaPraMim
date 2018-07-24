@@ -289,7 +289,7 @@ public class ItemCompravelController {
 	 * @return boolean true se eh valido
 	 * @exception IllegalArgumentException quando item nao existe
 	 */
-	private boolean itemExiste(int id, String mensagem){
+	public boolean itemExiste(int id, String mensagem){
 		if(itens.containsKey(id))
 			return true;
 		throw new IllegalArgumentException(mensagem);

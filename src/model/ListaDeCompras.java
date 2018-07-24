@@ -21,9 +21,9 @@ import util.ErrosListasComprasController;
  * @author Mariana Nascimento - Matricula: 117210416
  * @author Siuanny Barbosa - Matriucla: 117210395
  * @author Thayanne Sousa - Matricula: 117210414
- * 		   
- * 		   UFCG/2018.1 - Laboratório de
- *         Programação 2 - Projeto de Laboratorio (Lista pra mim)
+ * 
+ *         UFCG/2018.1 - Laboratório de Programação 2 - Projeto de Laboratorio
+ *         (Lista pra mim)
  */
 public class ListaDeCompras {
 
@@ -33,12 +33,13 @@ public class ListaDeCompras {
 	private boolean finalizada;
 	private String localCompra;
 	private double valorTotal;
-	
+
 	/**
 	 * Contrutor da classe Lista de Compras. Inicializa os atriburos da classe.
 	 * 
 	 * @param descritor
-	 *            string contendo uma representacao para descricao da lista de compras
+	 *            string contendo uma representacao para descricao da lista de
+	 *            compras
 	 */
 	public ListaDeCompras(String descritor) {
 		this.descritor = descritor;
@@ -46,7 +47,7 @@ public class ListaDeCompras {
 		this.dataCriacao = new Date(System.currentTimeMillis());
 		this.finalizada = false;
 	}
-	
+
 	/**
 	 * Adiciona uma nova compra na lista de compras.
 	 * 
@@ -60,7 +61,7 @@ public class ListaDeCompras {
 	public void adicionaItemLista(int id, int qtd, ItemCompravel item) {
 		this.listaDeCompras.put(item.getId(), new Compra(qtd, item));
 	}
-	
+
 	/**
 	 * Remove um irem da lista de compras.
 	 * 
@@ -68,7 +69,7 @@ public class ListaDeCompras {
 	 *            identificador do item a ser removido.
 	 */
 	public void deletaCompra(int id) {
-		
+
 		this.listaDeCompras.remove(id);
 	}
 
@@ -82,26 +83,27 @@ public class ListaDeCompras {
 	public boolean getEstado() {
 		return this.finalizada;
 	}
-	
+
 	/**
 	 * Retorna uma listagem de todas as compras cadastradas na lista de compras.
 	 * 
-	 * @return string contendo uma representacao textual de todas as compras cadastradas na lista.
+	 * @return string contendo uma representacao textual de todas as compras
+	 *         cadastradas na lista.
 	 */
 	public String getItemLista(int pos) {
 		List<Compra> compras = new ArrayList<>(listaDeCompras.values());
 		Collections.sort(compras, new ItemCategoriaENomeComparador());
-		
+
 		if (pos >= compras.size())
 			return "";
-		
+
 		return compras.get(pos).toString();
 	}
-	
-	public String getItemPeloId(int id){
+
+	public String getItemPeloId(int id) {
 		return listaDeCompras.get(id).toString();
 	}
-	
+
 	/**
 	 * Encerra uma lista de compras.
 	 * 
@@ -115,7 +117,7 @@ public class ListaDeCompras {
 		this.valorTotal = valorTotal;
 		this.finalizada = true;
 	}
-	
+
 	/**
 	 * Disponibiliza para outras classes o descritor de uma lista de compras.
 	 * 
@@ -124,11 +126,10 @@ public class ListaDeCompras {
 	public String getDescritor() {
 		return this.descritor;
 	}
-	
+
 	/**
-	 * Altera a quantidade de itens que serao comprados.
-	 * [Caso a nova quantidade a ser comprada for 0 (zero),
-	 * a compra será removida da lista]
+	 * Altera a quantidade de itens que serao comprados. [Caso a nova quantidade a
+	 * ser comprada for 0 (zero), a compra será removida da lista]
 	 * 
 	 * @param id
 	 *            identificador da compra a ser alterada
@@ -136,9 +137,9 @@ public class ListaDeCompras {
 	 *            nova quantidade a ser comprada
 	 */
 	public void setQntCompra(int id, int nQtd) {
-		compraCadastrada(id, ErrosListasComprasController.P_COMPRA_INEXISTENTE.toString());
+		analisaExistencia(id, ErrosListasComprasController.P_COMPRA_INEXISTENTE.toString());
 		int qtdAtual = this.listaDeCompras.get(id).getQtd();
-		if(qtdAtual + nQtd == 0) {
+		if (qtdAtual + nQtd == 0) {
 			this.deletaCompra(id);
 		} else {
 			this.listaDeCompras.get(id).setQtd(nQtd);
@@ -155,14 +156,11 @@ public class ListaDeCompras {
 	 *            com o id especificado
 	 */
 	public boolean analisaExistencia(int id, String msg) {
-		return (this.listaDeCompras.containsKey(id));
-	}
-	
-	public boolean compraCadastrada(int id, String msg){
-		if(this.listaDeCompras.containsKey(id))
+		if (this.listaDeCompras.containsKey(id))
 			return true;
 		throw new IllegalArgumentException(msg);
 	}
+
 	/**
 	 * Retorna a representacao textual da lista de compras.
 	 */
@@ -171,5 +169,5 @@ public class ListaDeCompras {
 		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 		return df.format(this.dataCriacao) + " " + this.descritor;
 	}
-	
+
 }

@@ -158,7 +158,7 @@ public class ListaDeCompras {
 		return (this.listaDeCompras.containsKey(id));
 	}
 	
-	private boolean compraCadastrada(int id, String msg){
+	public boolean compraCadastrada(int id, String msg){
 		if(this.listaDeCompras.containsKey(id))
 			return true;
 		throw new IllegalArgumentException(msg);

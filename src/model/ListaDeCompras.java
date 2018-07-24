@@ -4,11 +4,13 @@ import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import comparator.ItemCategoriaENomeComparador;
+import util.ErrosListasComprasController;
 
 /**
  * Entidade usada para representar uma lista de compras. Em uma lista de compras
@@ -66,6 +68,7 @@ public class ListaDeCompras {
 	 *            identificador do item a ser removido.
 	 */
 	public void deletaCompra(int id) {
+		
 		this.listaDeCompras.remove(id);
 	}
 
@@ -87,9 +90,16 @@ public class ListaDeCompras {
 	 */
 	public String getItemLista(int pos) {
 		List<Compra> compras = new ArrayList<>(listaDeCompras.values());
-		compras.sort(new ItemCategoriaENomeComparador());
-		//
+		Collections.sort(compras, new ItemCategoriaENomeComparador());
+		
+		if (pos >= compras.size())
+			return "";
+		
 		return compras.get(pos).toString();
+	}
+	
+	public String getItemPeloId(int id){
+		return listaDeCompras.get(id).toString();
 	}
 	
 	/**
@@ -126,6 +136,7 @@ public class ListaDeCompras {
 	 *            nova quantidade a ser comprada
 	 */
 	public void setQntCompra(int id, int nQtd) {
+		compraCadastrada(id, ErrosListasComprasController.P_COMPRA_INEXISTENTE.toString());
 		int qtdAtual = this.listaDeCompras.get(id).getQtd();
 		if(qtdAtual + nQtd == 0) {
 			this.deletaCompra(id);
@@ -147,6 +158,11 @@ public class ListaDeCompras {
 		return (this.listaDeCompras.containsKey(id));
 	}
 	
+	private boolean compraCadastrada(int id, String msg){
+		if(this.listaDeCompras.containsKey(id))
+			return true;
+		throw new IllegalArgumentException(msg);
+	}
 	/**
 	 * Retorna a representacao textual da lista de compras.
 	 */

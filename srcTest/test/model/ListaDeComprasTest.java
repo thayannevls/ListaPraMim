@@ -17,12 +17,12 @@ public class ListaDeComprasTest {
 	
 	@Before
 	public void setUp(){
-		lista = new ListaDeCompras("feira");
+		lista = new ListaDeCompras(1, "feira");
 	}
 	
 	@Test
 	public void testCriar() {
-		new ListaDeCompras("feira");
+		new ListaDeCompras(1, "feira");
 	}
 
 	@Test
@@ -51,7 +51,7 @@ public class ListaDeComprasTest {
 		String strDate = df.format(dataAtual);
 		
 		String retornoEsperado = strDate + " ha";
-		ListaDeCompras novaLista = new ListaDeCompras("ha");
+		ListaDeCompras novaLista = new ListaDeCompras(1, "ha");
 		
 		assertEquals("Verificado toString da classe ListaDeCompras", retornoEsperado, novaLista.toString());
 	}

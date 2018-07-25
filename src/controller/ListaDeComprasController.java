@@ -67,6 +67,7 @@ public class ListaDeComprasController {
 	public void adicionaCompraALista(String descritor, int qtd, ItemCompravel item) {
 		Validator.campoValido(descritor, ErrosListasComprasController.ADD_DESCRITOR_INVALIDO.toString());
 		Validator.ehPositivo(qtd, ErrosListasComprasController.ADD_QTD_INVALIDA.toString());
+		listaNaoFinalizada(descritor, ErrosListasComprasController.LISTA_FINALIZADA.toString());
 
 		if (listasDeCompras.containsKey(descritor)) {
 			this.listasDeCompras.get(descritor).adicionaItemLista(item.getId(), qtd, item);
@@ -123,6 +124,8 @@ public class ListaDeComprasController {
 	public void atualizaCompraDeLista(String descritor, int id, String operacao, int novaQtd) {
 		Validator.campoValido(descritor, ErrosListasComprasController.A_DESCRITOR_INVALIDO.toString());
 		Validator.operacaoValida(operacao, ErrosListasComprasController.A_OPERACAO_INVALIDA.toString());
+		listaNaoFinalizada(descritor, ErrosListasComprasController.LISTA_FINALIZADA.toString());
+		
 		this.listasDeCompras.get(descritor).analisaExistencia(id,
 				ErrosListasComprasController.A_COMPRA_INEXISTENTE.toString());
 		if (operacao.equals("adiciona")) {
@@ -294,6 +297,18 @@ public class ListaDeComprasController {
 		listasDeCompras.put(descritor, lista);
 		
 		return descritor;
+	}
+	
+	/**
+	 * Metodo que verifica se a lista ainda nao foi finalizada
+	 * @param descritor descritor da lista a ser verificada
+	 * @param mensagem mensagem de erro a ser retorna se tiver sido finalizada
+	 * @return boolean true se nao tiver sido finalizada
+	 */
+	private boolean listaNaoFinalizada(String descritor, String mensagem){
+		if(listasDeCompras.get(descritor).getFinalizada())
+			throw new IllegalArgumentException(mensagem);
+		return true;
 	}
 	
 	/**

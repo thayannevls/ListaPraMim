@@ -32,7 +32,9 @@ public enum ErrosListasComprasController {
 	//FINALIZAR
 	F_DESCRITOR_INVALIDO("Erro na finalizacao de lista de compras: descritor nao pode ser vazio ou nulo."),
 	F_LOCAL_INVALIDO("Erro na finalizacao de lista de compras: local nao pode ser vazio ou nulo."),
-	F_VALOR_FINAL_INVALIDO("Erro na finalizacao de lista de compras: valor final da lista invalido.");
+	F_VALOR_FINAL_INVALIDO("Erro na finalizacao de lista de compras: valor final da lista invalido."),
+	
+	LISTA_FINALIZADA("Erro: Lista ja finalizada.");
 	
 	private String descricao;
 

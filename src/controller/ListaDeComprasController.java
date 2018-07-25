@@ -4,12 +4,17 @@ import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.NavigableMap;
+import java.util.TreeMap;
 
+import comparator.ListaIdComparator;
 import model.ItemCompravel;
 import model.ListaDeCompras;
 import util.ErrosListasComprasController;
+import util.Utils;
 import util.Validator;
 
 /**
@@ -24,9 +29,11 @@ import util.Validator;
 public class ListaDeComprasController {
 
 	private Map<String, ListaDeCompras> listasDeCompras;
+	private int qtdListas;
 
 	public ListaDeComprasController() {
 		this.listasDeCompras = new HashMap<>();
+		qtdListas = 0;
 	}
 
 	/**
@@ -37,9 +44,10 @@ public class ListaDeComprasController {
 	 */
 	public String adicionaListaDeCompras(String descritor) {
 		Validator.campoValido(descritor, ErrosListasComprasController.C_DESCRITOR_INVALIDO.toString());
-		ListaDeCompras lista = new ListaDeCompras(descritor);
 
 		if (!this.listasDeCompras.containsKey(descritor)) {
+			qtdListas++;
+			ListaDeCompras lista = new ListaDeCompras(qtdListas, descritor);
 			this.listasDeCompras.put(descritor, lista);
 		}
 
@@ -80,7 +88,6 @@ public class ListaDeComprasController {
 		Validator.idValido(id, ErrosListasComprasController.P_ID_INVALIDO.toString());
 		this.listasDeCompras.get(descritor).analisaExistencia(id,
 				ErrosListasComprasController.P_COMPRA_INEXISTENTE.toString());
-		//
 		return this.listasDeCompras.get(descritor).getItemPeloId(id);
 	}
 
@@ -118,7 +125,6 @@ public class ListaDeComprasController {
 		Validator.operacaoValida(operacao, ErrosListasComprasController.A_OPERACAO_INVALIDA.toString());
 		this.listasDeCompras.get(descritor).analisaExistencia(id,
 				ErrosListasComprasController.A_COMPRA_INEXISTENTE.toString());
-		//
 		if (operacao.equals("adiciona")) {
 			this.listasDeCompras.get(descritor).setQntCompra(id, novaQtd);
 		} else {
@@ -272,6 +278,33 @@ public class ListaDeComprasController {
 			throw new IllegalArgumentException(ErrosListasComprasController.P_COMPRA_INEXISTENTE.toString());
 		
 		return listagem;
+	}
+	
+	/**
+	 * Gera lista automatica com base na ultima lista adicionada ao sistema
+	 * @return String descritor da nova lista automatica
+	 */
+	public String geraAutomaticaUltimaLista(){
+		String descritor = "Lista automatica 1 " + Utils.dataAtual();
+				
+		qtdListas ++;
+		ListaDeCompras lista = new ListaDeCompras(qtdListas, descritor);
+		
+		lista.setListaDeCompras(getUltimaLista().getListaDeCompras());
+		listasDeCompras.put(descritor, lista);
+		
+		return descritor;
+	}
+	
+	/**
+	 * Retorna ultima lista de compras cadastrada no sistema
+	 * @return ListaDeCompras ultima lista cadastrada no sistema
+	 */
+	private ListaDeCompras getUltimaLista(){
+		List<ListaDeCompras> listasOrdenadas = new ArrayList<>(listasDeCompras.values());
+		listasOrdenadas.sort(new ListaIdComparator());
+		ListaDeCompras ultimaLista = listasOrdenadas.get(listasOrdenadas.size() - 1);
+		return ultimaLista;
 	}
 
 }

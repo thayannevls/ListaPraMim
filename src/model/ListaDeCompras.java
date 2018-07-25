@@ -30,6 +30,7 @@ import util.ErrosListasComprasController;
  *
  */
 public class ListaDeCompras {
+	
 	private int id;
 	private String descritor;
 	private Map<Integer, Compra> listaDeCompras;
@@ -55,6 +56,10 @@ public class ListaDeCompras {
 	
 	public int getId(){
 		return id;
+	}
+	
+	public boolean getFinalizada(){
+		return finalizada;
 	}
 	
 	public Map<Integer, Compra> getListaDeCompras() {

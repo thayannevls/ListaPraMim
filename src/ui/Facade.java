@@ -25,7 +25,8 @@ public class Facade {
 		args = new String[] { "ui.Facade", "acceptance_test/use_case1.txt", "acceptance_test/use_case1_exception.txt",
 				"acceptance_test/use_case2.txt", "acceptance_test/use_case2_exception.txt",
 				"acceptance_test/use_case3.txt", "acceptance_test/use_case3_exception.txt",
-				"acceptance_test/use_case4.txt", "acceptance_test/use_case4_exception.txt" };
+				"acceptance_test/use_case4.txt", "acceptance_test/use_case4_exception.txt",
+				"acceptance_test/use_case5.txt"};
 		EasyAccept.main(args);
 	}
 
@@ -351,8 +352,21 @@ public class Facade {
 	public String pesquisaListasDeComprasPorData(String data) {
 		return this.listaPraMim.pesquisaListasDeComprasPorData(data);
 	}
-
+	
+	/**
+	 * Pesquisa listas de compras que contem aquele item
+	 * @param id id do item
+	 * @return String representacao textual das listas
+	 */
 	public String pesquisaListasDeComprasPorItem(int id) {
 		return this.listaPraMim.pesquisaListasDeComprasPorItem(id);
+	}
+	
+	/**
+	 * Gera automaticamente uma lista com base na ultima lista adicionada ao sistema
+	 * @return String descritor da nova lista automatica criada
+	 */
+	public String geraAutomaticaUltimaLista(){
+		return listaPraMim.geraAutomaticaUltimaLista();
 	}
 }

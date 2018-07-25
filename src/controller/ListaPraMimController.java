@@ -1,7 +1,9 @@
 package controller;
 
 import model.ItemCompravel;
+import model.ListaDeCompras;
 import util.ErrosListasComprasController;
+import util.Utils;
 
 public class ListaPraMimController {
 
@@ -328,6 +330,14 @@ public class ListaPraMimController {
 
 	public String pesquisaListasDeComprasPorItem(int id) {
 		return this.listasDeComprasController.pesquisaListasDeComprasPorItem(id);
+	}
+	
+	/**
+	 * Gera lista automatica com base na ultima lista adicionada ao sistema
+	 * @return String descritor da nova lista automatica
+	 */
+	public String geraAutomaticaUltimaLista(){
+		return listasDeComprasController.geraAutomaticaUltimaLista();
 	}
 
 }

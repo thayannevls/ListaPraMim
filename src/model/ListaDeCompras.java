@@ -30,7 +30,7 @@ import util.ErrosListasComprasController;
  *
  */
 public class ListaDeCompras {
-
+	private int id;
 	private String descritor;
 	private Map<Integer, Compra> listaDeCompras;
 	private String dataCriacao;
@@ -45,11 +45,24 @@ public class ListaDeCompras {
 	 *            string contendo uma representacao para descricao da lista de
 	 *            compras
 	 */
-	public ListaDeCompras(String descritor) {
+	public ListaDeCompras(int id, String descritor) {
+		this.id = id;
 		this.descritor = descritor;
 		this.listaDeCompras = new HashMap<>();
 		this.dataCriacao = this.getDate();
 		this.finalizada = false;
+	}
+	
+	public int getId(){
+		return id;
+	}
+	
+	public Map<Integer, Compra> getListaDeCompras() {
+		return listaDeCompras;
+	}
+
+	public void setListaDeCompras(Map<Integer, Compra> listaDeCompras) {
+		this.listaDeCompras = listaDeCompras;
 	}
 
 	/**

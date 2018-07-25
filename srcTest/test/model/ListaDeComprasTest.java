@@ -29,7 +29,7 @@ public class ListaDeComprasTest {
 	public void testAdicionaItemLista() {
 		ItemCompravel item = new ItemPorUnidade("semente", 2, "higiene pessoal", 1, "floricultura", 2.3);
 		lista.adicionaItemLista(1, 1, item);
-		assertEquals("Verificado adicionar item a lista", item.toString(), lista.imprimeListagem());
+		assertEquals("Verificado adicionar item a lista", item.toString(), lista.getItemPeloId(2));
 	}
 	
 	@Test
@@ -37,23 +37,11 @@ public class ListaDeComprasTest {
 		ItemCompravel item = new ItemPorUnidade("semente", 2, "higiene pessoal", 1, "floricultura", 2.3);
 		lista.adicionaItemLista(1, 1, item);
 		lista.deletaCompra(1);
-		assertEquals("Verificado deletar item da lista", "", lista.imprimeListagem());
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void testDeletaItemInexistente() {
 		lista.deletaCompra(1);
-	}
-	
-	@Test
-	public void testImprimeListagem() {
-		ItemCompravel item = new ItemPorUnidade("semente", 2, "higiene pessoal", 1, "floricultura", 2.3);
-		ItemCompravel item2 = new ItemPorUnidade("abacate", 3, "higiene pessoal", 1, "floricultura", 2.3);
-		lista.adicionaItemLista(1, 1, item);
-		lista.adicionaItemLista(1, 1, item2);
-		
-		String retornoEsperado = item.toString() + System.lineSeparator() + item2.toString();
-		assertEquals("Verificado imprime listagem de itens da lista", retornoEsperado, lista.imprimeListagem());
 	}
 	
 	@Test

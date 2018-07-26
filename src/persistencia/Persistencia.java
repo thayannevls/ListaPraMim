@@ -3,11 +3,17 @@ package persistencia;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.StringJoiner;
 
+/**
+ * 
+ * @author Thayanne Sousa - 117210414
+ */
 public final class Persistencia {
 	
 	private static final Persistencia INSTANCE = new Persistencia();
@@ -33,12 +39,12 @@ public final class Persistencia {
 		salvar(itensArquivo, texto);
 	}
 	
-	public static void carregarListas() throws IOException{
-		carregar(listasArquivo);
+	public static Object carregarListas() throws IOException, ClassNotFoundException{
+		return carregar(listasArquivo);
 	}
 	
-	public static void carregarItens() throws IOException{
-		carregar(itensArquivo);
+	public static Object carregarItens() throws IOException, ClassNotFoundException{
+		return carregar(itensArquivo);
 	}
 	
 	
@@ -52,7 +58,17 @@ public final class Persistencia {
 		fw.close();
 	}
 	
-	private static String carregar(File arquivo) throws IOException{
+	private static Object carregar(File arquivo) throws IOException, ClassNotFoundException{
+		
+		FileInputStream fis = new FileInputStream(arquivo);
+		ObjectInputStream ois = new ObjectInputStream(fis);
+		Object result = (Object) ois.readObject();
+		ois.close();
+		
+		return result;
+	}
+	
+	private static String carregarString(File arquivo) throws IOException{
 		
 		FileReader fr = new FileReader(arquivo);
 		BufferedReader br = new BufferedReader(fr);

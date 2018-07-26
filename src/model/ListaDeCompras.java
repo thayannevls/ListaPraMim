@@ -31,10 +31,9 @@ import util.ErrosListasComprasController;
  */
 public class ListaDeCompras {
 	
-	private int id;
 	private String descritor;
 	private Map<Integer, Compra> listaDeCompras;
-	private String dataCriacao;
+	private Date dataCriacao;
 	private boolean finalizada;
 	private String localCompra;
 	private double valorTotal;
@@ -46,18 +45,13 @@ public class ListaDeCompras {
 	 *            string contendo uma representacao para descricao da lista de
 	 *            compras
 	 */
-	public ListaDeCompras(int id, String descritor) {
-		this.id = id;
+	public ListaDeCompras(String descritor) {
 		this.descritor = descritor;
 		this.listaDeCompras = new HashMap<>();
 		this.dataCriacao = this.getDate();
 		this.finalizada = false;
 	}
-	
-	public int getId(){
-		return id;
-	}
-	
+
 	public boolean getFinalizada(){
 		return finalizada;
 	}
@@ -69,17 +63,18 @@ public class ListaDeCompras {
 	public void setListaDeCompras(Map<Integer, Compra> listaDeCompras) {
 		this.listaDeCompras = listaDeCompras;
 	}
-
+	
+	public Date getDataCriacao() {
+		return dataCriacao;
+	}
 	/**
 	 * Captura do sistema a data atual da criacao da lista.
 	 * 
 	 * @return string - no formato dd/MM/yyyy contendo a data capturada do sistema
 	 *         na qual a lista foi criada.
 	 */
-	private String getDate() {
-		Date data = new Date(System.currentTimeMillis());
-		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-		return df.format(data);
+	private Date getDate() {
+		return new Date(System.currentTimeMillis());
 	}
 
 	/**
@@ -102,8 +97,9 @@ public class ListaDeCompras {
 	 * @return string - no formato dd/MM/yyyy contendo a data na qual a lista foi
 	 *         cadastrada.
 	 */
-	public String getDataCriacao() {
-		return dataCriacao.toString();
+	public String getDataCriacaoStr() {
+		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+		return df.format(this.dataCriacao);
 	}
 
 	/**
@@ -223,7 +219,7 @@ public class ListaDeCompras {
 	 */
 	@Override
 	public String toString() {
-		return this.dataCriacao + " - " + this.descritor;
+		return this.getDataCriacaoStr() + " - " + this.descritor;
 	}
 
 }

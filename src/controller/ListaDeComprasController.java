@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.NavigableMap;
 import java.util.TreeMap;
 
-import comparator.ListaIdComparator;
+import comparator.ListaDataComparator;
 import model.ItemCompravel;
 import model.ListaDeCompras;
 import util.ErrosListasComprasController;
@@ -29,11 +29,9 @@ import util.Validator;
 public class ListaDeComprasController {
 
 	private Map<String, ListaDeCompras> listasDeCompras;
-	private int qtdListas;
 
 	public ListaDeComprasController() {
 		this.listasDeCompras = new HashMap<>();
-		qtdListas = 0;
 	}
 
 	/**
@@ -46,8 +44,7 @@ public class ListaDeComprasController {
 		Validator.campoValido(descritor, ErrosListasComprasController.C_DESCRITOR_INVALIDO.toString());
 
 		if (!this.listasDeCompras.containsKey(descritor)) {
-			qtdListas++;
-			ListaDeCompras lista = new ListaDeCompras(qtdListas, descritor);
+			ListaDeCompras lista = new ListaDeCompras(descritor);
 			this.listasDeCompras.put(descritor, lista);
 		}
 
@@ -197,7 +194,7 @@ public class ListaDeComprasController {
 	public String getItemListaPorData(String data, int posicaoLista) {
 		List<String> aux = new ArrayList<>();
 		for (ListaDeCompras lista : this.listasDeCompras.values()) {
-			if (lista.getDataCriacao().equals(data)) {
+			if (lista.getDataCriacaoStr().equals(data)) {
 				aux.add(lista.getDescritor());
 			}
 		}
@@ -243,7 +240,7 @@ public class ListaDeComprasController {
 		Validator.dataValida(data, ErrosListasComprasController.P_DATA_FORMATO_IVALIDO.toString());
 		List<String> aux = new ArrayList<>();
 		for (ListaDeCompras lista : this.listasDeCompras.values()) {
-			if (lista.getDataCriacao().equals(data)) {
+			if (lista.getDataCriacaoStr().equals(data)) {
 				aux.add(lista.getDescritor());
 			}
 		}
@@ -289,10 +286,8 @@ public class ListaDeComprasController {
 	 */
 	public String geraAutomaticaUltimaLista(){
 		String descritor = "Lista automatica 1 " + Utils.dataAtual();
-				
-		qtdListas ++;
-		ListaDeCompras lista = new ListaDeCompras(qtdListas, descritor);
 		
+		ListaDeCompras lista = new ListaDeCompras(descritor);
 		lista.setListaDeCompras(getUltimaLista().getListaDeCompras());
 		listasDeCompras.put(descritor, lista);
 		
@@ -317,7 +312,7 @@ public class ListaDeComprasController {
 	 */
 	private ListaDeCompras getUltimaLista(){
 		List<ListaDeCompras> listasOrdenadas = new ArrayList<>(listasDeCompras.values());
-		listasOrdenadas.sort(new ListaIdComparator());
+		listasOrdenadas.sort(new ListaDataComparator());
 		ListaDeCompras ultimaLista = listasOrdenadas.get(listasOrdenadas.size() - 1);
 		return ultimaLista;
 	}

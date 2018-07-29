@@ -11,7 +11,8 @@ package model;
  * @author Siuanny Barbosa - Matriucla: 117210395
  * @author Thayanne Sousa - Matricula: 117210414
  * 
- *         UFCG/2018.1 - Laboratório de Programação 2 - Projeto de Laboratorio (Lista pra mim)
+ *         UFCG/2018.1 - Laboratório de Programação 2 - Projeto de Laboratorio
+ *         (Lista pra mim)
  */
 public class Compra {
 
@@ -30,7 +31,7 @@ public class Compra {
 		this.qtd = qtd;
 		this.item = item;
 	}
-	
+
 	/**
 	 * Retorna a quantidade de itens que se deseja comprar de um determinado item.
 	 * 
@@ -49,18 +50,20 @@ public class Compra {
 	public void setQtd(int nQtd) {
 		this.qtd += nQtd;
 	}
-	
+
 	/**
-	 * Disponibiliza para outras entidades do sistema a categoria do item a ser comprado.
+	 * Disponibiliza para outras entidades do sistema a categoria do item a ser
+	 * comprado.
 	 * 
 	 * @return string contendo a categoria do item a ser comprado.
 	 */
 	public String getCategoria() {
 		return this.item.getCategoria();
 	}
-	
+
 	/**
-	 * Disponibiliza para outras entidades do sistema a descricao do item a ser comprado.
+	 * Disponibiliza para outras entidades do sistema a descricao do item a ser
+	 * comprado.
 	 * 
 	 * @return string contendo a descricao do item a ser comprado.
 	 */
@@ -74,6 +77,15 @@ public class Compra {
 	 */
 	public String toString() {
 		return this.qtd + " " + item.getDescricaoBasica();
+	}
+
+	/**
+	 * Retorna um item da compra.
+	 * 
+	 * @return ItemCompravel - representando item
+	 */
+	public ItemCompravel getItem() {
+		return this.item;
 	}
 
 }

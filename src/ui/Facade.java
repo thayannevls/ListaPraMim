@@ -26,7 +26,7 @@ public class Facade {
 				"acceptance_test/use_case2.txt", "acceptance_test/use_case2_exception.txt",
 				"acceptance_test/use_case3.txt", "acceptance_test/use_case3_exception.txt",
 				"acceptance_test/use_case4.txt", "acceptance_test/use_case4_exception.txt",
-				"acceptance_test/use_case5.txt"};
+				"acceptance_test/use_case5.txt", "acceptance_test/use_case7.txt"};
 		EasyAccept.main(args);
 	}
 
@@ -368,5 +368,13 @@ public class Facade {
 	 */
 	public String geraAutomaticaUltimaLista(){
 		return listaPraMim.geraAutomaticaUltimaLista();
+	}
+	
+	public void iniciaSistema(){
+		listaPraMim.carregar();
+	}
+	
+	public void fechaSistema(){
+		listaPraMim.salvar();
 	}
 }

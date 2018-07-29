@@ -1,13 +1,13 @@
 package persistencia;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.StringJoiner;
 
 /**
@@ -31,12 +31,12 @@ public final class Persistencia {
 		return INSTANCE;
 	}
 	
-	public static void salvarListas(String texto) throws IOException{
-		salvar(listasArquivo, texto);
+	public static void salvarListas(Object listas) throws IOException{
+		salvar(listasArquivo, listas);
 	}
 	
-	public static void salvarItens(String texto) throws IOException{
-		salvar(itensArquivo, texto);
+	public static void salvarItens(Object itens) throws IOException{
+		salvar(itensArquivo, itens);
 	}
 	
 	public static Object carregarListas() throws IOException, ClassNotFoundException{
@@ -47,25 +47,34 @@ public final class Persistencia {
 		return carregar(itensArquivo);
 	}
 	
+	public void limparListas(){
+		listasArquivo.delete();
+	}
 	
-	private static void salvar(File arquivo, String texto) throws IOException{
-		FileWriter fw = new FileWriter(arquivo);
-		BufferedWriter bw = new BufferedWriter(fw);
-		
-		bw.write(texto);
-		
-		bw.close();
-		fw.close();
+	public void limparItens(){
+		itensArquivo.delete();
+	}
+	
+	
+	private static void salvar(File arquivo, Object objeto) throws IOException{
+		FileOutputStream fos = new FileOutputStream(arquivo);		
+		ObjectOutputStream oos = new ObjectOutputStream(fos);
+	
+		oos.writeObject(objeto);
+		oos.close();
+		fos.close();
 	}
 	
 	private static Object carregar(File arquivo) throws IOException, ClassNotFoundException{
-		
-		FileInputStream fis = new FileInputStream(arquivo);
+		FileInputStream fis = new FileInputStream(arquivo);		
 		ObjectInputStream ois = new ObjectInputStream(fis);
-		Object result = (Object) ois.readObject();
-		ois.close();
+		   
+		Object objeto =  ois.readObject(); 
 		
-		return result;
+		ois.close();
+		fis.close();
+		
+		return objeto;
 	}
 	
 	private static String carregarString(File arquivo) throws IOException{

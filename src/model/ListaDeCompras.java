@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -29,7 +30,7 @@ import util.ErrosListasComprasController;
  * @author siuannybsr
  *
  */
-public class ListaDeCompras {
+public class ListaDeCompras implements Serializable {
 	
 	private String descritor;
 	private Map<Integer, Compra> listaDeCompras;

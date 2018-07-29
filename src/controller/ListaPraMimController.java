@@ -339,5 +339,16 @@ public class ListaPraMimController {
 	public String geraAutomaticaUltimaLista(){
 		return listasDeComprasController.geraAutomaticaUltimaLista();
 	}
+	
+	
+	public void salvar(){
+		itemController.salvar();
+		listasDeComprasController.salvar();
+	}
+	
 
+	public void carregar(){
+		itemController.carregar();
+		listasDeComprasController.carregar();
+	}
 }

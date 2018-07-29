@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -13,6 +14,7 @@ import model.ItemCompravel;
 import model.ItemPorQtd;
 import model.ItemPorQuilo;
 import model.ItemPorUnidade;
+import persistence.Persistencia;
 import util.ErrosItemController;
 import util.ErrosListasComprasController;
 import util.Validator;
@@ -349,6 +351,31 @@ public class ItemCompravelController {
 	public ItemCompravel getItemCadastrado(int id) {
 		itemExiste(id, ErrosListasComprasController.ADD_ITEM_INEXISTENTE.toString());
 		return itens.get(id);
+	}
+	
+	/**
+	 * Salva itens em um arquivo
+	 * @see Persistencia#salvarItens(Object)
+	 */
+	public void salvar(){
+		try {
+			Persistencia.salvarItens(itens);
+		} catch (IOException e) {
+			throw new RuntimeException(e.getMessage());
+		}
+	}
+	
+	/**
+	 * Carrega itens de arquivo e adiciona ao sistema
+	 * @see Persistencia#carregarItens()
+	 */
+	@SuppressWarnings("unchecked")
+	public void carregar(){
+		try {
+			itens = (Map<Integer, ItemCompravel>)Persistencia.carregarItens();
+		} catch (ClassNotFoundException | IOException e) {
+			throw new RuntimeException(e.getMessage());
+		}
 	}
 
 	/**

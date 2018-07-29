@@ -1,5 +1,7 @@
 package model;
 
+import java.io.Serializable;
+
 /**
  * Entidade que representa uma determinada compra em um sistema. Em uma compra
  * ha uma quantidade que representa a quantos itens se deseja comprar e um item
@@ -14,7 +16,7 @@ package model;
  *         UFCG/2018.1 - Laboratório de Programação 2 - Projeto de Laboratorio
  *         (Lista pra mim)
  */
-public class Compra {
+public class Compra implements Serializable {
 
 	private int qtd;
 	private ItemCompravel item;

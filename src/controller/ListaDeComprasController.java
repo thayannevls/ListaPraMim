@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.IOException;
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,6 +12,7 @@ import comparator.ListaDataComparator;
 import model.Compra;
 import model.ItemCompravel;
 import model.ListaDeCompras;
+import persistence.Persistencia;
 import util.ErrosListasComprasController;
 import util.Utils;
 import util.Validator;
@@ -385,6 +387,31 @@ public class ListaDeComprasController {
 		listasOrdenadas.sort(new ListaDataComparator());
 		ListaDeCompras ultimaLista = listasOrdenadas.get(listasOrdenadas.size() - 1);
 		return ultimaLista;
+	}
+	
+	/**
+	 * Salva listas cadastradas em um arquivo
+	 * @see Persistencia#salvarListas(Object)
+	 */
+	public void salvar(){
+		try {
+			Persistencia.salvarListas(listasDeCompras);
+		} catch (IOException e) {
+			throw new RuntimeException(e.getMessage());
+		}
+	}
+	
+	/**
+	 * Carrega listas e registra no sistema
+	 * @see Persistencia#carregarListas()
+	 */
+	@SuppressWarnings("unchecked")
+	public void carregar(){
+		try {
+			listasDeCompras = (Map<String, ListaDeCompras>) Persistencia.carregarListas();
+		} catch (ClassNotFoundException | IOException e) {
+			throw new RuntimeException(e.getMessage());
+		}
 	}
 
 }

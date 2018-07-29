@@ -4,21 +4,18 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+/**
+ * Classe que contem metodos de validacao usados pelo sistema
+ * 
+ * @author José Guilheme - Matricula: 117210370
+ * @author Mariana Nascimento - Matricula: 117210416
+ * @author Siuanny Barbosa - Matriucla: 117210395
+ * @author Thayanne Sousa - Matricula: 117210414
+ * 
+ *         UFCG/2018.1 - Laboratório de Programação 2 - Projeto de Laboratorio
+ *         (Lista pra mim)
+ */
 public class Validator {
-
-//	/**
-//	 * Verifica se número é maior que zero
-//	 * 
-//	 * @param num número a ser comparado
-//	 * @param mensagem mensagem que deve ser incluída na exceção
-//	 * @return boolean - retorna se for maior que zero
-//	 * @exception IllegalArgumentException se for menor que zero
-//	 */
-//	public static boolean maiorQueZero(int num, String mensagem){
-//		if(num <= 0)
-//			throw new IllegalArgumentException(mensagem);
-//		return true;
-//	}
 
 	/**
 	 * Verifica se número é positivo

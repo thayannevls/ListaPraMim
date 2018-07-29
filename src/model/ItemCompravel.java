@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,7 +18,7 @@ import util.Utils;
  * @author Thayanne Sousa - Matricula: 117210414 UFCG/2018.1 - Laboratório de
  *         Programação 2 - Projeto de Laboratorio (Lista pra mim)
  */
-public abstract class ItemCompravel {
+public abstract class ItemCompravel implements Serializable {
 
 	protected String nome;
 	protected int id;

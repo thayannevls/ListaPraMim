@@ -371,4 +371,12 @@ public class ItemCompravelController {
 		}
 	}
 
+	/**
+	 * Retorna a quantidade de itens cadastrados no sistema.
+	 * 
+	 * @return int - representando a quantidade de itens no sistema
+	 */
+	public int gteQtdItensNoSistema() {
+		return this.qtdItens;
+	}
 }

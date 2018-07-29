@@ -27,7 +27,6 @@ public class Facade {
 				"acceptance_test/use_case3.txt", "acceptance_test/use_case3_exception.txt",
 				"acceptance_test/use_case4.txt", "acceptance_test/use_case4_exception.txt",
 				"acceptance_test/use_case5.txt", "acceptance_test/use_case7.txt"};
-		EasyAccept.main(args);
 	}
 
 	public Facade() {
@@ -352,22 +351,45 @@ public class Facade {
 	public String pesquisaListasDeComprasPorData(String data) {
 		return this.listaPraMim.pesquisaListasDeComprasPorData(data);
 	}
-	
+
 	/**
 	 * Pesquisa listas de compras que contem aquele item
-	 * @param id id do item
+	 * 
+	 * @param id
+	 *            id do item
 	 * @return String representacao textual das listas
 	 */
 	public String pesquisaListasDeComprasPorItem(int id) {
 		return this.listaPraMim.pesquisaListasDeComprasPorItem(id);
 	}
-	
+
 	/**
 	 * Gera automaticamente uma lista com base na ultima lista adicionada ao sistema
+	 * 
 	 * @return String descritor da nova lista automatica criada
 	 */
-	public String geraAutomaticaUltimaLista(){
-		return listaPraMim.geraAutomaticaUltimaLista();
+	public String geraAutomaticaUltimaLista() {
+		return this.listaPraMim.geraAutomaticaUltimaLista();
+	}
+
+	/**
+	 * Gera automaticamente uma lista com base em uma lista que contempre o item
+	 * desejado.
+	 * 
+	 * @return String - representando o descritor da lista automatica criada
+	 */
+	public String geraAutomaticaItem(String descritorItem) {
+		return this.listaPraMim.geraAutomaticaItem(descritorItem);
+	}
+
+	/**
+	 * Gera automaticamente uma lista com base nos itens que estao mais presentes
+	 * nas listas do app.
+	 * 
+	 * @return String - representando o descitor da lista automatica criada
+	 */
+	public String geraAutomaticaItensMaisPresentes() {
+		return listaPraMim.geraAutomaticaItensMaisPresentes();
 	}
 	
 	public void iniciaSistema(){

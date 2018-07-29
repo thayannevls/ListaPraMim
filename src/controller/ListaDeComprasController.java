@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import comparator.ListaDataComparator;
+import model.Compra;
 import model.ItemCompravel;
 import model.ListaDeCompras;
 import persistencia.Persistencia;
@@ -121,7 +122,7 @@ public class ListaDeComprasController {
 		Validator.campoValido(descritor, ErrosListasComprasController.A_DESCRITOR_INVALIDO.toString());
 		Validator.operacaoValida(operacao, ErrosListasComprasController.A_OPERACAO_INVALIDA.toString());
 		listaNaoFinalizada(descritor, ErrosListasComprasController.LISTA_FINALIZADA.toString());
-		
+
 		this.listasDeCompras.get(descritor).analisaExistencia(id,
 				ErrosListasComprasController.A_COMPRA_INEXISTENTE.toString());
 		if (operacao.equals("adiciona")) {
@@ -250,15 +251,18 @@ public class ListaDeComprasController {
 		for (String descricao : aux) {
 			listagem += descricao + System.lineSeparator();
 		}
-		
+
 		return listagem;
 	}
 
 	/**
-	 * Retorna uma listagem de todas as listas de compras que contém um determinado id em suas compras.
+	 * Retorna uma listagem de todas as listas de compras que contém um determinado
+	 * id em suas compras.
 	 * 
-	 * @param id item a ser pesquisado.
-	 * @return string - contendo todas as listas que possuem um determinado id em suas compras.
+	 * @param id
+	 *            item a ser pesquisado.
+	 * @return string - contendo todas as listas que possuem um determinado id em
+	 *         suas compras.
 	 */
 	public String pesquisaListasDeComprasPorItem(int id) {
 		List<String> aux = new ArrayList<>();
@@ -266,50 +270,119 @@ public class ListaDeComprasController {
 			if (lista.analisaExistencia(id))
 				aux.add(lista.toString());
 		}
-		
+
 		Collections.sort(aux, Collator.getInstance());
 
 		String listagem = "";
-		for (String descricao : aux) 
+		for (String descricao : aux)
 			listagem += descricao + System.lineSeparator();
-		
+
 		if (("").equals(listagem))
 			throw new IllegalArgumentException(ErrosListasComprasController.P_COMPRA_INEXISTENTE.toString());
-		
+
 		return listagem;
 	}
-	
+
 	/**
 	 * Gera lista automatica com base na ultima lista adicionada ao sistema
+	 * 
 	 * @return String descritor da nova lista automatica
 	 */
-	public String geraAutomaticaUltimaLista(){
+	public String geraAutomaticaUltimaLista() {
 		String descritor = "Lista automatica 1 " + Utils.dataAtual();
-		
+
 		ListaDeCompras lista = new ListaDeCompras(descritor);
 		lista.setListaDeCompras(getUltimaLista().getListaDeCompras());
 		listasDeCompras.put(descritor, lista);
-		
+
 		return descritor;
 	}
-	
+
+	/**
+	 * Gera automaticamente uma lista com base nos itens que estao mais presentes
+	 * nas listas do app.
+	 * 
+	 * @param descritorItem
+	 * 
+	 * @return String - representando o descitor da lista automatica criada
+	 */
+	public String geraAutomaticaItem(String descritorItem) {
+		String descritor = "Lista automatica 2 " + Utils.dataAtual();
+		ListaDeCompras lista = null;
+		List<ListaDeCompras> listasOrdenadas = new ArrayList<>(listasDeCompras.values());
+		listasOrdenadas.sort(new ListaDataComparator());
+
+		for (ListaDeCompras listaOrd : listasOrdenadas) {
+			Map<Integer, Compra> listaCasatrada = listaOrd.getListaDeCompras();
+
+			for (Compra compra : listaCasatrada.values()) {
+				if (compra.getNome().equals(descritorItem))
+					lista = listaOrd;
+			}
+		}
+
+		if (lista == null)
+			throw new IllegalArgumentException(ErrosListasComprasController.G_COMPRA_NAO_CADASTRADA.toString());
+
+		this.listasDeCompras.put(descritor, lista);
+		return descritor;
+	}
+
+	/**
+	 * Gera lista automatica com base nos itens que mais aparecem em outras listas.
+	 * 
+	 * @param qtdItens
+	 *            quantidade de itens cadastrados no app.
+	 * @return String - representando o descritor da lista automatica
+	 */
+	public String geraAutomaticaItensMaisPresentes(int qtdItens) {
+		String descritor = "Lista automatica 3 " + Utils.dataAtual();
+		ListaDeCompras lista = new ListaDeCompras(descritor);
+		
+		for (int id = 0; id < qtdItens; id++) {
+			Compra compra = null;
+			int repeticaoDoItemNasListas = 0;
+			int qtdCompradaEmOutrasLostas = 0;
+
+			for (ListaDeCompras listaCadastrada : listasDeCompras.values()) {
+
+				if (listaCadastrada.analisaExistencia(id)) {
+					compra = listaCadastrada.getCompra(id);
+					repeticaoDoItemNasListas++;
+					qtdCompradaEmOutrasLostas += listaCadastrada.getCompra(id).getQtd();
+				}
+			}
+
+			if (repeticaoDoItemNasListas >= ((int) this.listasDeCompras.size() / 2))
+				lista.adicionaItemLista(id, (int) Math.floor(qtdCompradaEmOutrasLostas / repeticaoDoItemNasListas),
+						compra.getItem());
+		}
+
+		this.listasDeCompras.put(descritor, lista);
+		return descritor;
+	}
+
 	/**
 	 * Metodo que verifica se a lista ainda nao foi finalizada
-	 * @param descritor descritor da lista a ser verificada
-	 * @param mensagem mensagem de erro a ser retorna se tiver sido finalizada
+	 * 
+	 * @param descritor
+	 *            descritor da lista a ser verificada
+	 * @param mensagem
+	 *            mensagem de erro a ser retorna se tiver sido finalizada
 	 * @return boolean true se nao tiver sido finalizada
 	 */
-	private boolean listaNaoFinalizada(String descritor, String mensagem){
-		if(listasDeCompras.get(descritor).getFinalizada())
+	private boolean listaNaoFinalizada(String descritor, String mensagem) {
+		if (listasDeCompras.get(descritor).getFinalizada())
 			throw new IllegalArgumentException(mensagem);
 		return true;
 	}
-	
+
 	/**
 	 * Retorna ultima lista de compras cadastrada no sistema
+	 * 
 	 * @return ListaDeCompras ultima lista cadastrada no sistema
 	 */
-	private ListaDeCompras getUltimaLista(){
+	private ListaDeCompras getUltimaLista() {
 		List<ListaDeCompras> listasOrdenadas = new ArrayList<>(listasDeCompras.values());
 		listasOrdenadas.sort(new ListaDataComparator());
 		ListaDeCompras ultimaLista = listasOrdenadas.get(listasOrdenadas.size() - 1);

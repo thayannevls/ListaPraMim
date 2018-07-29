@@ -26,12 +26,17 @@ import util.ErrosListasComprasController;
  *         UFCG/2018.1 - Laboratório de Programação 2 - Projeto de Laboratorio
  *         (Lista pra mim)
  */
+<<<<<<< HEAD
 /**
  * @author siuannybsr
  *
  */
 public class ListaDeCompras implements Serializable {
 	
+=======
+public class ListaDeCompras {
+
+>>>>>>> 0fcbabdbbb3c4214b8f50e7a7771c34634e8dbc5
 	private String descritor;
 	private Map<Integer, Compra> listaDeCompras;
 	private Date dataCriacao;
@@ -53,21 +58,38 @@ public class ListaDeCompras implements Serializable {
 		this.finalizada = false;
 	}
 
-	public boolean getFinalizada(){
+	/**
+	 * Retorna o estado da Lista de compras.
+	 * @return boolean - no valor de true caso a lista esteja finalizada e false, caso contrario
+	 */
+	public boolean getFinalizada() {
 		return finalizada;
 	}
-	
+
+	/**
+	 * Retorna a lista de compras.
+	 * @return Map - com os identificadores da compra como chave e as compras como os valores
+	 */
 	public Map<Integer, Compra> getListaDeCompras() {
 		return listaDeCompras;
 	}
 
+	/**
+	 * Altera os dados da lista de compras.
+	 * @param listaDeCompras novos dados para a lista de compra
+	 */
 	public void setListaDeCompras(Map<Integer, Compra> listaDeCompras) {
 		this.listaDeCompras = listaDeCompras;
 	}
-	
+
+	/**
+	 * Retorna o a data da criacao da lista.
+	 * @return Date - representado a data
+	 */
 	public Date getDataCriacao() {
 		return dataCriacao;
 	}
+
 	/**
 	 * Captura do sistema a data atual da criacao da lista.
 	 * 
@@ -221,6 +243,17 @@ public class ListaDeCompras implements Serializable {
 	@Override
 	public String toString() {
 		return this.getDataCriacaoStr() + " - " + this.descritor;
+	}
+
+	/**
+	 * Retorna uma compra apartir do id.
+	 * 
+	 * @param id
+	 *            identificador da compra
+	 * @return Compra - representando uma compra de um item
+	 */
+	public Compra getCompra(int id) {
+		return this.listaDeCompras.get(id);
 	}
 
 }

@@ -1,9 +1,7 @@
 package controller;
 
 import model.ItemCompravel;
-import model.ListaDeCompras;
 import util.ErrosListasComprasController;
-import util.Utils;
 
 public class ListaPraMimController {
 
@@ -328,15 +326,24 @@ public class ListaPraMimController {
 		return this.listasDeComprasController.pesquisaListasDeComprasPorData(data);
 	}
 
+	/**
+	 * Pesquisa as listas de compras que cotem um determinado item.
+	 * 
+	 * @param id
+	 *            identificador do item
+	 * @return String - representando as listas cadastradas que contem o item
+	 *         requerido
+	 */
 	public String pesquisaListasDeComprasPorItem(int id) {
 		return this.listasDeComprasController.pesquisaListasDeComprasPorItem(id);
 	}
-	
+
 	/**
 	 * Gera lista automatica com base na ultima lista adicionada ao sistema
+	 * 
 	 * @return String descritor da nova lista automatica
 	 */
-	public String geraAutomaticaUltimaLista(){
+	public String geraAutomaticaUltimaLista() {
 		return listasDeComprasController.geraAutomaticaUltimaLista();
 	}
 	
@@ -345,10 +352,41 @@ public class ListaPraMimController {
 		itemController.salvar();
 		listasDeComprasController.salvar();
 	}
-	
 
 	public void carregar(){
 		itemController.carregar();
 		listasDeComprasController.carregar();
+	}
+
+	/**
+	 * Gera automaticamente uma lista com base em uma lista que contempre o item
+	 * desejado.
+	 * 
+	 * @param descritorItem
+	 *            descritor do item que sera usado como base
+	 * 
+	 * @return String - representando o descritor da lista automatica criada
+	 */
+	public String geraAutomaticaItem(String descritorItem) {
+		return this.listasDeComprasController.geraAutomaticaItem(descritorItem);
+	}
+
+	/**
+	 * Gera automaticamente uma lista com base nos itens que estao mais presentes
+	 * nas listas do app.
+	 * 
+	 * @return String - representando o descitor da lista automatica criada
+	 */
+	public String geraAutomaticaItensMaisPresentes() {
+		return this.listasDeComprasController.geraAutomaticaItensMaisPresentes(getQtdItensNoSistema());
+	}
+
+	/**
+	 * Retorna a quantidade de itens cadastrados no sistema.
+	 * 
+	 * @return int - representando a quantidade de itens no sistema
+	 */
+	private int getQtdItensNoSistema() {
+		return this.itemController.gteQtdItensNoSistema();
 	}
 }

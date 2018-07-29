@@ -1,14 +1,26 @@
 package controller;
 
 import model.ItemCompravel;
+import persistence.Persistencia;
 import util.ErrosListasComprasController;
 
-public class ListaPraMimController {
+/**
+ * Classe que controla todo o sistema
+ * 
+ * @author José Guilheme - Matricula: 117210370
+ * @author Mariana Nascimento - Matricula: 117210416
+ * @author Siuanny Barbosa - Matriucla: 117210395
+ * @author Thayanne Sousa - Matricula: 117210414
+ * 
+ *         UFCG/2018.1 - Laboratório de Programação 2 - Projeto de Laboratorio
+ *         (Lista pra mim)
+ */
+public class Sistema {
 
 	private ItemCompravelController itemController;
 	private ListaDeComprasController listasDeComprasController;
 
-	public ListaPraMimController() {
+	public Sistema() {
 		this.itemController = new ItemCompravelController();
 		this.listasDeComprasController = new ListaDeComprasController();
 	}
@@ -346,17 +358,6 @@ public class ListaPraMimController {
 	public String geraAutomaticaUltimaLista() {
 		return listasDeComprasController.geraAutomaticaUltimaLista();
 	}
-	
-	
-	public void salvar(){
-		itemController.salvar();
-		listasDeComprasController.salvar();
-	}
-
-	public void carregar(){
-		itemController.carregar();
-		listasDeComprasController.carregar();
-	}
 
 	/**
 	 * Gera automaticamente uma lista com base em uma lista que contempre o item
@@ -388,5 +389,25 @@ public class ListaPraMimController {
 	 */
 	private int getQtdItensNoSistema() {
 		return this.itemController.gteQtdItensNoSistema();
+	}
+	
+	/** 
+	 * Salva todos os itens e listas cadastrados localmente
+	 */
+	public void fechaSistema(){
+		itemController.salvar();
+		listasDeComprasController.salvar();
+	}
+
+	/**
+	 * Recupera todas as listas e itens cadastrados que foram salvos
+	 */
+	public void iniciaSistema(){
+		if(Persistencia.arquivosNaoCriados()){
+			fechaSistema();
+			throw new IllegalArgumentException("Sistema iniciado pela primeira vez. Arquivo criado.");
+		}
+		itemController.carregar();
+		listasDeComprasController.carregar();
 	}
 }

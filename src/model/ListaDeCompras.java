@@ -26,17 +26,9 @@ import util.ErrosListasComprasController;
  *         UFCG/2018.1 - Laboratório de Programação 2 - Projeto de Laboratorio
  *         (Lista pra mim)
  */
-<<<<<<< HEAD
-/**
- * @author siuannybsr
- *
- */
-public class ListaDeCompras implements Serializable {
-	
-=======
-public class ListaDeCompras {
 
->>>>>>> 0fcbabdbbb3c4214b8f50e7a7771c34634e8dbc5
+public class ListaDeCompras implements Serializable {
+
 	private String descritor;
 	private Map<Integer, Compra> listaDeCompras;
 	private Date dataCriacao;

@@ -7,16 +7,34 @@ import java.util.Date;
 import java.util.Locale;
 
 /**
- * Metodos auxiliares 
- * @author Thayanne
+ * Classe que contem metodos auxiliares
+ * 
+ * @author José Guilheme - Matricula: 117210370
+ * @author Mariana Nascimento - Matricula: 117210416
+ * @author Siuanny Barbosa - Matriucla: 117210395
+ * @author Thayanne Sousa - Matricula: 117210414
+ * 
+ *         UFCG/2018.1 - Laboratório de Programação 2 - Projeto de Laboratorio
+ *         (Lista pra mim)
  */
 public class Utils {
+	
+	/**
+	 * Retorna representacao do valor inteiro como a moeda Real
+	 * @param valorReal valor inteiro do dinheiro
+	 * @return String representacao em real
+	 */
 	public static String realComVirgula(int valorReal) {
 		Locale ptBr = new Locale("pt", "BR");
 		String valorReais = NumberFormat.getCurrencyInstance(ptBr).format(valorReal);
 		return valorReais;
 	}
 	
+	/**
+	 * Retorna representacao do valor double como a moeda Real
+	 * @param valorReal valor double do dinheiro
+	 * @return String representacao em real
+	 */
 	public static String realComVirgula(double valorReal) {
 		valorReal *= 1.0;
 		Locale ptBr = new Locale("pt", "BR");
@@ -26,7 +44,7 @@ public class Utils {
 	
 	/**
 	 * Retorna data atual em string
-	 * @return
+	 * @return String representacao da data
 	 */
 	public static String dataAtual(){
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");

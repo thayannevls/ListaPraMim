@@ -14,7 +14,7 @@ import model.ItemCompravel;
 import model.ItemPorQtd;
 import model.ItemPorQuilo;
 import model.ItemPorUnidade;
-import persistencia.Persistencia;
+import persistence.Persistencia;
 import util.ErrosItemController;
 import util.ErrosListasComprasController;
 import util.Validator;
@@ -353,21 +353,28 @@ public class ItemCompravelController {
 		return itens.get(id);
 	}
 	
+	/**
+	 * Salva itens em um arquivo
+	 * @see Persistencia#salvarItens(Object)
+	 */
 	public void salvar(){
 		try {
 			Persistencia.salvarItens(itens);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
 		}
 	}
 	
+	/**
+	 * Carrega itens de arquivo e adiciona ao sistema
+	 * @see Persistencia#carregarItens()
+	 */
+	@SuppressWarnings("unchecked")
 	public void carregar(){
 		try {
 			itens = (Map<Integer, ItemCompravel>)Persistencia.carregarItens();
 		} catch (ClassNotFoundException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
 		}
 	}
 

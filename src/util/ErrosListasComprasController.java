@@ -34,7 +34,10 @@ public enum ErrosListasComprasController {
 	F_LOCAL_INVALIDO("Erro na finalizacao de lista de compras: local nao pode ser vazio ou nulo."),
 	F_VALOR_FINAL_INVALIDO("Erro na finalizacao de lista de compras: valor final da lista invalido."),
 	
-	LISTA_FINALIZADA("Erro: Lista ja finalizada.");
+	LISTA_FINALIZADA("Erro: Lista ja finalizada."),
+	
+	//GERAR lISTA
+	G_COMPRA_NAO_CADASTRADA("Erro na geracao de lista automatica por item: nao ha compras cadastradas com o item desejado.");
 	
 	private String descricao;
 

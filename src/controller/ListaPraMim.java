@@ -15,12 +15,12 @@ import util.ErrosListasComprasController;
  *         UFCG/2018.1 - Laboratório de Programação 2 - Projeto de Laboratorio
  *         (Lista pra mim)
  */
-public class Sistema {
+public class ListaPraMim {
 
 	private ItemCompravelController itemController;
 	private ListaDeComprasController listasDeComprasController;
 
-	public Sistema() {
+	public ListaPraMim() {
 		this.itemController = new ItemCompravelController();
 		this.listasDeComprasController = new ListaDeComprasController();
 	}

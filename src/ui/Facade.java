@@ -4,7 +4,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import controller.Sistema;
+import controller.ListaPraMim;
 import easyaccept.EasyAccept;
 
 /**
@@ -19,7 +19,7 @@ import easyaccept.EasyAccept;
  */
 public class Facade {
 
-	Sistema sistema;
+	ListaPraMim sistema;
 
 	public static void main(String[] args) {
 		args = new String[] { "ui.Facade", "acceptance_test/use_case1.txt", "acceptance_test/use_case1_exception.txt",
@@ -32,7 +32,7 @@ public class Facade {
 	}
 
 	public Facade() {
-		this.sistema = new Sistema();
+		this.sistema = new ListaPraMim();
 	}
 
 	/**
@@ -395,14 +395,14 @@ public class Facade {
 	}
 	
 	/**
-	 * @see Sistema#iniciaSistema()
+	 * @see ListaPraMim#iniciaSistema()
 	 */
 	public void iniciaSistema(){
 		sistema.iniciaSistema();
 	}
 	
 	/**
-	 * @see Sistema#fechaSistema()
+	 * @see ListaPraMim#fechaSistema()
 	 */
 	public void fechaSistema(){
 		sistema.fechaSistema();

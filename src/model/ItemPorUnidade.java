@@ -55,6 +55,11 @@ public class ItemPorUnidade extends ItemCompravel {
 		this.unidade = unidade;
 	}
 
+	@Override
+	public void atualiza(String novoValor) {
+		this.unidade = Integer.parseInt(novoValor);
+	}
+	
 	/**
 	 * Responsavel por retornar a represnetação em String de um ItemPorUnidade.
 	 * 
@@ -64,5 +69,4 @@ public class ItemPorUnidade extends ItemCompravel {
 	public String toString() {
 		return this.id + ". " + this.nome + ", " + this.categoria + ", " + "Preco: <" + super.localPreco() + ">";
 	}
-
 }

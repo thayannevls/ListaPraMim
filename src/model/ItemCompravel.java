@@ -131,6 +131,8 @@ public abstract class ItemCompravel implements Serializable {
 		}
 		return localPreco;
 	}
+	
+	public abstract void atualiza(String novoValor);
 
 	/**
 	 * Responsável por verificar codigo hash do objeto

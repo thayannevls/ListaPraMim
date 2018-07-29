@@ -1,5 +1,8 @@
 package model;
 
+import util.ErrosItemController;
+import util.Validator;
+
 /**
  * Classe responsável por registrar e armazenar dados de um item do tipo: Por
  * quilo. Herda da classe ItemCompravel
@@ -53,6 +56,11 @@ public class ItemPorQuilo extends ItemCompravel {
 	public void setQuilo(double quilograma) {
 		this.quilograma = quilograma;
 	}
+	
+	@Override
+	public void atualiza(String novoValor) {
+		this.quilograma = Double.parseDouble(novoValor);
+	}
 
 	/**
 	 * Responsavel por retornar a represnetação em String de um ItemPorQuilo.
@@ -63,5 +71,4 @@ public class ItemPorQuilo extends ItemCompravel {
 	public String toString() {
 		return this.id + ". " + this.nome + ", " + this.categoria + ", " + "Preco por quilo: <" + super.localPreco() + ">";
 	}
-
 }

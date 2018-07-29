@@ -87,6 +87,12 @@ public class ItemPorQtd extends ItemCompravel {
 		return this.nome + ", " + this.categoria + ", " + this.quantidade + " " + this.unidadeDeMedida;
 	}
 	
+
+	@Override
+	public void atualiza(String novoValor) {
+		this.unidadeDeMedida = novoValor;
+	}
+	
 	/**
 	 * Responsavel por retornar a represnetação em String de um ItemPorQtd.
 	 * 

@@ -202,18 +202,15 @@ public class ItemCompravelController {
 			((ItemPorQtd) itens.get(id)).setQuantidade(quantidade);
 			break;
 		case "unidade de medida":
-			((ItemPorQtd) itens.get(id)).setUnidade(novoValor);
+			itens.get(id).atualiza(novoValor);
 			break;
 		case "unidades":
-			int unidade = Integer.parseInt(novoValor);
-			Validator.ehPositivo(unidade, ErrosItemController.ATUALIZA_QUANTIDADE_NEGATIVO.toString());
-			((ItemPorUnidade) itens.get(id)).setUnidade(unidade);
+			Validator.ehPositivo(Integer.parseInt(novoValor), ErrosItemController.ATUALIZA_QUANTIDADE_NEGATIVO.toString());
+			itens.get(id).atualiza(novoValor);
 			break;
 		case "kg":
-			double kg = Double.parseDouble(novoValor);
-			Validator.ehPositivo(kg, ErrosItemController.ATUALIZA_QUILO_NEGATIVO.toString());
-
-			((ItemPorQuilo) itens.get(id)).setQuilo(kg);
+			Validator.ehPositivo(Double.parseDouble(novoValor), ErrosItemController.ATUALIZA_QUILO_NEGATIVO.toString());
+			itens.get(id).atualiza(novoValor);
 			break;
 		default:
 			throw new IllegalArgumentException(ErrosItemController.ATUALIZA_ATRIBUTO_INEXISTENTE.toString());

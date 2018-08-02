@@ -363,7 +363,7 @@ public class ListaDeComprasController {
 			}
 
 			if (repeticaoDoItemNasListas >= ((int) this.listasDeCompras.size() / 2))
-				lista.adicionaItemLista(id, (int) Math.floor(qtdCompradaEmOutrasLostas / repeticaoDoItemNasListas), compra.getItem());
+				lista.adicionaItemLista(id, (int) Math.floor(qtdCompradaEmOutrasListas / repeticaoDoItemNasListas), compra.getItem());
 		}
 		
 		this.listasDeCompras.put(descritor, lista);

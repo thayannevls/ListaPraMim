@@ -23,13 +23,18 @@ import util.Validator;
  * @author Jose Guilheme - Matricula: 117210370
  * @author Mariana Nascimento - Matricula: 117210416
  * @author Siuanny Barbosa - Matriucla: 117210395
- * @author Thayanne Sousa - Matricula: 117210414 UFCG/2018.1 - Laboratorio de
- *         Programacao 2 - Projeto de Laboratorio (Lista pra mim)
+ * @author Thayanne Sousa - Matricula: 117210414
+ * 
+ *         UFCG/2018.1 - Laboratorio de Programacao 2 - Projeto de Laboratorio
+ *         (Lista pra mim)
  */
 public class ListaDeComprasController {
 
 	private Map<String, ListaDeCompras> listasDeCompras;
 
+	/**
+	 * Inicializa os atributos da classe ListaDeComprasController.
+	 */
 	public ListaDeComprasController() {
 		this.listasDeCompras = new HashMap<>();
 	}
@@ -38,16 +43,16 @@ public class ListaDeComprasController {
 	 * Metodo que adiciona uma lista de compras ao HashMap.
 	 * 
 	 * @param descritor
+	 *            string contendo a descricao da lista
 	 * @return descritor da lista de compras
 	 */
 	public String adicionaListaDeCompras(String descritor) {
 		Validator.campoValido(descritor, ErrosListasComprasController.C_DESCRITOR_INVALIDO.toString());
-
+		//
 		if (!this.listasDeCompras.containsKey(descritor)) {
 			ListaDeCompras lista = new ListaDeCompras(descritor);
 			this.listasDeCompras.put(descritor, lista);
 		}
-
 		return descritor;
 	}
 
@@ -64,8 +69,8 @@ public class ListaDeComprasController {
 	public void adicionaCompraALista(String descritor, int qtd, ItemCompravel item) {
 		Validator.campoValido(descritor, ErrosListasComprasController.ADD_DESCRITOR_INVALIDO.toString());
 		Validator.ehPositivo(qtd, ErrosListasComprasController.ADD_QTD_INVALIDA.toString());
-		listaNaoFinalizada(descritor, ErrosListasComprasController.LISTA_FINALIZADA.toString());
-
+		this.estadoLista(descritor, ErrosListasComprasController.LISTA_FINALIZADA.toString());
+		//
 		if (listasDeCompras.containsKey(descritor)) {
 			this.listasDeCompras.get(descritor).adicionaItemLista(item.getId(), qtd, item);
 		}
@@ -84,8 +89,7 @@ public class ListaDeComprasController {
 	public String pesquisaCompraEmLista(String descritor, int id) {
 		Validator.campoValido(descritor, ErrosListasComprasController.P_DESCRITOR_INVALIDO.toString());
 		Validator.idValido(id, ErrosListasComprasController.P_ID_INVALIDO.toString());
-		this.listasDeCompras.get(descritor).analisaExistencia(id,
-				ErrosListasComprasController.P_COMPRA_INEXISTENTE.toString());
+		this.listasDeCompras.get(descritor).analisaExistencia(id, ErrosListasComprasController.P_COMPRA_INEXISTENTE.toString());
 		return this.listasDeCompras.get(descritor).getItemPeloId(id);
 	}
 
@@ -101,7 +105,6 @@ public class ListaDeComprasController {
 		//
 		if (!this.listasDeCompras.containsKey(descritor))
 			throw new IllegalArgumentException(ErrosListasComprasController.P_LISTA_INEXISTENTE.toString());
-
 		return descritor;
 	}
 
@@ -121,10 +124,9 @@ public class ListaDeComprasController {
 	public void atualizaCompraDeLista(String descritor, int id, String operacao, int novaQtd) {
 		Validator.campoValido(descritor, ErrosListasComprasController.A_DESCRITOR_INVALIDO.toString());
 		Validator.operacaoValida(operacao, ErrosListasComprasController.A_OPERACAO_INVALIDA.toString());
-		listaNaoFinalizada(descritor, ErrosListasComprasController.LISTA_FINALIZADA.toString());
-
-		this.listasDeCompras.get(descritor).analisaExistencia(id,
-				ErrosListasComprasController.A_COMPRA_INEXISTENTE.toString());
+		this.estadoLista(descritor, ErrosListasComprasController.LISTA_FINALIZADA.toString());
+		this.listasDeCompras.get(descritor).analisaExistencia(id, ErrosListasComprasController.A_COMPRA_INEXISTENTE.toString());
+		//
 		if (operacao.equals("adiciona")) {
 			this.listasDeCompras.get(descritor).setQntCompra(id, novaQtd);
 		} else {
@@ -142,8 +144,7 @@ public class ListaDeComprasController {
 	 */
 	public void deletaCompraDeLista(String descritor, int id) {
 		Validator.campoValido(descritor, ErrosListasComprasController.E_DESCRITOR_INVALIDO.toString());
-		this.listasDeCompras.get(descritor).analisaExistencia(id,
-				ErrosListasComprasController.E_COMPRA_INEXISTENTE.toString());
+		this.listasDeCompras.get(descritor).analisaExistencia(id, ErrosListasComprasController.E_COMPRA_INEXISTENTE.toString());
 		//
 		this.listasDeCompras.get(descritor).deletaCompra(id);
 	}
@@ -276,10 +277,10 @@ public class ListaDeComprasController {
 		String listagem = "";
 		for (String descricao : aux)
 			listagem += descricao + System.lineSeparator();
-
+		//
 		if (("").equals(listagem))
 			throw new IllegalArgumentException(ErrosListasComprasController.P_COMPRA_INEXISTENTE.toString());
-
+		//
 		return listagem;
 	}
 
@@ -320,10 +321,10 @@ public class ListaDeComprasController {
 					lista = listaOrd;
 			}
 		}
-
+		//
 		if (lista == null)
 			throw new IllegalArgumentException(ErrosListasComprasController.G_COMPRA_NAO_CADASTRADA.toString());
-
+		//
 		this.listasDeCompras.put(descritor, lista);
 		return descritor;
 	}
@@ -337,8 +338,8 @@ public class ListaDeComprasController {
 	 */
 	public String geraAutomaticaItensMaisPresentes(int qtdItens) {
 		String descritor = "Lista automatica 3 " + Utils.dataAtual();
-		ListaDeCompras lista = new ListaDeCompras(descritor);
 		
+		ListaDeCompras lista = new ListaDeCompras(descritor);
 		for (int id = 0; id < qtdItens; id++) {
 			Compra compra = null;
 			int repeticaoDoItemNasListas = 0;
@@ -354,10 +355,9 @@ public class ListaDeComprasController {
 			}
 
 			if (repeticaoDoItemNasListas >= ((int) this.listasDeCompras.size() / 2))
-				lista.adicionaItemLista(id, (int) Math.floor(qtdCompradaEmOutrasLostas / repeticaoDoItemNasListas),
-						compra.getItem());
+				lista.adicionaItemLista(id, (int) Math.floor(qtdCompradaEmOutrasLostas / repeticaoDoItemNasListas), compra.getItem());
 		}
-
+		
 		this.listasDeCompras.put(descritor, lista);
 		return descritor;
 	}
@@ -371,10 +371,9 @@ public class ListaDeComprasController {
 	 *            mensagem de erro a ser retorna se tiver sido finalizada
 	 * @return boolean true se nao tiver sido finalizada
 	 */
-	private boolean listaNaoFinalizada(String descritor, String mensagem) {
-		if (listasDeCompras.get(descritor).getFinalizada())
+	private void estadoLista(String descritor, String mensagem) {
+		if (listasDeCompras.get(descritor).getEstado())
 			throw new IllegalArgumentException(mensagem);
-		return true;
 	}
 
 	/**
@@ -388,25 +387,27 @@ public class ListaDeComprasController {
 		ListaDeCompras ultimaLista = listasOrdenadas.get(listasOrdenadas.size() - 1);
 		return ultimaLista;
 	}
-	
+
 	/**
 	 * Salva listas cadastradas em um arquivo
+	 * 
 	 * @see Persistencia#salvarListas(Object)
 	 */
-	public void salvar(){
+	public void salvar() {
 		try {
 			Persistencia.salvarListas(listasDeCompras);
 		} catch (IOException e) {
 			throw new RuntimeException(e.getMessage());
 		}
 	}
-	
+
 	/**
 	 * Carrega listas e registra no sistema
+	 * 
 	 * @see Persistencia#carregarListas()
 	 */
 	@SuppressWarnings("unchecked")
-	public void carregar(){
+	public void carregar() {
 		try {
 			listasDeCompras = (Map<String, ListaDeCompras>) Persistencia.carregarListas();
 		} catch (ClassNotFoundException | IOException e) {

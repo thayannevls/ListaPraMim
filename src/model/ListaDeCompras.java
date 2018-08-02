@@ -29,6 +29,8 @@ import util.ErrosListasComprasController;
 
 public class ListaDeCompras implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+
 	private String descritor;
 	private Map<Integer, Compra> listaDeCompras;
 	private Date dataCriacao;
@@ -46,16 +48,8 @@ public class ListaDeCompras implements Serializable {
 	public ListaDeCompras(String descritor) {
 		this.descritor = descritor;
 		this.listaDeCompras = new HashMap<>();
-		this.dataCriacao = this.getDate();
+		this.dataCriacao = new Date(System.currentTimeMillis());
 		this.finalizada = false;
-	}
-
-	/**
-	 * Retorna o estado da Lista de compras.
-	 * @return boolean - no valor de true caso a lista esteja finalizada e false, caso contrario
-	 */
-	public boolean getFinalizada() {
-		return finalizada;
 	}
 
 	/**
@@ -63,7 +57,7 @@ public class ListaDeCompras implements Serializable {
 	 * @return Map - com os identificadores da compra como chave e as compras como os valores
 	 */
 	public Map<Integer, Compra> getListaDeCompras() {
-		return listaDeCompras;
+		return this.listaDeCompras;
 	}
 
 	/**
@@ -79,17 +73,7 @@ public class ListaDeCompras implements Serializable {
 	 * @return Date - representado a data
 	 */
 	public Date getDataCriacao() {
-		return dataCriacao;
-	}
-
-	/**
-	 * Captura do sistema a data atual da criacao da lista.
-	 * 
-	 * @return string - no formato dd/MM/yyyy contendo a data capturada do sistema
-	 *         na qual a lista foi criada.
-	 */
-	private Date getDate() {
-		return new Date(System.currentTimeMillis());
+		return this.dataCriacao;
 	}
 
 	/**
@@ -145,7 +129,7 @@ public class ListaDeCompras implements Serializable {
 	 *         cadastradas na lista.
 	 */
 	public String getItemLista(int pos) {
-		List<Compra> compras = new ArrayList<>(listaDeCompras.values());
+		List<Compra> compras = new ArrayList<>(this.listaDeCompras.values());
 		Collections.sort(compras, new ItemCategoriaENomeComparador());
 
 		return (pos >= compras.size()) ? "" : compras.get(pos).toString();
@@ -159,7 +143,7 @@ public class ListaDeCompras implements Serializable {
 	 * @return String - com sua representação
 	 */
 	public String getItemPeloId(int id) {
-		return listaDeCompras.get(id).toString();
+		return this.listaDeCompras.get(id).toString();
 	}
 
 	/**
@@ -195,7 +179,7 @@ public class ListaDeCompras implements Serializable {
 	 *            nova quantidade a ser comprada
 	 */
 	public void setQntCompra(int id, int nQtd) {
-		analisaExistencia(id, ErrosListasComprasController.P_COMPRA_INEXISTENTE.toString());
+		this.analisaExistencia(id, ErrosListasComprasController.P_COMPRA_INEXISTENTE.toString());
 		int qtdAtual = this.listaDeCompras.get(id).getQtd();
 		if (qtdAtual + nQtd == 0) {
 			this.deletaCompra(id);
@@ -230,14 +214,6 @@ public class ListaDeCompras implements Serializable {
 	}
 
 	/**
-	 * Retorna a representacao textual da lista de compras.
-	 */
-	@Override
-	public String toString() {
-		return this.getDataCriacaoStr() + " - " + this.descritor;
-	}
-
-	/**
 	 * Retorna uma compra apartir do id.
 	 * 
 	 * @param id
@@ -246,6 +222,14 @@ public class ListaDeCompras implements Serializable {
 	 */
 	public Compra getCompra(int id) {
 		return this.listaDeCompras.get(id);
+	}
+	
+	/**
+	 * Retorna a representacao textual da lista de compras.
+	 */
+	@Override
+	public String toString() {
+		return this.getDataCriacaoStr() + " - " + this.descritor;
 	}
 
 }

@@ -25,8 +25,10 @@ import util.Validator;
  * @author José Guilheme - Matricula: 117210370
  * @author Mariana Nascimento - Matricula: 117210416
  * @author Siuanny Barbosa - Matriucla: 117210395
- * @author Thayanne Sousa - Matricula: 117210414 UFCG/2018.1 - Laboratório de
- *         Programação 2 - Projeto de Laboratorio (Lista pra mim)
+ * @author Thayanne Sousa - Matricula: 117210414
+ * 
+ *         UFCG/2018.1 - Laboratório de Programação 2 - Projeto de Laboratorio
+ *         (Lista pra mim)
  */
 public class ItemCompravelController {
 
@@ -63,7 +65,7 @@ public class ItemCompravelController {
 		Validator.campoValido(categoria, ErrosItemController.CADASTRO_CATEGORIA_NULA.toString());
 		Validator.categoriaValida(categoria, ErrosItemController.CADASTRO_CATEGORIA_INEXISTENTE.toString());
 		Validator.campoValido(nome, ErrosItemController.CADASTRO_NOME_NULO.toString());
-
+		//
 		int id = qtdItens + 1;
 		ItemCompravel item = new ItemPorQuilo(nome, id, categoria, kg, localDeCompra, preco);
 		itens.put(id, item);
@@ -93,7 +95,7 @@ public class ItemCompravelController {
 		Validator.campoValido(categoria, ErrosItemController.CADASTRO_CATEGORIA_NULA.toString());
 		Validator.categoriaValida(categoria, ErrosItemController.CADASTRO_CATEGORIA_INEXISTENTE.toString());
 		Validator.campoValido(nome, ErrosItemController.CADASTRO_NOME_NULO.toString());
-
+		//
 		int id = qtdItens + 1;
 		ItemCompravel item = new ItemPorUnidade(nome, id, categoria, unidade, localDeCompra, preco);
 		itens.put(id, item);
@@ -118,9 +120,7 @@ public class ItemCompravelController {
 	 *            preco do item
 	 * @return int retorna id gerado para o item
 	 */
-	public int adicionaItemPorQtd(String nome, String categoria, int qnt, String unidadeDeMedida, String localDeCompra,
-			double preco) {
-
+	public int adicionaItemPorQtd(String nome, String categoria, int qnt, String unidadeDeMedida, String localDeCompra, double preco) {
 		Validator.ehPositivo(qnt, ErrosItemController.CADASTRO_QUANTIDADE_NEGATIVA.toString());
 		Validator.ehPositivo(preco, ErrosItemController.CADASTRO_PRECO_INVALIDO.toString());
 		Validator.campoValido(localDeCompra, ErrosItemController.CADASTRO_LOCAL_NULO.toString());
@@ -128,7 +128,7 @@ public class ItemCompravelController {
 		Validator.campoValido(categoria, ErrosItemController.CADASTRO_CATEGORIA_NULA.toString());
 		Validator.campoValido(nome, ErrosItemController.CADASTRO_NOME_NULO.toString());
 		Validator.campoValido(unidadeDeMedida, ErrosItemController.CADASTRO_UNIDADE_NULA.toString());
-
+		//
 		int id = qtdItens + 1;
 		ItemCompravel item = new ItemPorQtd(nome, id, categoria, qnt, unidadeDeMedida, localDeCompra, preco);
 		itens.put(id, item);
@@ -144,9 +144,9 @@ public class ItemCompravelController {
 	 * @return String representacao textual do item
 	 */
 	public String exibeItem(int id) {
-		idValido(id, ErrosItemController.LISTAGEM_ID_INVALIDO.toString());
-		itemExiste(id, ErrosItemController.LISTAGEM_ITEM_INEXISTENTE.toString());
-
+		this.idValido(id, ErrosItemController.LISTAGEM_ID_INVALIDO.toString());
+		this.itemExiste(id, ErrosItemController.LISTAGEM_ITEM_INEXISTENTE.toString());
+		//
 		return itens.get(id).toString();
 	}
 
@@ -161,11 +161,11 @@ public class ItemCompravelController {
 	 *            novo preco a ser adicionado
 	 */
 	public void adicionaPrecoItem(int id, String localDeCompra, double preco) {
-		idValido(id, ErrosItemController.PRECO_ID_INVALIDO.toString());
-		itemExiste(id, ErrosItemController.PRECO_ITEM_INEXISTENTE.toString());
+		this.idValido(id, ErrosItemController.PRECO_ID_INVALIDO.toString());
+		this.itemExiste(id, ErrosItemController.PRECO_ITEM_INEXISTENTE.toString());
 		Validator.ehPositivo(preco, ErrosItemController.PRECO_ITEM_PRECO_INVALIDO.toString());
 		Validator.campoValido(localDeCompra, ErrosItemController.PRECO_LOCAL_NULO.toString());
-
+		//
 		itens.get(id).adicionaPreco(localDeCompra, preco);
 	}
 
@@ -178,16 +178,13 @@ public class ItemCompravelController {
 	 *            atributo a ser modificdo
 	 * @param novoValor
 	 *            novo valor que recebera o atributo
-	 * @exception quando
-	 *                se tem id, atributo ou novo valor invalido
 	 */
 	public void atualizaItem(int id, String atributo, String novoValor) {
 		Validator.campoValido(atributo, ErrosItemController.ATUALIZA_ATRIBUTO_NULO.toString());
 		Validator.campoValido(novoValor, ErrosItemController.ATUALIZA_VALOR_NULO.toString());
-		idValido(id, ErrosItemController.ATUALIZA_ITEM_INEXISTENTE.toString());
-
-		itemExiste(id, ErrosItemController.ATUALIZA_ITEM_INEXISTENTE.toString());
-
+		this.idValido(id, ErrosItemController.ATUALIZA_ITEM_INEXISTENTE.toString());
+		this.itemExiste(id, ErrosItemController.ATUALIZA_ITEM_INEXISTENTE.toString());
+		//
 		switch (atributo) {
 		case "nome":
 			itens.get(id).setNome(novoValor);
@@ -224,8 +221,9 @@ public class ItemCompravelController {
 	 *            id do item a ser deletado
 	 */
 	public void deletaItem(int id) {
-		idValido(id, ErrosItemController.DELETA_ID_INVALIDO.toString());
-		itemExiste(id, ErrosItemController.DELETA_ID_INVALIDO.toString());
+		this.idValido(id, ErrosItemController.DELETA_ID_INVALIDO.toString());
+		this.itemExiste(id, ErrosItemController.DELETA_ID_INVALIDO.toString());
+		//
 		itens.remove(id);
 	}
 
@@ -242,7 +240,7 @@ public class ItemCompravelController {
 
 		Collections.sort(itensOrdenados, new ItemNomeComparator());
 
-		return (posicao >= itensOrdenados.size())? "" : itensOrdenados.get(posicao).toString();
+		return (posicao < 0 || posicao >= itensOrdenados.size()) ? "" : itensOrdenados.get(posicao).toString();
 	}
 
 	/**
@@ -256,6 +254,7 @@ public class ItemCompravelController {
 	 */
 	public String getItemPorCategoria(String categoria, int posicao) {
 		Validator.categoriaValida(categoria, ErrosItemController.LISTAGEM_CATEGORIA_INEXISTENTE.toString());
+		//
 		List<ItemCompravel> itensCategoria = new ArrayList<>();
 		for (ItemCompravel i : itens.values()) {
 			if (i.getCategoria().equals(categoria)) {
@@ -265,7 +264,7 @@ public class ItemCompravelController {
 
 		Collections.sort(itensCategoria, new ItemNomeComparator());
 
-		return (posicao >= itensCategoria.size())? "" : itensCategoria.get(posicao).toString();
+		return (posicao < 0 || posicao >= itensCategoria.size()) ? "" : itensCategoria.get(posicao).toString();
 	}
 
 	/**
@@ -281,7 +280,7 @@ public class ItemCompravelController {
 
 		Collections.sort(itensPreco, new MenorPrecoComparator());
 
-		return (posicao >= itensPreco.size())? "" : itensPreco.get(posicao).toString();
+		return (posicao < 0 || posicao >= itensPreco.size()) ? "" : itensPreco.get(posicao).toString();
 	}
 
 	/**
@@ -297,13 +296,11 @@ public class ItemCompravelController {
 		List<ItemCompravel> itensPesquisados = new ArrayList<>();
 		itensPesquisados.addAll(itens.values());
 
-		itensPesquisados = itensPesquisados.stream()
-				.filter((ItemCompravel item) -> item.getNome().toLowerCase().contains(strPesquisada.toLowerCase()))
-				.collect(Collectors.toList());
+		itensPesquisados = itensPesquisados.stream().filter((ItemCompravel item) -> item.getNome().toLowerCase().contains(strPesquisada.toLowerCase())).collect(Collectors.toList());
 
 		Collections.sort(itensPesquisados, new ItemNomeComparator());
 
-		return (posicao >= itensPesquisados.size())? "" : itensPesquisados.get(posicao).toString();
+		return (posicao < 0 || posicao >= itensPesquisados.size()) ? "" : itensPesquisados.get(posicao).toString();
 	}
 
 	/**
@@ -314,8 +311,6 @@ public class ItemCompravelController {
 	 * @param mensagem
 	 *            mensagem de erro caso nao seja valido
 	 * @return boolean true se eh valido
-	 * @exception IllegalArgumentException
-	 *                quando id nao eh valido
 	 */
 	private void idValido(int id, String mensagem) {
 		if (id < 1)
@@ -330,8 +325,6 @@ public class ItemCompravelController {
 	 * @param mensagem
 	 *            mensagem de erro caso nao exista
 	 * @return boolean true se eh valido
-	 * @exception IllegalArgumentException
-	 *                quando item nao existe
 	 */
 	public void itemExiste(int id, String mensagem) {
 		if (!itens.containsKey(id))
@@ -346,30 +339,33 @@ public class ItemCompravelController {
 	 * @return ItemCompravel - representando o item
 	 */
 	public ItemCompravel getItemCadastrado(int id) {
-		itemExiste(id, ErrosListasComprasController.ADD_ITEM_INEXISTENTE.toString());
+		this.itemExiste(id, ErrosListasComprasController.ADD_ITEM_INEXISTENTE.toString());
+		//
 		return itens.get(id);
 	}
-	
+
 	/**
 	 * Salva itens em um arquivo
+	 * 
 	 * @see Persistencia#salvarItens(Object)
 	 */
-	public void salvar(){
+	public void salvar() {
 		try {
 			Persistencia.salvarItens(itens);
 		} catch (IOException e) {
 			throw new RuntimeException(e.getMessage());
 		}
 	}
-	
+
 	/**
 	 * Carrega itens de arquivo e adiciona ao sistema
+	 * 
 	 * @see Persistencia#carregarItens()
 	 */
 	@SuppressWarnings("unchecked")
-	public void carregar(){
+	public void carregar() {
 		try {
-			itens = (Map<Integer, ItemCompravel>)Persistencia.carregarItens();
+			itens = (Map<Integer, ItemCompravel>) Persistencia.carregarItens();
 		} catch (ClassNotFoundException | IOException e) {
 			throw new RuntimeException(e.getMessage());
 		}
@@ -383,4 +379,5 @@ public class ItemCompravelController {
 	public int gteQtdItensNoSistema() {
 		return this.qtdItens;
 	}
+	
 }

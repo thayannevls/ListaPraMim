@@ -391,6 +391,10 @@ public class ListaPraMim {
 		return this.itemController.gteQtdItensNoSistema();
 	}
 	
+	public String sugereMelhorEstabelecimento(String descritorLista, int posicaoEstabelecimento, int posicaoLista){
+		return this.listasDeComprasController.sugereMelhorEstabelecimento(descritorLista, posicaoEstabelecimento, posicaoLista);
+	}
+	
 	/** 
 	 * Salva todos os itens e listas cadastrados localmente
 	 */

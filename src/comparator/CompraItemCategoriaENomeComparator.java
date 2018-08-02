@@ -5,12 +5,13 @@ import java.util.Comparator;
 import java.util.List;
 
 import model.Compra;
+import model.ItemCompravel;
 
-public class ItemCategoriaENomeComparador implements Comparator<Compra>{
+public class CompraItemCategoriaENomeComparator implements Comparator<Compra> {
 
 	private List<String> categorias;
 	
-	public ItemCategoriaENomeComparador() {
+	public CompraItemCategoriaENomeComparator() {
 		categorias = Arrays.asList("higiene pessoal", "limpeza", "alimento industrializado", "alimento nao industrializado");
 	}
 	

@@ -9,8 +9,12 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
+import java.util.stream.Collectors;
 
-import comparator.ItemCategoriaENomeComparador;
+import comparator.CompraItemCategoriaENomeComparator;
+import comparator.EstabelecimentoPrecoComparator;
+import comparator.ItemCategoriaENomeComparator;
 import util.ErrosListasComprasController;
 
 /**
@@ -146,7 +150,7 @@ public class ListaDeCompras implements Serializable {
 	 */
 	public String getItemLista(int pos) {
 		List<Compra> compras = new ArrayList<>(listaDeCompras.values());
-		Collections.sort(compras, new ItemCategoriaENomeComparador());
+		Collections.sort(compras, new CompraItemCategoriaENomeComparator());
 
 		return (pos >= compras.size()) ? "" : compras.get(pos).toString();
 	}
@@ -246,6 +250,58 @@ public class ListaDeCompras implements Serializable {
 	 */
 	public Compra getCompra(int id) {
 		return this.listaDeCompras.get(id);
+	}
+
+	public String sugereMelhorEstabelecimento(int posicaoEstabelecimento, int posicaoLista) {
+//		Map<String, Double> estabelecimentos = new HashMap<>();
+//        
+//		for(Compra compra: this.listaDeCompras.values()){
+//			compra.getItem().getMapaDePrecos().forEach(
+//					(k, v) -> estabelecimentos.merge(k, v, (v1, v2) -> ((v1) * compra.getQtd() + v2)));
+//		}
+//		System.out.println(estabelecimentos.entrySet());
+//		EstabelecimentoPrecoComparator bvc = new EstabelecimentoPrecoComparator(estabelecimentos);
+//        TreeMap<String, Double> sorted_map = new TreeMap<String, Double>(bvc);
+//        sorted_map.putAll(estabelecimentos);
+//        String key = (String)sorted_map.keySet().toArray()[posicaoEstabelecimento];
+//        
+//        List<Compra> itensPesquisados = this.listaDeCompras.values().stream()
+//				.filter((Compra compra) -> compra.getItem().getMapaDePrecos().containsKey(key))
+//				.collect(Collectors.toList());
+//        return (String) (sorted_map.keySet().toArray()[posicaoEstabelecimento] + itensPesquisados.get(posicaoLista).getItem().toString());
+		String estabelecimento = (String) this.retornaEstabelecimentosOrdenados().keySet().toArray()[posicaoEstabelecimento];
+		
+		if(posicaoLista == 0)
+			return estabelecimento + ": R$ " + this.retornaEstabelecimentosOrdenados().get(estabelecimento);
+		return "- " + retornaItensPorEstabelecimento(estabelecimento).get(posicaoLista).toString();
+		
+		
+		
+	}
+	
+	public TreeMap<String, Double> retornaEstabelecimentosOrdenados(){
+		Map<String, Double> estabelecimentos = new HashMap<>();
+        
+		for(Compra compra: this.listaDeCompras.values()){
+			compra.getItem().getMapaDePrecos().forEach((k, v) -> 
+						estabelecimentos.merge(k, v, (v1, v2) -> 
+						((v1) * compra.getQtd() + v2)));
+		}
+		EstabelecimentoPrecoComparator bvc = new EstabelecimentoPrecoComparator(estabelecimentos);
+        TreeMap<String, Double> estabelecimentos_ordenados = new TreeMap<String, Double>(bvc);
+        estabelecimentos_ordenados.putAll(estabelecimentos);
+        
+        return estabelecimentos_ordenados;
+	}
+	
+	public List<ItemCompravel> retornaItensPorEstabelecimento(String estabelecimento){
+		List<ItemCompravel> itensPesquisados = this.listaDeCompras.values().stream()
+				.map(Compra::getItem)
+				.filter((ItemCompravel item) -> item.getMapaDePrecos().containsKey(estabelecimento))
+				.collect(Collectors.toList());
+		
+		Collections.sort(itensPesquisados, new ItemCategoriaENomeComparator());
+		return itensPesquisados;
 	}
 
 }

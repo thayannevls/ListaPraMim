@@ -19,14 +19,15 @@ import easyaccept.EasyAccept;
  */
 public class Facade {
 
-	ListaPraMim sistema;
+	private ListaPraMim sistema;
 
 	public static void main(String[] args) {
 		args = new String[] { "ui.Facade", "acceptance_test/use_case1.txt", "acceptance_test/use_case1_exception.txt",
 				"acceptance_test/use_case2.txt", "acceptance_test/use_case2_exception.txt",
 				"acceptance_test/use_case3.txt", "acceptance_test/use_case3_exception.txt",
 				"acceptance_test/use_case4.txt", "acceptance_test/use_case4_exception.txt",
-				"acceptance_test/use_case5.txt", "acceptance_test/use_case7.txt"};
+				"acceptance_test/use_case5.txt", "acceptance_test/use_case6.txt",
+				"acceptance_test/use_case7.txt"};
 		
 		EasyAccept.main(args);
 	}
@@ -392,6 +393,10 @@ public class Facade {
 	 */
 	public String geraAutomaticaItensMaisPresentes() {
 		return sistema.geraAutomaticaItensMaisPresentes();
+	}
+	
+	public String sugereMelhorEstabelecimento(String descritorLista, int posicaoEstabelecimento, int posicaoLista){
+		return sistema.sugereMelhorEstabelecimento(descritorLista, posicaoEstabelecimento, posicaoLista);
 	}
 	
 	/**

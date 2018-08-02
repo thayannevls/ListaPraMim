@@ -21,4 +21,5 @@ public class ItemNomeComparator implements Comparator<ItemCompravel> {
 	public int compare(ItemCompravel i1, ItemCompravel i2) {
 		return i1.getNome().compareTo(i2.getNome());
 	}
+	
 }

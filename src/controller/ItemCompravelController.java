@@ -65,7 +65,7 @@ public class ItemCompravelController {
 		Validator.campoValido(categoria, ErrosItemController.CADASTRO_CATEGORIA_NULA.toString());
 		Validator.categoriaValida(categoria, ErrosItemController.CADASTRO_CATEGORIA_INEXISTENTE.toString());
 		Validator.campoValido(nome, ErrosItemController.CADASTRO_NOME_NULO.toString());
-		//
+		 
 		int id = qtdItens + 1;
 		ItemCompravel item = new ItemPorQuilo(nome, id, categoria, kg, localDeCompra, preco);
 		itens.put(id, item);
@@ -95,7 +95,7 @@ public class ItemCompravelController {
 		Validator.campoValido(categoria, ErrosItemController.CADASTRO_CATEGORIA_NULA.toString());
 		Validator.categoriaValida(categoria, ErrosItemController.CADASTRO_CATEGORIA_INEXISTENTE.toString());
 		Validator.campoValido(nome, ErrosItemController.CADASTRO_NOME_NULO.toString());
-		//
+		 
 		int id = qtdItens + 1;
 		ItemCompravel item = new ItemPorUnidade(nome, id, categoria, unidade, localDeCompra, preco);
 		itens.put(id, item);
@@ -128,7 +128,7 @@ public class ItemCompravelController {
 		Validator.campoValido(categoria, ErrosItemController.CADASTRO_CATEGORIA_NULA.toString());
 		Validator.campoValido(nome, ErrosItemController.CADASTRO_NOME_NULO.toString());
 		Validator.campoValido(unidadeDeMedida, ErrosItemController.CADASTRO_UNIDADE_NULA.toString());
-		//
+		 
 		int id = qtdItens + 1;
 		ItemCompravel item = new ItemPorQtd(nome, id, categoria, qnt, unidadeDeMedida, localDeCompra, preco);
 		itens.put(id, item);
@@ -146,7 +146,7 @@ public class ItemCompravelController {
 	public String exibeItem(int id) {
 		this.idValido(id, ErrosItemController.LISTAGEM_ID_INVALIDO.toString());
 		this.itemExiste(id, ErrosItemController.LISTAGEM_ITEM_INEXISTENTE.toString());
-		//
+		 
 		return itens.get(id).toString();
 	}
 
@@ -165,7 +165,7 @@ public class ItemCompravelController {
 		this.itemExiste(id, ErrosItemController.PRECO_ITEM_INEXISTENTE.toString());
 		Validator.ehPositivo(preco, ErrosItemController.PRECO_ITEM_PRECO_INVALIDO.toString());
 		Validator.campoValido(localDeCompra, ErrosItemController.PRECO_LOCAL_NULO.toString());
-		//
+		 
 		itens.get(id).adicionaPreco(localDeCompra, preco);
 	}
 
@@ -184,7 +184,7 @@ public class ItemCompravelController {
 		Validator.campoValido(novoValor, ErrosItemController.ATUALIZA_VALOR_NULO.toString());
 		this.idValido(id, ErrosItemController.ATUALIZA_ITEM_INEXISTENTE.toString());
 		this.itemExiste(id, ErrosItemController.ATUALIZA_ITEM_INEXISTENTE.toString());
-		//
+		 
 		switch (atributo) {
 		case "nome":
 			itens.get(id).setNome(novoValor);
@@ -223,7 +223,7 @@ public class ItemCompravelController {
 	public void deletaItem(int id) {
 		this.idValido(id, ErrosItemController.DELETA_ID_INVALIDO.toString());
 		this.itemExiste(id, ErrosItemController.DELETA_ID_INVALIDO.toString());
-		//
+		 
 		itens.remove(id);
 	}
 
@@ -254,7 +254,7 @@ public class ItemCompravelController {
 	 */
 	public String getItemPorCategoria(String categoria, int posicao) {
 		Validator.categoriaValida(categoria, ErrosItemController.LISTAGEM_CATEGORIA_INEXISTENTE.toString());
-		//
+		 
 		List<ItemCompravel> itensCategoria = new ArrayList<>();
 		for (ItemCompravel i : itens.values()) {
 			if (i.getCategoria().equals(categoria)) {
@@ -340,7 +340,7 @@ public class ItemCompravelController {
 	 */
 	public ItemCompravel getItemCadastrado(int id) {
 		this.itemExiste(id, ErrosListasComprasController.ADD_ITEM_INEXISTENTE.toString());
-		//
+
 		return itens.get(id);
 	}
 

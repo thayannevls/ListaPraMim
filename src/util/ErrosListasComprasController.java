@@ -74,8 +74,5 @@ public enum ErrosListasComprasController {
 	public String toString() {
 		return this.descricao;
 	}
-	
-	
-	
 
 }

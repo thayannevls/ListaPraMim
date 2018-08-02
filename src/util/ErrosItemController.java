@@ -1,5 +1,16 @@
 package util;
 
+/**
+ * Classe responsavel por "enumerar" erros do ItemController
+ * 
+ * @author Jose Guilheme - Matricula: 117210370
+ * @author Mariana Nascimento - Matricula: 117210416
+ * @author Siuanny Barbosa - Matriucla: 117210395
+ * @author Thayanne Sousa - Matricula: 117210414
+ * 
+ *         UFCG/2018.1 - Laboratorio de Programacao 2 - Projeto de Laboratorio
+ *         (Lista pra mim)
+ */
 public enum ErrosItemController {
 	
 	// CADASTRO
@@ -59,4 +70,5 @@ public enum ErrosItemController {
 	public String toString() {
 		return this.descricao;
 	}
+	
 }

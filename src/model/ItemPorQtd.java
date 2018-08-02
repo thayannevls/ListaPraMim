@@ -6,11 +6,21 @@ package model;
  * 
  * @author José Guilheme - Matricula: 117210370
  * @author Mariana Nascimento - Matricula: 117210416
+<<<<<<< HEAD
  * @author Siuanny Barbosa - Matricula: 117210395
  * @author Thayanne Sousa - Matricula: 117210414 UFCG/2018.1 - Laboratório de
  *         Programação 2 - Projeto de Laboratorio (Lista pra mim)
+=======
+ * @author Siuanny Barbosa - Matriucla: 117210395
+ * @author Thayanne Sousa - Matricula: 117210414
+ * 
+ *         UFCG/2018.1 - Laboratório de Programação 2 - Projeto de Laboratorio
+ *         (Lista pra mim)
+>>>>>>> a1d686855f4a766978d1e0d9f7ace14f1b5bde23
  */
 public class ItemPorQtd extends ItemCompravel {
+
+	private static final long serialVersionUID = -9130324870896031904L;
 
 	private int quantidade;
 	private String unidadeDeMedida;
@@ -33,8 +43,7 @@ public class ItemPorQtd extends ItemCompravel {
 	 * @param preco
 	 *            preco do item
 	 */
-	public ItemPorQtd(String nome, int id, String categoria, int quantidade, String unidadeDeMedida,
-			String localDeCompra, double preco) {
+	public ItemPorQtd(String nome, int id, String categoria, int quantidade, String unidadeDeMedida, String localDeCompra, double preco) {
 		super(nome, id, categoria, localDeCompra, preco);
 		this.quantidade = quantidade;
 		this.unidadeDeMedida = unidadeDeMedida;
@@ -74,7 +83,7 @@ public class ItemPorQtd extends ItemCompravel {
 	 * @param unidadeDeMedida
 	 *            novo valor para alterar a unidade de medida
 	 */
-	public void setUnidade(String unidadeDeMedida) {
+	public void atualiza(String unidadeDeMedida) {
 		this.unidadeDeMedida = unidadeDeMedida;
 	}
 
@@ -86,13 +95,7 @@ public class ItemPorQtd extends ItemCompravel {
 	public String getDescricaoBasica() {
 		return this.nome + ", " + this.categoria + ", " + this.quantidade + " " + this.unidadeDeMedida;
 	}
-	
 
-	@Override
-	public void atualiza(String novoValor) {
-		this.unidadeDeMedida = novoValor;
-	}
-	
 	/**
 	 * Responsavel por retornar a represnetação em String de um ItemPorQtd.
 	 * 
@@ -100,8 +103,7 @@ public class ItemPorQtd extends ItemCompravel {
 	 */
 	@Override
 	public String toString() {
-		return this.id + ". " + this.nome + ", " + this.categoria + ", " + this.quantidade + " " + this.unidadeDeMedida
-				+ ", " + "Preco: <" + super.localPreco() + ">";
+		return this.id + ". " + this.nome + ", " + this.categoria + ", " + this.quantidade + " " + this.unidadeDeMedida + ", " + "Preco: <" + super.localPreco() + ">";
 	}
 
 }

@@ -29,6 +29,7 @@ public enum ErrosListasComprasController {
 	A_COMPRA_INEXISTENTE("Erro na atualizacao de compra: compra nao encontrada na lista."),
 	A_OPERACAO_INVALIDA("Erro na atualizacao de compra: operacao invalida para atualizacao."),
 	A_DESCRITOR_INVALIDO("Erro na atualizacao da compra: descritor nao pode ser vazio ou null."),
+	A_NOVA_QTD_INVALIDA("Erro na atualizacao da compra: quantidade invalida."),
 	
 	//ADICIONAR
 	ADD_ITEM_INEXISTENTE("Erro na compra de item: item nao existe no sistema."),
@@ -46,6 +47,9 @@ public enum ErrosListasComprasController {
 	F_VALOR_FINAL_INVALIDO("Erro na finalizacao de lista de compras: valor final da lista invalido."),
 	
 	LISTA_FINALIZADA("Erro: Lista ja finalizada."),
+	
+	//LISTA NAO EXISTE
+	LISTA_INEXISTENTE("Erro: lista nao cadastrada."),
 	
 	//GERAR lISTA
 	G_COMPRA_NAO_CADASTRADA("Erro na geracao de lista automatica por item: nao ha compras cadastradas com o item desejado.");

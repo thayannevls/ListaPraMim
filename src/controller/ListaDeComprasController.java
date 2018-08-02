@@ -362,6 +362,9 @@ public class ListaDeComprasController {
 		return descritor;
 	}
 
+	public String sugereMelhorEstabelecimento(String descritorLista, int posicaoEstabelecimento, int posicaoLista){
+		
+	}
 	/**
 	 * Metodo que verifica se a lista ainda nao foi finalizada
 	 * 

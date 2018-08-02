@@ -9,8 +9,6 @@ import model.Compra;
 import model.ItemPorUnidade;
 
 public class CompraTest {
-
-	
 	private ItemPorUnidade item;
 	private Compra compra;
 	private Compra c;

@@ -354,4 +354,65 @@ public class ListaDeComprasControllerTest {
 	}
 	
 	
+	// ---------------- TESTA CASE 6, SUGESTAO DE MELHOR ESTABELECIMENTO --------------------//
+	
+	@Test
+	public void sugereMelhorEstabelecimentoTest() {
+		// ---- cadastrando itens ---- //
+		
+		int itemId1 = itemController.adicionaItemPorQuilo("Peito peru ", "alimento industrializado", 2.0, "Mercadinho Bem Barato", 34.49);
+		int itemId2 = itemController.adicionaItemPorUnidade("Batata Chips", "alimento industrializado", 3, "Supermercado UauMart", 3.69);
+		int itemId3 = itemController.adicionaItemPorQtd("Capsulas tres coracoes", "alimento industrializado", 8, "capsulas", "Mercadinho Bem Barato", 11.69);
+		int itemId4 = itemController.adicionaItemPorQuilo("Macaxeira", "alimento nao industrializado", 0.5, "Mercadinho Bem Barato", 3.69);
+		int itemId5 = itemController.adicionaItemPorUnidade("Veja so", "limpeza", 3, "Mercadinho Bem Barato", 3.69);
+		
+		// ---- adicionando mais precos ---- //
+		itemController.adicionaPrecoItem(itemId1, "SuperMercado UauMart", 43.69);
+		itemController.adicionaPrecoItem(itemId1, "Supermercado BuyMore", 33.09);
+		itemController.adicionaPrecoItem(itemId2, "Mercadinho Bem Barato", 3.99);
+		itemController.adicionaPrecoItem(itemId2, "Supermercado BuyMore", 4.09);
+		itemController.adicionaPrecoItem(itemId2, "Supermercado Excepcional", 3.79);
+		itemController.adicionaPrecoItem(itemId3, "Supermercado UauMart", 10.89);
+		itemController.adicionaPrecoItem(itemId3, "Supermercado BuyMore", 10.89);
+		itemController.adicionaPrecoItem(itemId3, "Supermercado Excepcional", 9.49);
+		itemController.adicionaPrecoItem(itemId4, "Supermercado UauMart", 4.49);
+		itemController.adicionaPrecoItem(itemId4, "Supermercado Excepcional", 4.19);
+		itemController.adicionaPrecoItem(itemId5, "Supermercado BuyMore", 3.50);
+		
+		// ---- iniciado lista de compras e adicionando itens  ---- //
+		controller.adicionaListaDeCompras("fefeira");
+		controller.adicionaCompraALista("fefeira", 1, itemController.getItemCadastrado(itemId1));
+		controller.adicionaCompraALista("fefeira", 3, itemController.getItemCadastrado(itemId2));
+		controller.adicionaCompraALista("fefeira", 1, itemController.getItemCadastrado(itemId3));
+		controller.adicionaCompraALista("fefeira", 2, itemController.getItemCadastrado(itemId4));
+		controller.adicionaCompraALista("fefeira", 1, itemController.getItemCadastrado(itemId5));
+		
+		// ---- testando os precos totais ---- //
+		assertEquals("Supermercado Excepcional: R$ 29,24", controller.sugereMelhorEstabelecimento("fefeira", 0, 0));
+		assertEquals("Supermercado BuyMore: R$ 59,75", controller.sugereMelhorEstabelecimento("fefeira", 1, 0));
+		assertEquals("Mercadinho Bem Barato: R$ 71,62", controller.sugereMelhorEstabelecimento("fefeira", 2, 0));
+		assertEquals("Supermercado UauMart: R$ 74,63", controller.sugereMelhorEstabelecimento("fefeira", 3, 0));
+		
+		// ---- testando os itens ---- //
+		assertEquals("- 3 Batata Chips, alimento industrializado", controller.sugereMelhorEstabelecimento("fefeira", 0, 1));
+		assertEquals("", controller.sugereMelhorEstabelecimento("fefeira", 0, 4));
+		
+		assertEquals("- Veja so, limpeza", controller.sugereMelhorEstabelecimento("fefeira", 1, 1));
+		assertEquals("", controller.sugereMelhorEstabelecimento("fefeira", 1, 5));
+		
+		assertEquals("- Veja so, limpeza", controller.sugereMelhorEstabelecimento("fefeira", 2, 1));
+		assertEquals("- Macaxeira, alimento nao industrializado", controller.sugereMelhorEstabelecimento("fefeira", 2, 5));
+		
+		assertEquals("- Batata Chips, alimento industrializado", controller.sugereMelhorEstabelecimento("fefeira", 3, 1));
+		assertEquals("", controller.sugereMelhorEstabelecimento("fefeira", 3, 5));
+		
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void sugereMelhorEstabelecimentoSemDados() {
+		controller.adicionaListaDeCompras("drogon");
+		controller.sugereMelhorEstabelecimento("drogon", 0, 0);
+		
+	}
+	
 }

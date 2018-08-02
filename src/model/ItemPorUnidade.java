@@ -13,6 +13,8 @@ package model;
  */
 public class ItemPorUnidade extends ItemCompravel {
 
+	private static final long serialVersionUID = -9083284538533707762L;
+	
 	private int unidade;
 
 	/**
@@ -51,15 +53,10 @@ public class ItemPorUnidade extends ItemCompravel {
 	 * @param unidade
 	 *            quantidade de itens
 	 */
-	public void setUnidade(int unidade) {
-		this.unidade = unidade;
+	public void atualiza(String unidade) {
+		this.unidade = Integer.valueOf(unidade);
 	}
 
-	@Override
-	public void atualiza(String novoValor) {
-		this.unidade = Integer.parseInt(novoValor);
-	}
-	
 	/**
 	 * Responsavel por retornar a represnetação em String de um ItemPorUnidade.
 	 * 
@@ -69,4 +66,5 @@ public class ItemPorUnidade extends ItemCompravel {
 	public String toString() {
 		return this.id + ". " + this.nome + ", " + this.categoria + ", " + "Preco: <" + super.localPreco() + ">";
 	}
+
 }

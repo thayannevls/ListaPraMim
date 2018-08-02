@@ -23,13 +23,18 @@ import util.Validator;
  * @author Jose Guilheme - Matricula: 117210370
  * @author Mariana Nascimento - Matricula: 117210416
  * @author Siuanny Barbosa - Matriucla: 117210395
- * @author Thayanne Sousa - Matricula: 117210414 UFCG/2018.1 - Laboratorio de
- *         Programacao 2 - Projeto de Laboratorio (Lista pra mim)
+ * @author Thayanne Sousa - Matricula: 117210414
+ * 
+ *         UFCG/2018.1 - Laboratorio de Programacao 2 - Projeto de Laboratorio
+ *         (Lista pra mim)
  */
 public class ListaDeComprasController {
 
 	private Map<String, ListaDeCompras> listasDeCompras;
 
+	/**
+	 * Inicializa os atributos da classe ListaDeComprasController.
+	 */
 	public ListaDeComprasController() {
 		this.listasDeCompras = new HashMap<>();
 	}
@@ -38,16 +43,15 @@ public class ListaDeComprasController {
 	 * Metodo que adiciona uma lista de compras ao HashMap.
 	 * 
 	 * @param descritor
+	 *            string contendo a descricao da lista
 	 * @return descritor da lista de compras
 	 */
 	public String adicionaListaDeCompras(String descritor) {
 		Validator.campoValido(descritor, ErrosListasComprasController.C_DESCRITOR_INVALIDO.toString());
 
 		if (!this.listasDeCompras.containsKey(descritor)) {
-			ListaDeCompras lista = new ListaDeCompras(descritor);
-			this.listasDeCompras.put(descritor, lista);
+			this.listasDeCompras.put(descritor, new ListaDeCompras(descritor));
 		}
-
 		return descritor;
 	}
 
@@ -64,9 +68,8 @@ public class ListaDeComprasController {
 	public void adicionaCompraALista(String descritor, int qtd, ItemCompravel item) {
 		Validator.campoValido(descritor, ErrosListasComprasController.ADD_DESCRITOR_INVALIDO.toString());
 		Validator.ehPositivo(qtd, ErrosListasComprasController.ADD_QTD_INVALIDA.toString());
-		listaExiste(descritor, ErrosListasComprasController.LISTA_INEXISTENTE.toString());
-		listaNaoFinalizada(descritor, ErrosListasComprasController.LISTA_FINALIZADA.toString());
-		
+		this.listaExiste(descritor, ErrosListasComprasController.LISTA_INEXISTENTE.toString());
+		this.estadoLista(descritor, ErrosListasComprasController.LISTA_FINALIZADA.toString());
 
 		if (listasDeCompras.containsKey(descritor)) {
 			this.listasDeCompras.get(descritor).adicionaItemLista(item.getId(), qtd, item);
@@ -86,9 +89,10 @@ public class ListaDeComprasController {
 	public String pesquisaCompraEmLista(String descritor, int id) {
 		Validator.campoValido(descritor, ErrosListasComprasController.P_DESCRITOR_INVALIDO.toString());
 		Validator.idValido(id, ErrosListasComprasController.P_ID_INVALIDO.toString());
-		listaExiste(descritor, ErrosListasComprasController.LISTA_INEXISTENTE.toString());
+		this.listaExiste(descritor, ErrosListasComprasController.LISTA_INEXISTENTE.toString());
 		this.listasDeCompras.get(descritor).analisaExistencia(id,
 				ErrosListasComprasController.P_COMPRA_INEXISTENTE.toString());
+
 		return this.listasDeCompras.get(descritor).getItemPeloId(id);
 	}
 
@@ -101,10 +105,9 @@ public class ListaDeComprasController {
 	 */
 	public String pesquisaListaDeCompras(String descritor) {
 		Validator.campoValido(descritor, ErrosListasComprasController.PL_DESCRITOR_INVALIDO.toString());
-		//
+
 		if (!this.listasDeCompras.containsKey(descritor))
 			throw new IllegalArgumentException(ErrosListasComprasController.P_LISTA_INEXISTENTE.toString());
-
 		return descritor;
 	}
 
@@ -124,11 +127,11 @@ public class ListaDeComprasController {
 	public void atualizaCompraDeLista(String descritor, int id, String operacao, int novaQtd) {
 		Validator.campoValido(descritor, ErrosListasComprasController.A_DESCRITOR_INVALIDO.toString());
 		Validator.operacaoValida(operacao, ErrosListasComprasController.A_OPERACAO_INVALIDA.toString());
-		listaNaoFinalizada(descritor, ErrosListasComprasController.LISTA_FINALIZADA.toString());
+		this.estadoLista(descritor, ErrosListasComprasController.LISTA_FINALIZADA.toString());
 		Validator.ehPositivo(novaQtd, ErrosListasComprasController.A_NOVA_QTD_INVALIDA.toString());
-
 		this.listasDeCompras.get(descritor).analisaExistencia(id,
 				ErrosListasComprasController.A_COMPRA_INEXISTENTE.toString());
+
 		if (operacao.equals("adiciona")) {
 			this.listasDeCompras.get(descritor).setQntCompra(id, novaQtd);
 		} else {
@@ -146,10 +149,10 @@ public class ListaDeComprasController {
 	 */
 	public void deletaCompraDeLista(String descritor, int id) {
 		Validator.campoValido(descritor, ErrosListasComprasController.E_DESCRITOR_INVALIDO.toString());
-		listaExiste(descritor, ErrosListasComprasController.LISTA_INEXISTENTE.toString());
+		this.listaExiste(descritor, ErrosListasComprasController.LISTA_INEXISTENTE.toString());
 		this.listasDeCompras.get(descritor).analisaExistencia(id,
 				ErrosListasComprasController.E_COMPRA_INEXISTENTE.toString());
-		//
+
 		this.listasDeCompras.get(descritor).deletaCompra(id);
 	}
 
@@ -184,8 +187,8 @@ public class ListaDeComprasController {
 		Validator.campoValido(descritor, ErrosListasComprasController.F_DESCRITOR_INVALIDO.toString());
 		Validator.campoValido(localDaCompra, ErrosListasComprasController.F_LOCAL_INVALIDO.toString());
 		Validator.ehPositivo(valorTotal, ErrosListasComprasController.F_VALOR_FINAL_INVALIDO.toString());
-		listaExiste(descritor, ErrosListasComprasController.LISTA_INEXISTENTE.toString());
-		//
+		this.listaExiste(descritor, ErrosListasComprasController.LISTA_INEXISTENTE.toString());
+
 		this.listasDeCompras.get(descritor).finalizaCompras(localDaCompra, valorTotal);
 	}
 
@@ -302,14 +305,14 @@ public class ListaDeComprasController {
 
 		ListaDeCompras lista = new ListaDeCompras(descritor);
 		lista.setListaDeCompras(getUltimaLista().getListaDeCompras());
-		listasDeCompras.put(descritor, lista);
+		this.listasDeCompras.put(descritor, lista);
 
 		return descritor;
 	}
 
 	/**
-	 * Gera automaticamente uma lista com base no item pesquisado, a lista gerada eh igual
-	 * a ultima lista cadastrada que contempla o item.
+	 * Gera automaticamente uma lista com base no item pesquisado, a lista gerada eh
+	 * igual a ultima lista cadastrada que contempla o item.
 	 * 
 	 * @param descritorItem
 	 * 
@@ -380,10 +383,9 @@ public class ListaDeComprasController {
 	 *            mensagem de erro a ser retorna se tiver sido finalizada
 	 * @return boolean true se nao tiver sido finalizada
 	 */
-	private boolean listaNaoFinalizada(String descritor, String mensagem) {
-		if (listasDeCompras.get(descritor).getFinalizada())
+	private void estadoLista(String descritor, String mensagem) {
+		if (listasDeCompras.get(descritor).getEstado())
 			throw new IllegalArgumentException(mensagem);
-		return true;
 	}
 
 	/**

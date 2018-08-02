@@ -1,6 +1,5 @@
 package controller;
 
-import model.ItemCompravel;
 import persistence.Persistencia;
 import util.ErrosListasComprasController;
 
@@ -20,6 +19,9 @@ public class ListaPraMim {
 	private ItemCompravelController itemController;
 	private ListaDeComprasController listasDeComprasController;
 
+	/**
+	 * Inicializa os atributos da classe ListaPraMim.
+	 */
 	public ListaPraMim() {
 		this.itemController = new ItemCompravelController();
 		this.listasDeComprasController = new ListaDeComprasController();
@@ -80,8 +82,7 @@ public class ListaPraMim {
 	 *            preco do item
 	 * @return int retorna id gerado para o item
 	 */
-	public int adicionaItemPorQtd(String nome, String categoria, int qnt, String unidadeDeMedida, String localDeCompra,
-			double preco) {
+	public int adicionaItemPorQtd(String nome, String categoria, int qnt, String unidadeDeMedida, String localDeCompra, double preco) {
 		return this.itemController.adicionaItemPorQtd(nome, categoria, qnt, unidadeDeMedida, localDeCompra, preco);
 	}
 
@@ -206,9 +207,7 @@ public class ListaPraMim {
 	 *            identificador do item
 	 */
 	public void adicionaCompraALista(String descritorLista, int quantidade, int itemId) {
-		ItemCompravel item;
-		item = itemController.getItemCadastrado(itemId);
-		this.listasDeComprasController.adicionaCompraALista(descritorLista, quantidade, item);
+		this.listasDeComprasController.adicionaCompraALista(descritorLista, quantidade, itemController.getItemCadastrado(itemId));
 	}
 
 	/**
@@ -265,6 +264,7 @@ public class ListaPraMim {
 	 */
 	public void deletaCompraDeLista(String descritorLista, int itemId) {
 		itemController.itemExiste(itemId, ErrosListasComprasController.E_ITEM_INEXISTENTE.toString());
+		//
 		this.listasDeComprasController.deletaCompraDeLista(descritorLista, itemId);
 	}
 
@@ -404,10 +404,11 @@ public class ListaPraMim {
 	 */
 	public void iniciaSistema(){
 		if(Persistencia.arquivosNaoCriados()){
-			fechaSistema();
+			this.fechaSistema();
 			throw new IllegalArgumentException("Sistema iniciado pela primeira vez. Arquivo criado.");
 		}
 		itemController.carregar();
 		listasDeComprasController.carregar();
 	}
+
 }

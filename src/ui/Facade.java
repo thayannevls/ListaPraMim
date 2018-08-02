@@ -26,8 +26,8 @@ public class Facade {
 				"acceptance_test/use_case2.txt", "acceptance_test/use_case2_exception.txt",
 				"acceptance_test/use_case3.txt", "acceptance_test/use_case3_exception.txt",
 				"acceptance_test/use_case4.txt", "acceptance_test/use_case4_exception.txt",
-				"acceptance_test/use_case5.txt", "acceptance_test/use_case7.txt"};
-		
+				"acceptance_test/use_case5.txt", "acceptance_test/use_case7.txt" };
+
 		EasyAccept.main(args);
 	}
 
@@ -52,8 +52,7 @@ public class Facade {
 	 *            preco em reais
 	 * @return int id do novo item
 	 */
-	public int adicionaItemPorQtd(String nome, String categoria, int qnt, String unidadeDeMedida, String localDeCompra,
-			double preco) {
+	public int adicionaItemPorQtd(String nome, String categoria, int qnt, String unidadeDeMedida, String localDeCompra, double preco) {
 		return this.sistema.adicionaItemPorQtd(nome, categoria, qnt, unidadeDeMedida, localDeCompra, preco);
 	}
 
@@ -73,8 +72,7 @@ public class Facade {
 	 * @return int id do novo item
 	 */
 	public int adicionaItemPorQuilo(String nome, String categoria, double kg, String localDeCompra, double preco) {
-		int id = this.sistema.adicionaItemPorQuilo(nome, categoria, kg, localDeCompra, preco);
-		return id;
+		return this.sistema.adicionaItemPorQuilo(nome, categoria, kg, localDeCompra, preco);
 	}
 
 	/**
@@ -391,20 +389,21 @@ public class Facade {
 	 * @return String - representando o descitor da lista automatica criada
 	 */
 	public String geraAutomaticaItensMaisPresentes() {
-		return sistema.geraAutomaticaItensMaisPresentes();
+		return this.sistema.geraAutomaticaItensMaisPresentes();
 	}
-	
+
 	/**
 	 * @see ListaPraMim#iniciaSistema()
 	 */
-	public void iniciaSistema(){
-		sistema.iniciaSistema();
+	public void iniciaSistema() {
+		this.sistema.iniciaSistema();
 	}
-	
+
 	/**
 	 * @see ListaPraMim#fechaSistema()
 	 */
-	public void fechaSistema(){
-		sistema.fechaSistema();
+	public void fechaSistema() {
+		this.sistema.fechaSistema();
 	}
+	
 }

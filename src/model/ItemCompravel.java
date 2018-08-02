@@ -15,11 +15,15 @@ import util.Utils;
  * @author José Guilheme - Matricula: 117210370
  * @author Mariana Nascimento - Matricula: 117210416
  * @author Siuanny Barbosa - Matriucla: 117210395
- * @author Thayanne Sousa - Matricula: 117210414 UFCG/2018.1 - Laboratório de
- *         Programação 2 - Projeto de Laboratorio (Lista pra mim)
+ * @author Thayanne Sousa - Matricula: 117210414
+ * 
+ *         UFCG/2018.1 - Laboratório de Programação 2 - Projeto de Laboratorio
+ *         (Lista pra mim)
  */
 public abstract class ItemCompravel implements Serializable {
 
+	private static final long serialVersionUID = -4404861805894253484L;
+	
 	protected String nome;
 	protected int id;
 	protected CategoriaEnum categoria;

@@ -410,7 +410,20 @@ public class ListaDeComprasControllerTest {
 	public void sugereMelhorEstabelecimentoSemDados() {
 		controller.adicionaListaDeCompras("drogon");
 		controller.sugereMelhorEstabelecimento("drogon", 0, 0);
+	}
+	
+	@Test
+	public void testGetItemListaPorData(){
+		String data = controller.adicionaListaDeCompras("feira semanal");
+		controller.getItemListaPorData(data, 0);
+	}
+	
+	@Test
+	public void testGetItemListaPorItem(){
+		controller.adicionaListaDeCompras("descritor");
+		int id = itemController.adicionaItemPorQtd("item", "higiene pessoal", 1, "l", "super", 2.0);
 		
+		controller.getItemListaPorItem(id, 0);
 	}
 	
 }

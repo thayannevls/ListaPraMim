@@ -26,26 +26,11 @@ public class CompraTest {
 		assertNotNull(c);
  	}
 
-	@Test(expected=IllegalArgumentException.class)
-	public void testConstrutorCompraQntZero() {
-		c = new Compra(0, item);
- 	}
-	
-	@Test(expected=IllegalArgumentException.class)
-	public void testConstrutorCompraQntNegativa() {
-		c = new Compra(-1, item);
- 	}
-
 	@Test
 	public void testSetQtd() {
 		assertEquals(6, compra.getQtd());
 		compra.setQtd(12);
-		assertEquals(12, compra.getQtd());
-	}
-	
-	@Test(expected=IllegalArgumentException.class)
-	public void testSetQtdValorNegativo() {
-		compra.setQtd(-12);
+		assertEquals(18, compra.getQtd());
 	}
 
 	@Test

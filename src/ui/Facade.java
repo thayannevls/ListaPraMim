@@ -137,7 +137,7 @@ public class Facade {
 	/**
 	 * Deleta item que contem id especificado
 	 * 
-	 * @param id
+	 * @param id id do item a ser deletado
 	 */
 	public void deletaItem(int id) {
 		this.sistema.deletaItem(id);
@@ -197,6 +197,7 @@ public class Facade {
 	 * @param descricao
 	 *            string contendo uma representacao para descricao da lista de
 	 *            compras
+	 * @return String descricao da nova lista adicionada
 	 */
 	public String adicionaListaDeCompras(String descricao) {
 		return this.sistema.adicionaListaDeCompras(descricao);
@@ -376,6 +377,8 @@ public class Facade {
 	/**
 	 * Gera automaticamente uma lista com base em uma lista que contempre o item
 	 * desejado.
+	 * 
+	 * @param descritorItem descritor item
 	 * 
 	 * @return String - representando o descritor da lista automatica criada
 	 */

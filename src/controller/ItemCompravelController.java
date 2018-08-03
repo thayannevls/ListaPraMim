@@ -310,7 +310,6 @@ public class ItemCompravelController {
 	 *            id a ser verificado
 	 * @param mensagem
 	 *            mensagem de erro caso nao seja valido
-	 * @return boolean true se eh valido
 	 */
 	private void idValido(int id, String mensagem) {
 		if (id < 1)
@@ -324,7 +323,6 @@ public class ItemCompravelController {
 	 *            id a ser verificado
 	 * @param mensagem
 	 *            mensagem de erro caso nao exista
-	 * @return boolean true se eh valido
 	 */
 	public void itemExiste(int id, String mensagem) {
 		if (!itens.containsKey(id))

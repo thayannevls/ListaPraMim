@@ -121,9 +121,7 @@ public class ListaDeCompras implements Serializable {
 	/**
 	 * Analisa se a lista foi finalizada
 	 * 
-	 * @param msg
-	 *            mensagem de erro a ser exibida caso se queira realizar uma
-	 *            atividade nao desejada em uma lista finalizada
+	 * @return boolean true caso esteja esteja finalizada, false se nao estiver
 	 */
 	public boolean getEstado() {
 		return this.finalizada;
@@ -131,6 +129,8 @@ public class ListaDeCompras implements Serializable {
 
 	/**
 	 * Retorna uma listagem de todas as compras cadastradas na lista de compras.
+	 * 
+	 * @param pos posicao do item na lista
 	 * 
 	 * @return string contendo uma representacao textual de todas as compras
 	 *         cadastradas na lista.
@@ -266,7 +266,7 @@ public class ListaDeCompras implements Serializable {
 	/**
 	 * Recupera todos os estabelecimentos cadastrados dos itens, ao somar todos os mapas de preco e somar seus valores
 	 * multiplicando pela quantiadde de item. E ordenado pelo preco, do menor para o maior
-	 * @return TreeMap<String, Double> estabelecimentos ordenados
+	 * @return TreeMap estabelecimentos ordenados
 	 */
 	private TreeMap<String, Double> retornaEstabelecimentosOrdenados(){
 		Map<String, Double> estabelecimentos = new HashMap<>();
@@ -308,6 +308,37 @@ public class ListaDeCompras implements Serializable {
 	private boolean listaNaoVazia(String mensagem){
 		if(this.listaDeCompras.size() == 0)
 			 throw new IllegalArgumentException(mensagem);
+		return true;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((descritor == null) ? 0 : descritor.hashCode());
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ListaDeCompras other = (ListaDeCompras) obj;
+		if (descritor == null) {
+			if (other.descritor != null)
+				return false;
+		} else if (!descritor.equals(other.descritor))
+			return false;
 		return true;
 	}
 

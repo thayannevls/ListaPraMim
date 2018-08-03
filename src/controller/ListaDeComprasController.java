@@ -121,8 +121,8 @@ public class ListaDeComprasController {
 	 *            identificacao do item comprado
 	 * @param operacao
 	 *            operacao que se deseja realizar (adicionar ou diminuir)
-	 * @param qtd
-	 *            quantidade que sera adicionada ou diminuida
+	 * @param novaQtd 
+	 * 			  nova quantidade a ser adicionada na compra
 	 */
 	public void atualizaCompraDeLista(String descritor, int id, String operacao, int novaQtd) {
 		Validator.campoValido(descritor, ErrosListasComprasController.A_DESCRITOR_INVALIDO.toString());
@@ -314,7 +314,7 @@ public class ListaDeComprasController {
 	 * Gera automaticamente uma lista com base no item pesquisado, a lista gerada eh
 	 * igual a ultima lista cadastrada que contempla o item.
 	 * 
-	 * @param descritorItem
+	 * @param descritorItem descritor do item
 	 * 
 	 * @return String - representando o descitor da lista automatica criada
 	 */
@@ -385,7 +385,6 @@ public class ListaDeComprasController {
 	 *            descritor da lista a ser verificada
 	 * @param mensagem
 	 *            mensagem de erro a ser retorna se tiver sido finalizada
-	 * @return boolean true se nao tiver sido finalizada
 	 */
 	private void estadoLista(String descritor, String mensagem) {
 		if (listasDeCompras.get(descritor).getEstado())

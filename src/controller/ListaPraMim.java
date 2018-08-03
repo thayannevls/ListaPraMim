@@ -120,8 +120,6 @@ public class ListaPraMim {
 	 *            atributo a ser modificdo
 	 * @param novoValor
 	 *            novo valor que recebera o atributo
-	 * @exception quando
-	 *                se tem id, atributo ou novo valor invalido
 	 */
 	public void atualizaItem(int id, String atributo, String novoValor) {
 		this.itemController.atualizaItem(id, atributo, novoValor);
@@ -188,7 +186,7 @@ public class ListaPraMim {
 	/**
 	 * Cria lista de compra
 	 * 
-	 * @param descritor
+	 * @param descritor descritor
 	 * @return String - representação da lista com seu descritor
 	 */
 	public String adicionaListaDeCompras(String descritor) {

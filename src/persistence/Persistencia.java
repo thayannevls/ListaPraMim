@@ -64,6 +64,7 @@ public final class Persistencia {
 	 * @return Object listas recuperadas
 	 * @throws IOException
 	 *             caso ocorra algum erro
+	 *  @throws ClassNotFoundException caso nao consiga carregar lista
 	 */
 	public static Object carregarListas() throws IOException, ClassNotFoundException {
 		return carregar(listasArquivo);
@@ -74,7 +75,8 @@ public final class Persistencia {
 	 * 
 	 * @return Object itens recuperado
 	 * @throws IOException
-	 *             caso ocorra algum erro
+	 *             caso ocorra algum erro 
+	 *  @throws ClassNotFoundException caso ocorra algum erro ao carregar item
 	 */
 	public static Object carregarItens() throws IOException, ClassNotFoundException {
 		return carregar(itensArquivo);
@@ -122,8 +124,8 @@ public final class Persistencia {
 	 * @param arquivo
 	 *            arquivo que deve ser lido
 	 * @return Object objeto recuperado
-	 * @throws IOException
-	 * @throws ClassNotFoundException
+	 * @throws IOException caso ocorra algum erro ao carregar arquivo
+	 * @throws ClassNotFoundException caso ocorra algum erro ao ler o objeto
 	 */
 	private static Object carregar(File arquivo) throws IOException, ClassNotFoundException {
 		FileInputStream fis = new FileInputStream(arquivo);

@@ -24,7 +24,6 @@ public class Validator {
 	 *            numero a ser comparado
 	 * @param mensagem
 	 *            mensagem que deve ser incluida na excecao
-	 * @return boolean retorna se for positivo
 	 * @exception IllegalArgumentException
 	 *                se for negativo
 	 */
@@ -36,9 +35,9 @@ public class Validator {
 	/**
 	 * Verifica se um campo de texto nao e nulo e nem vazio
 	 * 
+	 * @param mensagem mensagem de erro caso nao seja valido
 	 * @param campo
 	 *            texto a ser validado
-	 * @return boolean retorna verdadeiro se nao for vazio ou nulo
 	 * @exception IllegalArgumentException
 	 *                se o campo for nulo ou vazio
 	 */
@@ -56,6 +55,8 @@ public class Validator {
 	 *            mensagem que vai ser retorna se houver erro
 	 * @exception IllegalArgumentException
 	 *                caso seja passado uma categoria invalida
+	 *                
+	 *  @return boolean true caso seja valida
 	 */
 	public static boolean categoriaValida(String categoria, String mensagem) {
 		for (CategoriaEnum c : CategoriaEnum.values()) {
@@ -94,7 +95,6 @@ public class Validator {
 	 *            operacao que sera realizada
 	 * @param msg
 	 *            mensagem que sera lancada
-	 * @return valor booleano
 	 */
 	public static void operacaoValida(String operacao, String msg) {
 		if (!(operacao.equals("adiciona") || operacao.equals("diminui")))
@@ -106,8 +106,7 @@ public class Validator {
 	 * 
 	 * @param id
 	 *            identificacao do item
-	 * @param msg
-	 * @return valor booleano
+	 * @param msg mensagem de erro caso seja menor que 1
 	 */
 	public static void idValido(int id, String msg) {
 		if (id < 1)

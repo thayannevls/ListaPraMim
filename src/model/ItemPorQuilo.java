@@ -15,7 +15,6 @@ package model;
 public class ItemPorQuilo extends ItemCompravel {
 
 	private static final long serialVersionUID = 2465579793071835553L;
-
 	private double quilograma;
 
 	/**
@@ -58,6 +57,10 @@ public class ItemPorQuilo extends ItemCompravel {
 		this.quilograma = quilograma;
 	}
 	
+	/**
+	 * Atualiza valor do quilograma 
+	 * @param novoValor novo valor do quilograma
+	 */
 	@Override
 	public void atualiza(String novoValor) {
 		this.quilograma = Double.parseDouble(novoValor);

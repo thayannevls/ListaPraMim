@@ -180,9 +180,10 @@ public abstract class ItemCompravel implements Serializable {
 	/**
 	 * Retorna uma representacao textual basica de um item por quilo contendo sua
 	 * descricao e sua categoria e peso base.
+	 * 
+	 * @return String descricao basica do item
 	 */
 	public String getDescricaoBasica() {
 		return this.nome + ", " + this.categoria;
 	}
-
 }

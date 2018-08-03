@@ -13,7 +13,7 @@ import java.io.ObjectOutputStream;
  * 
  * @author José Guilheme - Matricula: 117210370
  * @author Mariana Nascimento - Matricula: 117210416
- * @author Siuanny Barbosa - Matriucla: 117210395
+ * @author Siuanny Barbosa - Matricula: 117210395
  * @author Thayanne Sousa - Matricula: 117210414
  * 
  *         UFCG/2018.1 - Laboratório de Programação 2 - Projeto de Laboratorio
@@ -28,8 +28,7 @@ public final class Persistencia {
 	private static File listasArquivo = new File(rootPath + File.separator + "listasDeCompras.txt");;
 	private static File itensArquivo = new File(rootPath + File.separator + "itens.txt");;
 
-	private Persistencia() {
-	}
+	private Persistencia() {}
 
 	public static Persistencia getInstance() {
 		return INSTANCE;
@@ -104,6 +103,11 @@ public final class Persistencia {
 	 *             caso ocorra algum erro inesperado
 	 */
 	private static void salvar(File arquivo, Object objeto) throws IOException {
+		if(! arquivo.exists()){
+			rootPath.mkdirs();
+		} else{
+			arquivo.delete();
+		}
 		FileOutputStream fos = new FileOutputStream(arquivo);
 		ObjectOutputStream oos = new ObjectOutputStream(fos);
 

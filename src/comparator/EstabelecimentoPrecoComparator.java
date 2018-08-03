@@ -14,10 +14,11 @@ public class EstabelecimentoPrecoComparator implements Comparator<String> {
  // Note: this comparator imposes orderings that are inconsistent with
     // equals.
     public int compare(String a, String b) {
-        if (base.get(a) >= base.get(b)) {
-            return -1;
-        } else {
-            return 1;
-        } // returning 0 would merge keys
+    	return base.get(a).compareTo(base.get(b));
+//        if (base.get(a) >= base.get(b)) {
+//            return -1;
+//        } else {
+//            return 1;
+//        } // returning 0 would merge keys
     }
 }

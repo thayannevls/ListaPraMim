@@ -19,7 +19,6 @@ import java.io.Serializable;
 public class Compra implements Serializable {
 
 	private static final long serialVersionUID = 4224243928438393972L;
-
 	private int qtd;
 	private ItemCompravel item;
 

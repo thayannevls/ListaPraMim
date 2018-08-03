@@ -26,14 +26,9 @@ public class Facade {
 				"acceptance_test/use_case2.txt", "acceptance_test/use_case2_exception.txt",
 				"acceptance_test/use_case3.txt", "acceptance_test/use_case3_exception.txt",
 				"acceptance_test/use_case4.txt", "acceptance_test/use_case4_exception.txt",
-<<<<<<< HEAD
 				"acceptance_test/use_case5.txt", "acceptance_test/use_case6.txt",
-				"acceptance_test/use_case7.txt"};
-		
-=======
-				"acceptance_test/use_case5.txt", "acceptance_test/use_case7.txt" };
+				"acceptance_test/use_case6_exception.txt", "acceptance_test/use_case7.txt"};
 
->>>>>>> a1d686855f4a766978d1e0d9f7ace14f1b5bde23
 		EasyAccept.main(args);
 	}
 
@@ -397,15 +392,12 @@ public class Facade {
 	public String geraAutomaticaItensMaisPresentes() {
 		return this.sistema.geraAutomaticaItensMaisPresentes();
 	}
-<<<<<<< HEAD
+
 	
 	public String sugereMelhorEstabelecimento(String descritorLista, int posicaoEstabelecimento, int posicaoLista){
 		return sistema.sugereMelhorEstabelecimento(descritorLista, posicaoEstabelecimento, posicaoLista);
 	}
 	
-=======
-
->>>>>>> a1d686855f4a766978d1e0d9f7ace14f1b5bde23
 	/**
 	 * @see ListaPraMim#iniciaSistema()
 	 */

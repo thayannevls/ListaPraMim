@@ -31,6 +31,9 @@ public class Facade {
 		EasyAccept.main(args);
 	}
 
+	/**
+	 * Inicializa os atributos do Facade.
+	 */
 	public Facade() {
 		this.sistema = new ListaPraMim();
 	}

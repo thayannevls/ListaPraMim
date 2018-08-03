@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import model.Compra;
+import model.ItemCompravel;
 
 /**
  * Classe que compara itens por dois níveis: 1 - pela categoria; 2 - por sua
@@ -12,17 +13,17 @@ import model.Compra;
  * 
  * @author Jose Guilheme - Matricula: 117210370
  * @author Mariana Nascimento - Matricula: 117210416
- * @author Siuanny Barbosa - Matriucla: 117210395
+ * @author Siuanny Barbosa - Matricula: 117210395
  * @author Thayanne Sousa - Matricula: 117210414
  * 
  *         UFCG/2018.1 - Laboratorio de Programacao 2 - Projeto de Laboratorio
  *         (Lista pra mim)
  */
-public class ItemCategoriaENomeComparador implements Comparator<Compra> {
+public class CompraItemCategoriaENomeComparator implements Comparator<Compra> {
 
 	private List<String> categorias;
-
-	public ItemCategoriaENomeComparador() {
+	
+	public CompraItemCategoriaENomeComparator() {
 		categorias = Arrays.asList("higiene pessoal", "limpeza", "alimento industrializado", "alimento nao industrializado");
 	}
 

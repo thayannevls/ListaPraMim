@@ -9,9 +9,15 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
+import java.util.stream.Collectors;
 
-import comparator.ItemCategoriaENomeComparador;
+import comparator.CompraItemCategoriaENomeComparator;
+import comparator.EstabelecimentoPrecoComparator;
+import comparator.ItemCategoriaENomeComparator;
+import util.ErrosListaDeCompras;
 import util.ErrosListasComprasController;
+import util.Utils;
 
 /**
  * Entidade usada para representar uma lista de compras. Em uma lista de compras
@@ -20,7 +26,7 @@ import util.ErrosListasComprasController;
  * 
  * @author José Guilheme - Matricula: 117210370
  * @author Mariana Nascimento - Matricula: 117210416
- * @author Siuanny Barbosa - Matriucla: 117210395
+ * @author Siuanny Barbosa - Matricula: 117210395
  * @author Thayanne Sousa - Matricula: 117210414
  * 
  *         UFCG/2018.1 - Laboratório de Programação 2 - Projeto de Laboratorio
@@ -29,8 +35,9 @@ import util.ErrosListasComprasController;
 
 public class ListaDeCompras implements Serializable {
 
-	private static final long serialVersionUID = 1L;
 
+	private static final long serialVersionUID = -6272821390303833180L;
+	
 	private String descritor;
 	private Map<Integer, Compra> listaDeCompras;
 	private Date dataCriacao;
@@ -129,8 +136,10 @@ public class ListaDeCompras implements Serializable {
 	 *         cadastradas na lista.
 	 */
 	public String getItemLista(int pos) {
-		List<Compra> compras = new ArrayList<>(this.listaDeCompras.values());
-		Collections.sort(compras, new ItemCategoriaENomeComparador());
+
+		List<Compra> compras = new ArrayList<>(listaDeCompras.values());
+		Collections.sort(compras, new CompraItemCategoriaENomeComparator());
+
 
 		return (pos >= compras.size()) ? "" : compras.get(pos).toString();
 	}
@@ -225,11 +234,81 @@ public class ListaDeCompras implements Serializable {
 	}
 	
 	/**
+	 * Sugere melhor estabelecimento com base na posicao passada, os estabelecimentos sao ordenados de acordo com seu
+	 * preco total, que e o somatorio do preco de todos os itens
+	 * @param posicaoEstabelecimento posicao do estabelecimento de acordo com ordenacao de preco
+	 * @param posicaoLista posicao na lista, se for 0 retorna o estabelecimento, se for acima de 0 retorna item
+	 * ordenado por categoria e nome que contem esse estabelecimento
+	 * @return String sugestao de melhor estabelecimento
+	 */
+	public String sugereMelhorEstabelecimento(int posicaoEstabelecimento, int posicaoLista) {
+		listaNaoVazia(ErrosListaDeCompras.FALTA_DADOS.toString());
+		
+		if(posicaoEstabelecimento > this.retornaEstabelecimentosOrdenados().keySet().size())
+			return "";
+		
+		String estabelecimento = (String) this.retornaEstabelecimentosOrdenados().keySet().toArray()[posicaoEstabelecimento];
+		
+		if(posicaoLista == 0)
+			return estabelecimento + ": " + Utils.realComVirgula(this.retornaEstabelecimentosOrdenados().get(estabelecimento));
+		
+		return retornaItemPorEstabelecimento(estabelecimento, posicaoLista - 1);
+	}
+	
+	/**
 	 * Retorna a representacao textual da lista de compras.
 	 */
 	@Override
 	public String toString() {
 		return this.getDataCriacaoStr() + " - " + this.descritor;
+	}
+
+	/**
+	 * Recupera todos os estabelecimentos cadastrados dos itens, ao somar todos os mapas de preco e somar seus valores
+	 * multiplicando pela quantiadde de item. E ordenado pelo preco, do menor para o maior
+	 * @return TreeMap<String, Double> estabelecimentos ordenados
+	 */
+	private TreeMap<String, Double> retornaEstabelecimentosOrdenados(){
+		Map<String, Double> estabelecimentos = new HashMap<>();
+        
+		for(Compra compra: this.listaDeCompras.values()){
+			   compra.getItem().getMapaDePrecos().forEach((k, v) ->
+			               estabelecimentos.merge(k, v * (compra.getQtd()), (a, b) ->
+			               (a + b)));
+			}
+		EstabelecimentoPrecoComparator bvc = new EstabelecimentoPrecoComparator(estabelecimentos);
+        TreeMap<String, Double> estabelecimentos_ordenados = new TreeMap<String, Double>(bvc);
+        estabelecimentos_ordenados.putAll(estabelecimentos);
+        
+        return estabelecimentos_ordenados;
+	}
+	
+	/**
+	 * Retorna item que contem estabelecimento, pela posicao de ordenacao por categoria e nome
+	 * @param estabelecimento estabelecimento a ser pesquisado
+	 * @param posicao posicao do item na ordenacao
+	 * @return String descricao basica do item
+	 */
+	private String retornaItemPorEstabelecimento(String estabelecimento, int posicao){
+		List<ItemCompravel> itensPesquisados = this.listaDeCompras.values().stream()
+				.map(Compra::getItem)
+				.filter((ItemCompravel item) -> item.getMapaDePrecos().containsKey(estabelecimento))
+				.collect(Collectors.toList());
+		Collections.sort(itensPesquisados, new ItemCategoriaENomeComparator());
+		if(posicao >= itensPesquisados.size())
+			return "";
+		return "- " + this.listaDeCompras.get(itensPesquisados.get(posicao).getId()).toString();
+	}
+	
+	/**
+	 * Verifica se nenhuma compra foi adicionada a lita
+	 * @param mensagem mensagem de erro caso esteja vazia
+	 * @return boolean true se nao estiver vazia
+	 */
+	private boolean listaNaoVazia(String mensagem){
+		if(this.listaDeCompras.size() == 0)
+			 throw new IllegalArgumentException(mensagem);
+		return true;
 	}
 
 }

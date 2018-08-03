@@ -8,7 +8,7 @@ import util.ErrosListasComprasController;
  * 
  * @author José Guilheme - Matricula: 117210370
  * @author Mariana Nascimento - Matricula: 117210416
- * @author Siuanny Barbosa - Matriucla: 117210395
+ * @author Siuanny Barbosa - Matricula: 117210395
  * @author Thayanne Sousa - Matricula: 117210414
  * 
  *         UFCG/2018.1 - Laboratório de Programação 2 - Projeto de Laboratorio
@@ -389,6 +389,10 @@ public class ListaPraMim {
 	 */
 	private int getQtdItensNoSistema() {
 		return this.itemController.gteQtdItensNoSistema();
+	}
+	
+	public String sugereMelhorEstabelecimento(String descritorLista, int posicaoEstabelecimento, int posicaoLista){
+		return this.listasDeComprasController.sugereMelhorEstabelecimento(descritorLista, posicaoEstabelecimento, posicaoLista);
 	}
 	
 	/** 

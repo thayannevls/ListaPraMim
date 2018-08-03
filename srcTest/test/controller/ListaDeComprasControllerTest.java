@@ -367,7 +367,7 @@ public class ListaDeComprasControllerTest {
 		int itemId5 = itemController.adicionaItemPorUnidade("Veja so", "limpeza", 3, "Mercadinho Bem Barato", 3.69);
 		
 		// ---- adicionando mais precos ---- //
-		itemController.adicionaPrecoItem(itemId1, "SuperMercado UauMart", 43.69);
+		itemController.adicionaPrecoItem(itemId1, "Supermercado UauMart", 43.69);
 		itemController.adicionaPrecoItem(itemId1, "Supermercado BuyMore", 33.09);
 		itemController.adicionaPrecoItem(itemId2, "Mercadinho Bem Barato", 3.99);
 		itemController.adicionaPrecoItem(itemId2, "Supermercado BuyMore", 4.09);
@@ -386,24 +386,22 @@ public class ListaDeComprasControllerTest {
 		controller.adicionaCompraALista("fefeira", 1, itemController.getItemCadastrado(itemId3));
 		controller.adicionaCompraALista("fefeira", 2, itemController.getItemCadastrado(itemId4));
 		controller.adicionaCompraALista("fefeira", 1, itemController.getItemCadastrado(itemId5));
-		
-		// ---- testando os precos totais ---- //
+	
 		assertEquals("Supermercado Excepcional: R$ 29,24", controller.sugereMelhorEstabelecimento("fefeira", 0, 0));
 		assertEquals("Supermercado BuyMore: R$ 59,75", controller.sugereMelhorEstabelecimento("fefeira", 1, 0));
-		assertEquals("Mercadinho Bem Barato: R$ 71,62", controller.sugereMelhorEstabelecimento("fefeira", 2, 0));
+		assertEquals("Mercadinho Bem Barato: R$ 69,22", controller.sugereMelhorEstabelecimento("fefeira", 2, 0));
 		assertEquals("Supermercado UauMart: R$ 74,63", controller.sugereMelhorEstabelecimento("fefeira", 3, 0));
-		
 		// ---- testando os itens ---- //
 		assertEquals("- 3 Batata Chips, alimento industrializado", controller.sugereMelhorEstabelecimento("fefeira", 0, 1));
 		assertEquals("", controller.sugereMelhorEstabelecimento("fefeira", 0, 4));
 		
-		assertEquals("- Veja so, limpeza", controller.sugereMelhorEstabelecimento("fefeira", 1, 1));
+		assertEquals("- 1 Veja so, limpeza", controller.sugereMelhorEstabelecimento("fefeira", 1, 1));
 		assertEquals("", controller.sugereMelhorEstabelecimento("fefeira", 1, 5));
 		
-		assertEquals("- Veja so, limpeza", controller.sugereMelhorEstabelecimento("fefeira", 2, 1));
-		assertEquals("- Macaxeira, alimento nao industrializado", controller.sugereMelhorEstabelecimento("fefeira", 2, 5));
+		assertEquals("- 1 Veja so, limpeza", controller.sugereMelhorEstabelecimento("fefeira", 2, 1));
+		assertEquals("- 2 Macaxeira, alimento nao industrializado", controller.sugereMelhorEstabelecimento("fefeira", 2, 5));
 		
-		assertEquals("- Batata Chips, alimento industrializado", controller.sugereMelhorEstabelecimento("fefeira", 3, 1));
+		assertEquals("- 3 Batata Chips, alimento industrializado", controller.sugereMelhorEstabelecimento("fefeira", 3, 1));
 		assertEquals("", controller.sugereMelhorEstabelecimento("fefeira", 3, 5));
 		
 	}
@@ -412,7 +410,20 @@ public class ListaDeComprasControllerTest {
 	public void sugereMelhorEstabelecimentoSemDados() {
 		controller.adicionaListaDeCompras("drogon");
 		controller.sugereMelhorEstabelecimento("drogon", 0, 0);
+	}
+	
+	@Test
+	public void testGetItemListaPorData(){
+		String data = controller.adicionaListaDeCompras("feira semanal");
+		controller.getItemListaPorData(data, 0);
+	}
+	
+	@Test
+	public void testGetItemListaPorItem(){
+		controller.adicionaListaDeCompras("descritor");
+		int id = itemController.adicionaItemPorQtd("item", "higiene pessoal", 1, "l", "super", 2.0);
 		
+		controller.getItemListaPorItem(id, 0);
 	}
 	
 }

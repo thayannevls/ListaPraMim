@@ -6,9 +6,10 @@ package model;
  * 
  * @author José Guilheme - Matricula: 117210370
  * @author Mariana Nascimento - Matricula: 117210416
- * @author Siuanny Barbosa - Matriucla: 117210395
- * @author Thayanne Sousa - Matricula: 117210414
- * 
+ * @author Siuanny Barbosa - Matricula: 117210395
+ * @author Thayanne Sousa - Matricula: 117210414 UFCG/2018.1 - Laboratório de
+ *         Programação 2 - Projeto de Laboratorio (Lista pra mim)
+
  *         UFCG/2018.1 - Laboratório de Programação 2 - Projeto de Laboratorio
  *         (Lista pra mim)
  */
@@ -89,7 +90,7 @@ public class ItemPorQtd extends ItemCompravel {
 	public String getDescricaoBasica() {
 		return this.nome + ", " + this.categoria + ", " + this.quantidade + " " + this.unidadeDeMedida;
 	}
-
+	
 	/**
 	 * Responsavel por retornar a represnetação em String de um ItemPorQtd.
 	 * 

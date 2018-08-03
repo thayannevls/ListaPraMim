@@ -6,15 +6,14 @@ package model;
  * 
  * @author José Guilheme - Matricula: 117210370
  * @author Mariana Nascimento - Matricula: 117210416
- * @author Siuanny Barbosa - Matriucla: 117210395
+ * @author Siuanny Barbosa - Matricula: 117210395
  * @author Thayanne Sousa - Matricula: 117210414 UFCG/2018.1 - Laboratório de
  * 
  *         Programação 2 - Projeto de Laboratorio (Lista pra mim)
  */
 public class ItemPorUnidade extends ItemCompravel {
 
-	private static final long serialVersionUID = -9083284538533707762L;
-	
+	private static final long serialVersionUID = 1567800141641499291L;
 	private int unidade;
 
 	/**

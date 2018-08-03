@@ -10,7 +10,7 @@ import java.io.Serializable;
  * 
  * @author José Guilheme - Matricula: 117210370
  * @author Mariana Nascimento - Matricula: 117210416
- * @author Siuanny Barbosa - Matriucla: 117210395
+ * @author Siuanny Barbosa - Matricula: 117210395
  * @author Thayanne Sousa - Matricula: 117210414
  * 
  *         UFCG/2018.1 - Laboratório de Programação 2 - Projeto de Laboratorio
@@ -19,7 +19,6 @@ import java.io.Serializable;
 public class Compra implements Serializable {
 
 	private static final long serialVersionUID = 4224243928438393972L;
-
 	private int qtd;
 	private ItemCompravel item;
 

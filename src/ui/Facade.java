@@ -11,7 +11,7 @@ import easyaccept.EasyAccept;
  * 
  * @author José Guilheme - Matricula: 117210370
  * @author Mariana Nascimento - Matricula: 117210416
- * @author Siuanny Barbosa - Matriucla: 117210395
+ * @author Siuanny Barbosa - Matricula: 117210395
  * @author Thayanne Sousa - Matricula: 117210414
  * 
  *         UFCG/2018.1 - Laboratório de Programação 2 - Projeto de Laboratorio
@@ -19,14 +19,15 @@ import easyaccept.EasyAccept;
  */
 public class Facade {
 
-	ListaPraMim sistema;
+	private ListaPraMim sistema;
 
 	public static void main(String[] args) {
 		args = new String[] { "ui.Facade", "acceptance_test/use_case1.txt", "acceptance_test/use_case1_exception.txt",
 				"acceptance_test/use_case2.txt", "acceptance_test/use_case2_exception.txt",
 				"acceptance_test/use_case3.txt", "acceptance_test/use_case3_exception.txt",
 				"acceptance_test/use_case4.txt", "acceptance_test/use_case4_exception.txt",
-				"acceptance_test/use_case5.txt", "acceptance_test/use_case7.txt" };
+				"acceptance_test/use_case5.txt", "acceptance_test/use_case6.txt",
+				"acceptance_test/use_case6_exception.txt", "acceptance_test/use_case7.txt"};
 
 		EasyAccept.main(args);
 	}
@@ -392,6 +393,11 @@ public class Facade {
 		return this.sistema.geraAutomaticaItensMaisPresentes();
 	}
 
+	
+	public String sugereMelhorEstabelecimento(String descritorLista, int posicaoEstabelecimento, int posicaoLista){
+		return sistema.sugereMelhorEstabelecimento(descritorLista, posicaoEstabelecimento, posicaoLista);
+	}
+	
 	/**
 	 * @see ListaPraMim#iniciaSistema()
 	 */

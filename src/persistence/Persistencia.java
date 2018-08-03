@@ -29,12 +29,20 @@ public final class Persistencia {
 	private static File listasArquivo;
 	private static File itensArquivo;
 
+	/**
+	 * Inicializa atributos da classe persistencia.
+	 */
 	private Persistencia() {
 		rootPath = new File(DIR);
 		listasArquivo = new File(rootPath + File.separator + "listasDeCompras.txt");;
 		itensArquivo = new File(rootPath + File.separator + "itens.txt");;
 	}
 
+	/**
+	 * Disponibiliza acesso a aplicação de persistencia.
+	 * 
+	 * @return instancia criada.
+	 */
 	public static Persistencia getInstance() {
 		return INSTANCE;
 	}

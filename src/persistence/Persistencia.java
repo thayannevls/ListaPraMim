@@ -24,11 +24,15 @@ public final class Persistencia {
 	private static final Persistencia INSTANCE = new Persistencia();
 
 	private static final String DIR = "resources" + File.separator + "persistencia";
-	private static File rootPath = new File(DIR);
-	private static File listasArquivo = new File(rootPath + File.separator + "listasDeCompras.txt");;
-	private static File itensArquivo = new File(rootPath + File.separator + "itens.txt");;
+	
+	private static File rootPath;
+	private static File listasArquivo;
+	private static File itensArquivo;
 
 	private Persistencia() {
+		rootPath = new File(DIR);
+		listasArquivo = new File(rootPath + File.separator + "listasDeCompras.txt");;
+		itensArquivo = new File(rootPath + File.separator + "itens.txt");;
 	}
 
 	public static Persistencia getInstance() {

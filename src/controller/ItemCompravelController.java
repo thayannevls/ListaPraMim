@@ -20,7 +20,7 @@ import util.ErrosListasComprasController;
 import util.Validator;
 
 /**
- * Classe responsável por controlar itens comŕavel no sistema
+ * Classe responsavel por controlar itens comŕavel no sistema
  * 
  * @author José Guilheme - Matricula: 117210370
  * @author Mariana Nascimento - Matricula: 117210416
